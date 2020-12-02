@@ -1,0 +1,32 @@
+.container {
+  height: 50px;
+  padding: 0 20px;
+  line-height: 50px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  img {
+    display: block;
+    width: 16px;
+    height: 18px;
+  }
+  .videolistitem {
+    padding-left: 5px;
+    color: #333;
+    flex-grow: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  &:hover {
+    .videolistitem {
+      color: #ef4c4f;
+    }
+    background:rgba(202,203,203,0.8);
+  }
+  &.active {
+    .videolistitem {
+      color: #ef4c4f;
+    }
+  }
+}

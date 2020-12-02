@@ -1,0 +1,367 @@
+// 公用common
+@common01: rgba(255, 255, 255, .7);
+// 分割线
+@common02: rgba(255, 255, 255, .1);
+
+// 默认主题 default
+// 主要用于背景 rainbow
+@default01: #282828;
+@rainbow01: #FEA4C7;
+@space01: #4B8FFF;
+// @default01: rgba(51, 51, 51, 1);
+// @rainbow01: rgba(254, 142, 185, 1);
+// @space01: rgba(31, 116, 255, 1);
+
+@default02: rgba(0, 0, 0, .2);
+@rainbow02: rgba(255, 255, 255, .2);
+@space02: rgba(255, 255, 255, .2);
+
+@default03: rgba(0, 0, 0, .5);
+@rainbow03: rgba(0, 0, 0, .5);
+@space03: rgba(0, 0, 0, .5);
+
+@default04: rgba(0, 0, 0, .7);
+@rainbow04: rgba(0, 0, 0, .7);
+@space04: rgba(0, 0, 0, .7);
+
+@default16: rgba(255, 255, 255, .8);
+@rainbow16: rgba(0, 0, 0, .8);
+@space16: rgba(0, 0, 0, .8);
+
+@default17: rgba(255, 255, 255, .5);
+@rainbow17: rgba(255, 255, 255, .5);
+@space17: rgba(255, 255, 255, .5);
+
+@default05: rgba(40, 40, 40, 1);
+@rainbow05: rgba(254, 142, 185, 1);
+@space05: rgba(31, 116, 255, 1);
+
+@default06: rgba(255, 255, 255, .2);
+@rainbow06: rgba(255, 255, 255, .2);
+@space06: rgba(255, 255, 255, .2);
+
+@default07: rgba(255, 255, 255, .5);
+@rainbow07:rgba(255, 255, 255, .5);
+@space07: rgba(255, 255, 255, .5);
+
+@default08: rgba(255, 255, 255, .8);
+@rainbow08: rgba(0, 0, 0, .8);
+@space08: rgba(0, 0, 0, .8);
+
+@default09: rgba(255, 255, 255, 1);
+@rainbow09: rgba(255, 255, 255, 1);
+@space09: rgba(255, 255, 255, 1);
+
+@default10: rgba(239, 76, 79, 1);
+@rainbow10: rgba(254, 142, 185, 1);
+@space10: rgba(31, 116, 255, 1);
+
+@default11: rgba(75, 77, 90, 1);
+@rainbow11: rgba(254, 142, 185, 1);
+@space11: rgba(31, 116, 255, 1);
+
+@default12: rgba(40, 40, 40, 1);
+@rainbow12: rgba(255, 164, 199, 1);
+@space12: rgba(75, 143, 255, 1);
+
+@default13: rgba(255, 181, 83, 1);
+@rainbow13: rgba(255, 181, 83, 1);
+@space13: rgba(255, 181, 83, 1);
+
+@default14: rgba(117, 204, 108, 1);
+@rainbow14: rgba(117, 204, 108, 1);
+@space14: rgba(117, 204, 108, 1);
+
+@default15: rgba(255, 208, 44, 1);
+@rainbow15: rgba(255, 244, 44, 1);
+@space15: rgba(255, 208, 44, 1);
+
+@default18: rgba(255, 255, 255, .2);
+@rainbow18: rgba(0, 0, 0, .2);
+@space18: rgba(0, 0, 0, .2);
+
+@default19: rgba(0, 0, 0, .4);
+@rainbow19: rgba(255, 255, 255, .4);
+@space19: rgba(255, 255, 255, .4);
+
+@default20: @default10;
+@rainbow20: @default09;
+@space20: @default09;
+
+@default21: @default09;
+@rainbow21: @rainbow10;
+@space21: @space10;
+
+@default22: rgba(239, 76, 79, .2);
+@rainbow22: rgba(254, 142, 185, .2);
+@space22: rgba(31, 116, 255, .2);
+// 背景
+.BaseBg(@attr) {
+  :global(.black-theme) & {
+    @{attr}: @default01;
+  }
+  :global(.pink-theme) & {
+    @{attr}: @rainbow01;
+  }
+  :global(.blue-theme) & {
+    @{attr}: @space01;
+  }
+}
+
+// 输入框背景 / 视频默认背景 聊天背景
+.BoxBg(@attr) {
+  :global(.black-theme) &  {
+    @{attr}: @default02;
+  }
+  :global(.pink-theme) & {
+    @{attr}: @rainbow02;
+  }
+  :global(.blue-theme) & {
+    @{attr}: @space02;
+  }
+}
+
+// 课件/上台区域/底部icon的背景框 聊天区发言输入框 聊天区发言输入框 聊天区和班级信息的tab背景 聊天区和班级信息的背景框
+.ListBg(@attr) {
+  :global(.black-theme) & {
+    @{attr}: @default03;
+  }
+  :global(.pink-theme) & {
+    @{attr}: @rainbow03;
+  }
+  :global(.blue-theme) & {
+    @{attr}: @space03;
+  }
+}
+
+// 遮罩背景
+.MaskBg(@attr) {
+  :global(.black-theme) & {
+    @{attr}: @default04;
+  }
+  :global(.pink-theme) & {
+    @{attr}: @rainbow04;
+  }
+  :global(.blue-theme) & {
+    @{attr}: @space04;
+  }
+}
+
+// 禁用
+.Disabled(@attr) {
+  :global(.black-theme) & {
+    @{attr}: @default06;
+  }
+  :global(.pink-theme) & {
+    @{attr}: @rainbow06;
+  }
+  :global(.blue-theme) & {
+    @{attr}: @space06;
+  }
+}
+
+.SubFont(@attr) {
+  :global(.black-theme) :local(&) {
+    @{attr}: @default07;
+  }
+  :global(.pink-theme) & {
+    @{attr}: @rainbow07;
+  }
+  :global(.blue-theme) & {
+    @{attr}: @space07;
+  }
+}
+
+// 名字 消息
+.MessageFont(@attr) {
+  :global(.black-theme) & {
+    @{attr}: @default08;
+  }
+  :global(.pink-theme) & {
+    @{attr}: @rainbow08;
+  }
+  :global(.blue-theme) & {
+    @{attr}: @space08;
+  }
+}
+
+// 名字 消息
+.SubMessageFont(@attr) {
+  :global(.black-theme) & {
+    @{attr}: @default16;
+  }
+  :global(.pink-theme) & {
+    @{attr}: @rainbow16;
+  }
+  :global(.blue-theme) & {
+    @{attr}: @space16;
+  }
+}
+
+// 字体颜色
+.BaseFont(@attr) {
+  :global(.black-theme) & {
+    @{attr}: @default09;
+  }
+  :global(.pink-theme) & {
+    @{attr}: @rainbow09;
+  }
+  :global(.blue-theme) & {
+    @{attr}: @space09;
+  }
+}
+
+.PrimaryColor(@attr) {
+  :global(.black-theme) & {
+    @{attr}: @default10;
+  }
+  :global(.pink-theme) & {
+    @{attr}: @rainbow10;
+  }
+  :global(.blue-theme) & {
+    @{attr}: @space10;
+  }
+}
+
+// 硬币背景 
+.CoinBg(@attr) {
+  :global(.black-theme) & {
+    @{attr}: @default11;
+  }
+  :global(.pink-theme) & {
+    @{attr}: @rainbow11;
+  }
+  :global(.blue-theme) & {
+    @{attr}: @space11;
+  }
+}
+
+
+// 工单
+.WorkOrder(@attr) {
+  :global(.black-theme) & {
+    @{attr}: @default12;
+  }
+  :global(.pink-theme) & {
+    @{attr}: @rainbow12;
+  }
+  :global(.blue-theme) & {
+    @{attr}: @space12;
+  }
+}
+
+// 点赞颜色
+.LikeColor(@attr) {
+  :global(.black-theme) & {
+    @{attr}: @default15;
+  }
+  :global(.blue-theme) & {
+    @{attr}: @default15;
+  }
+  :global(.pink-theme) & {
+    @{attr}: @default15;
+  }
+}
+
+// 图标
+.Icons(@attr) {
+  :global(.black-theme) & {
+    @{attr}: @default17;
+  }
+  :global(.pink-theme) & {
+    @{attr}: @rainbow17;
+  }
+  :global(.blue-theme) & {
+    @{attr}: @space17;
+  }
+}
+
+// placeholder
+.PlaceHolder(@attr) {
+  :global(.black-theme) & {
+    @{attr}: @default18;
+  }
+  :global(.pink-theme) & {
+    @{attr}: @rainbow18;
+  }
+  :global(.blue-theme) & {
+    @{attr}: @space18;
+  }
+}
+
+// selft
+.SelfInfo(@attr) {
+  :global(.black-theme) & {
+    @{attr}: @default19;
+  }
+  :global(.pink-theme) & {
+    @{attr}: @rainbow19;
+  }
+  :global(.blue-theme) & {
+    @{attr}: @space19;
+  }
+}
+
+// 异常状态1
+.UnexpectStateColor1(@attr) {
+  :global(.black-theme) & {
+    @{attr}: @default20;
+  }
+  :global(.pink-theme) & {
+    @{attr}: @rainbow20;
+  }
+  :global(.blue-theme) & {
+    @{attr}: @space20;
+  }
+}
+
+// 异常状态2
+.UnexpectStateColor2(@attr) {
+  :global(.black-theme) & {
+    @{attr}: @default21;
+  }
+  :global(.pink-theme) & {
+    @{attr}: @rainbow21;
+  }
+  :global(.blue-theme) & {
+    @{attr}: @space21;
+  }
+}
+
+// 分割线
+.DividerColor(@attr) {
+  :global(.black-theme) & {
+    @{attr}: @common02;
+  }
+  :global(.blue-theme) & {
+    @{attr}: @common02;
+  }
+  :global(.pink-theme) & {
+    @{attr}: @common02;
+  }
+}
+
+// 主题背景透明
+.PrimaryColorOpacity(@attr) {
+  :global(.black-theme) & {
+    @{attr}: @default22;
+  }
+  :global(.blue-theme) & {
+    @{attr}: @space22;
+  }
+  :global(.pink-theme) & {
+    @{attr}: @rainbow22;
+  }
+}
+
+.BackgroundImg() {
+  :global(.black-theme) & {
+    background-image: url('@/assets/images/bg/bg-container.png');
+  }
+  :global(.blue-theme) & {
+    background-image: url('@/assets/images/bg/bg-container-rainbow.png');
+  }
+  :global(.pink-theme) & {
+    background-image: url('@/assets/images/bg/bg-container-space.png');
+  }
+}

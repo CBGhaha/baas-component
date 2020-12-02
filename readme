@@ -1,0 +1,9 @@
+send: 
+getCoursewareList  获取课件
+zmlCoursePageTotal zml总页数
+zmlLoadfail  zml加载失败
+
+
+receive： 
+COURSE_EVENT  设置课件的id 和 page
+PALETTE_EVENT 老师设置画笔教具
