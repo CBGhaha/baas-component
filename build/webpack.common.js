@@ -47,7 +47,7 @@ const config = {
     }),
     new CopyPlugin([
       {
-        from: 'public/*',
+        from: 'config/*',
         to: path.resolve('./dist/'),
         flatten: true
       }

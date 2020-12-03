@@ -1,5 +1,4 @@
 import Player from './react/index';
-// // import './dist/main.css';
 // import Player from './dist/main.js';
 // import './dist/main.css';
 import { datapage } from './mock';

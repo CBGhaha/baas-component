@@ -5,7 +5,7 @@ const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const config = {
-  entry: path.resolve(__dirname, '../render.js'),
+  entry: path.resolve(__dirname, '../example.js'),
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, '../dist'),

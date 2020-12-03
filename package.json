@@ -1,11 +1,12 @@
 {
-  "name": "@zm-youke/couserware-player",
-  "version": "1.0.2",
-  "description": "课件播放器",
-  "main": "./dist/main.js",
+  "name": "courseware-paly",
+  "version": "1.0.0",
+  "description": "课件播放器源码",
+  "main": "./index.js",
   "scripts": {
     "build": "webpack --config ./build/webpack.config.js --progress --colors",
-    "dev": "cross-env BUILD_ENV=development webpack-dev-server --config ./build/webpack.dev.config.js --devtool eval --progress --colors"
+    "dev": "cross-env BUILD_ENV=development webpack-dev-server --config ./build/webpack.dev.config.js --devtool eval --progress --colors",
+    "publish": "npm publish dist"
   },
   "author": "bangguo.chen",
   "license": "ISC",

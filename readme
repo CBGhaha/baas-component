@@ -1,3 +1,19 @@
+源码位置：./react
+
+发布npm包步骤：
+1:修改config中package.json中的版本号（version）
+2:npm run build
+4:npm run publish
+
+引入方法：
+情形一：非react项目使用 
+      1:import Player from '@zm-youke/couserware-player';
+      2:import '@zm-youke/couserware-player/main.css';
+情形二：react项目
+      import Player from '@zm-youke/couserware-player/react';
+
+
+
 send: 
 getCoursewareList  获取课件
 zmlCoursePageTotal zml总页数

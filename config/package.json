@@ -1,12 +1,8 @@
 {
   "name": "@zm-youke/couserware-player",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "课件播放器",
   "main": "./main.js",
-  "scripts": {
-    "build": "webpack --config ./build/webpack.config.js --progress --colors",
-    "dev": "cross-env BUILD_ENV=development webpack-dev-server --config ./build/webpack.dev.config.js --devtool eval --progress --colors"
-  },
   "author": "bangguo.chen",
   "license": "ISC",
   "devDependencies": {
