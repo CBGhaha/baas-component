@@ -1,6 +1,6 @@
 import controllers from './controller/index';
-import store from '@/redux/store';
-import commonAction from '@/redux/actions/common';
+import store from '../redux/store';
+import commonAction from '../redux/actions/common';
 
 class SocketControllers {
   controllers = controllers;

@@ -1,10 +1,10 @@
-.container {
+.outline-item-container {
   position: relative;
   text-align: center;
   padding: 10px 0;
   cursor: pointer;
   height: 187px;
-  .content {
+  .outline-item-content {
     box-sizing: content-box;
     width: 261px;
     height: 147px;
@@ -14,18 +14,18 @@
     display: flex;
     align-items:center;
     justify-content: center;
-    .img {
+    .outline-item-img {
       max-width: 100%;
       max-height: 100%;
       vertical-align: middle;
     }
-    .loading {
+    .outline-item-loading {
       position: absolute;
       top: 0;
       bottom: 0;
       left: 0;
       right: 0;
-      .icon {
+      .outline-item-icon {
         position: absolute;
         width: 16px;
         height: 16px;
@@ -44,28 +44,20 @@
       }
     }
   }
-  .pageNumb {
+  .outline-item-pageNumb {
     text-align: center;
     padding: 8px 0;
     font-size: 12px;
-    .pageTag {
+    .outline-item-pageTag {
       padding: 4px;
     }
   }
-  // &:hover {
-  //   .content {
-  //     border: 2px solid #76b7fd;
-  //   }
-  //   .pageTag {
-  //     background: #76b7fd;
-  //     color: #fff;
-  //   }
-  // }
+
   &.active {
-    .content {
+    .outline-item-content {
       border: 2px solid #76b7fd;
     }
-    .pageTag {
+    .outline-item-pageTag {
       background: #76b7fd;
       color: #fff;
     }

@@ -1,11 +1,7 @@
-import { APP_ID } from '@/config';
-// import QtBridge from '@zm-youke/qt-bridge';
-import store from '@/redux/store';
-import { isAudience } from '@/utils/index';
-import { ZML_ORIGIN_LIST } from '@/config';
-import commonAction from '@/redux/actions/common';
-
-// import { getVideoDisable } from '../../../api';
+import { APP_ID } from '../../../../config';
+import store from '../../../../redux/store';
+import { isAudience } from '../../../../utils/index';
+import commonAction from '../../../../redux/actions/common';
 export default class ZmInstance {
   zmlUrl='';
   zmlWindow = null;

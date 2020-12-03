@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 // import { pdfHost } from '@/config';
 import PropTypes from 'prop-types';
 // import ZmIcon from 'components/zmIcon';
-import style from './item.less';
+import './item.less';
 // import errImg from '@/assets/images/loaderror.png';
 
 // const format = '?x-oss-process=image/resize,h_90,w_160';
@@ -18,9 +18,9 @@ export default function VideoListItem(props) {
   };
 
   return (
-    <div className={`${style.container} ${active === pageNumb ? style.active : ''}`} onClick={() => openPlay(pageNumb)}>
+    <div className={`videoList-container ${active === pageNumb ? 'videoList-active' : ''}`} onClick={() => openPlay(pageNumb)}>
       <img src={iconMap[videItem.type]} />
-      <span className={style.videolistitem} title={videItem.name}>{videItem.name}</span>
+      <span className='videoList-videolistitem' title={videItem.name}>{videItem.name}</span>
     </div>
   );
 }

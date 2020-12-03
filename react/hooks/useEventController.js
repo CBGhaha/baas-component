@@ -4,8 +4,8 @@
  * 2:只针对于被注册的事件（在controller-member中被注册）
 */
 
-import { useEffect, useContext } from 'react';
-// import { PlayerContext } from '@/config';
+import { useEffect } from 'react';
+
 
 export default function useEventController(eventControllersInstance, event, cb) {
   // const { eventControllersInstance } = useContext(PlayerContext);

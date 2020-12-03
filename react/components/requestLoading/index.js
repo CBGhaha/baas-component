@@ -1,9 +1,7 @@
 import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import PropsTypes from 'prop-types';
-// import svgaPlayer from '@/utils/svgaPlayer';
-// import loadingSvga from '@/assets/loading3.svga';
-import styles from './index.less';
+import './index.less';
 
 
 export function LoadingComponent(props) {
@@ -14,7 +12,7 @@ export function LoadingComponent(props) {
     // // }, 500);
 
   }, []);
-  return <div className={styles.box} style={style || {}}>
+  return <div className="requestLoading-box" style={style || {}}>
     <div id={$id}></div>
     加载中...
   </div>;

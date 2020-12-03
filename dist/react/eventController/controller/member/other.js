@@ -2,9 +2,8 @@
  * 其他信令
  */
 import SocketController from '../controller';
-// import * as track from '@/utils/track';
-import store from '@/redux/store';
-import commonAction from '@/redux/actions/common';
+import store from '../../../redux/store';
+import commonAction from '../../../redux/actions/common';
 
 export const OTHER_CONTROLLER = 'otherController';
 

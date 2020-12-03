@@ -1,8 +1,8 @@
 /*
  * 课件白板答题信令
  */
-import store from '@/redux/store';
-import commonAction from '@/redux/actions/common';
+import store from '../../../redux/store';
+import commonAction from '../../../redux/actions/common';
 import SocketController from '../controller';
 export const WHITEBOARD_CONTROLLER = 'whiteBoardController';
 

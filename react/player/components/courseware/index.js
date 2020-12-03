@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import store from '@/redux/store';
+import store from '../../../redux/store';
 import Zml from './zml';
 import Pdf from './pdf';
-import Blackboard from '@/components//blackboard';
-import style from './index.less';
-import { PlayerContext } from '@/config';
+import Blackboard from '../../../components//blackboard';
+import { PlayerContext } from '../../../config';
+import './index.less';
 const coursewares = {
   zml: Zml,
   pdf: Pdf,
@@ -22,11 +22,11 @@ function Courseware(props) {
   const currentWare = coursewareList.find(i => i.id === coursewareId);
   const isZml = currentWare && currentWare.type === 'zml';
   return (
-    <div className={`${style.box} ${role === USER_TYPE.student && isZml && isZmlExaming ? style.top : ''}`}>
+    <div className={`zml-box ${role === USER_TYPE.student && isZml && isZmlExaming ? '`zml-top' : ''}`}>
       {
         // 课件区
         coursewareList.map((item, index)=>
-          <div key={index} className={style.content} style={{ zIndex: coursewareId === item.id ? 0 : -1 }}>
+          <div key={index} className="zml-content" style={{ zIndex: coursewareId === item.id ? 0 : -1 }}>
             { React.createElement(coursewares[item.type], { coursewareInfo: item, active: coursewareId === item.id }, null)}
           </div>
         )

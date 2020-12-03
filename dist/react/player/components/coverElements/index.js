@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { lessonProgress } from '@/config';
+import { lessonProgress } from '../../../config';
 import { connect } from 'react-redux';
-import style from './index.less';
+import './index.less';
 
 
 function CoverElements(props) {
@@ -31,14 +31,14 @@ function CoverElements(props) {
   const { lesson_progress } = window.lessonInfo;
   const inLesson = lesson_progress === lessonProgress.in;
   return (
-    <div className={style.box}>
+    <div className="coverElements-box">
       {
         zmlCoverEleList.map((area, index)=><div
           tag="cover-ele"
           onClick={(e)=>inLesson && handleClickItem(e, area)}
           key={index}
           style={{ ...area, display: showCoverAreas ? 'block' : 'none' }}
-          className={`${style.coverItem} ${!inLesson ? style.disable : 'none'}`}>
+          className={`coverElements-coverIte ${!inLesson ? 'coverElements-disable' : 'none'}`}>
         </div>)
       }
     </div>

@@ -1,11 +1,11 @@
-.container {
+.videoList-box-container {
   position: absolute;
   z-index: 2;
   top: 0;
   left: 0;
   bottom: 0;
 	border-left: 1px solid #e0e2e6;
-  .content {
+  .videoList-box-content {
     width: 200px;
     height: 100%;
     background: rgba(237,239,243,0.9);
@@ -13,13 +13,13 @@
     transition: width 0.5s;
     display: flex;
     flex-direction: column;
-    .header {
+    .videoList-box-header {
       height: 39px;
       line-height: 39px;
       text-align: center;
       border-bottom: 1px solid #e0e2e6;
     }
-    .scroll {
+    .videoList-box-scroll {
       flex: 1;
       &::-webkit-scrollbar {
         /*滚动条整体样式*/
@@ -41,7 +41,7 @@
     }
   }
 
-  .handle {
+  .videoList-box-handle {
     position: absolute;
     width: 24px;
     height: 70px;
@@ -52,7 +52,7 @@
     border-top-right-radius: 6px;
     border-bottom-right-radius: 6px;
     cursor: pointer;
-    .arrow {
+    .videoList-box-arrow {
       width: 16px;
       height: 16px;
       position: absolute;
@@ -60,7 +60,7 @@
       left: 50%;
       transform: translate(-50%, -50%) rotate(180deg);
       fill: #8c8d8e;
-      &.inunfold {
+      &.videoList-box-inunfold {
         transform: translate(-50%, -50%);
       }
       transition: transform 0.5s;

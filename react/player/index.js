@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import store from '@/redux/store';
-import useEventController from '@/hooks/useEventController';
-import DrawTools from '@/components/drawTools/index';
+import store from '../redux/store';
+import useEventController from '../hooks/useEventController';
+import DrawTools from '../components/drawTools/index';
 import CoverElements from './components/coverElements/index';
 import Courseware from './components/courseware/index';
 import OutLine from './components/outLine/index';
 import VideoList from './components/videoList/index';
-import style from './index.less';
-import { calZmlScope } from '@/utils/index';
-import { PlayerContext } from '@/config';
+import { calZmlScope } from '../utils/index';
+import { PlayerContext } from '../config';
+import './index.less';
 const histroyPageMap = {};
 // const initScope = calZmlScope();
 
@@ -159,9 +159,9 @@ export default function Room(props) {
         eventControllersInstance
       }}
     >
-      <div className={style.box}>
-        <div className={style.content}>
-          <div className={style.main} style={{ ...scope, overflow: 'hidden' }}>
+      <div className="player-box">
+        <div className="player-content">
+          <div className="player-main" style={{ ...scope, overflow: 'hidden' }}>
             {coursewareList.length > 0 && <Courseware />}
             <DrawTools pageNumValue={pageNum} coursewareId={coursewareId} signalType="whiteboard_data"/>
             {!isStudent && <div style={{ display: isPPT ? 'block' : 'none' }}><OutLine coursewareId={coursewareId} active={isPPT} pageTotal={pageTotal} currentPage={pageNum} /></div>}

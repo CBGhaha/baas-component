@@ -1,11 +1,11 @@
-.container {
+.outline-container {
   position: absolute;
   z-index: 2;
   top: 0;
   right: 0;
   bottom: 0;
 	border-left: 1px solid #e0e2e6;
-  .content {
+  .outline-content {
     width: 200px;
     height: 100%;
     background: #edeff3;
@@ -13,13 +13,13 @@
     transition: width 0.5s;
     display: flex;
     flex-direction: column;
-    .header {
+    .outline-header {
       height: 39px;
       line-height: 39px;
       text-align: center;
       border-bottom: 1px solid #e0e2e6;
     }
-    .scroll {
+    .outline-scroll {
       flex: 1;
       &::-webkit-scrollbar {
         /*滚动条整体样式*/
@@ -41,7 +41,7 @@
     }
   }
 
-  .handle {
+  .outline-handle {
     position: absolute;
     width: 24px;
     height: 70px;
@@ -52,7 +52,7 @@
     border-top-left-radius: 16px;
     border-bottom-left-radius: 16px;
     cursor: pointer;
-    .arrow {
+    .outline-arrow {
       width: 16px;
       height: 16px;
       position: absolute;
@@ -60,7 +60,7 @@
       left: 50%;
       transform: translate(-50%, -50%);
       fill: #8c8d8e;
-      &.inunfold {
+      &.outline-inunfold {
         transform: translate(-50%, -50%) rotate(180deg);
       }
       transition: transform 0.5s;

@@ -35,7 +35,7 @@ const config = {
             loader: 'css-loader', //css-loader用于支持css的模块化 可以让css支持import require
             options: {
               minimize: true,
-              modules: true
+              modules: false
             }
           },
           {
@@ -80,7 +80,7 @@ const config = {
             }
           }
         ],
-        include: /global/
+        include: /global|node_module|dist/
       }
     ]
   },

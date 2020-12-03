@@ -1,8 +1,8 @@
 import 'regenerator-runtime/runtime';
 import React from 'react';
 import { Provider } from 'react-redux';
-import '@/module/localStorage';
-import '@/module/sessionStorage';
+import './module/localStorage';
+import './module/sessionStorage';
 window.USER_TYPE = {
   student: 'STUDENT',
   teacher: 'TEACHER',

@@ -63,7 +63,7 @@ const config = {
           },
           'less-loader'
         ],
-        exclude: /dist|global/
+        exclude: /dist|global|node_module/
       },
       {
         test: [/\.css/, /\.less/],
@@ -88,7 +88,7 @@ const config = {
             }
           }
         ],
-        include: /global|dist/
+        include: /global|node_module|dist/
       }
     ]
   },

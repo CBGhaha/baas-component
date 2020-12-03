@@ -1,5 +1,5 @@
 import { zmSketchPad } from 'zmSketchpad';
-import store from '@/redux/store';
+import store from '../../..//redux/store';
 
 function drawingCb(data) {
   console.log('drawingCb:', data);

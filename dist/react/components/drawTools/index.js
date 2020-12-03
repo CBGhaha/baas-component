@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import style from './index.less';
+import './index.less';
 import './cursor.global.less';
-import useEventController from '@/hooks/useEventController';
+import useEventController from '../../hooks/useEventController';
 import dawToolsInstance from './drawToolsInstance/index';
-import { PlayerContext } from '@/config';
+import { PlayerContext } from '../../config';
 
 let lastToolType;
 
@@ -175,9 +175,9 @@ function DrawTool(props) {
 
   return (
     <div className="box">
-      <div id="draw" ref={drawRef} onWheel={handleWheel} className={`${style.draw} ${cursorClassName}`} style={{ zIndex: toolType === 'point' || isLoading ? -1 : 1 }} onClick={(e) => editText(e.nativeEvent)}>
-        {userInfo.role === 'student' && <div className={style.cover}></div>}
-        { <div style={{ opacity: currenttool.action !== 'eraser' ? 0 : 1 }} ref={mockEraser} className={`${style.mockEraser} mockEraser`}></div>}
+      <div id="draw" ref={drawRef} onWheel={handleWheel} className={`drawTools-draw ${cursorClassName}`} style={{ zIndex: toolType === 'point' || isLoading ? -1 : 1 }} onClick={(e) => editText(e.nativeEvent)}>
+        {userInfo.role === 'student' && <div className="drawTools-cover"></div>}
+        { <div style={{ opacity: currenttool.action !== 'eraser' ? 0 : 1 }} ref={mockEraser} className={'drawTool-mockEraser mockEraser'}></div>}
       </div>
     </div >
   );

@@ -1,11 +1,10 @@
 import React, { useEffect, useContext, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { LoadingComponent } from '@/components/requestLoading/index';
-import style from './index.less';
-import { PlayerContext } from '@/config';
-import { pdfHost } from '@/config';
-import fetchResource, { preloadImageByUrl } from '@/utils/fetchResource';
-
+import { LoadingComponent } from '../../../../components/requestLoading/index';
+import { PlayerContext } from '../../../../config';
+import { pdfHost } from '../../../../config';
+import fetchResource, { preloadImageByUrl } from '../../../../utils/fetchResource';
+import './index.less';
 const preLoadImgSet = new Set();
 
 export default function Pdf(props) {
@@ -85,9 +84,9 @@ export default function Pdf(props) {
     }, 200);
   }, [pageNumValue, active]);
   return (
-    <div className={style.box} style={{ width: '100%', height: '100%', border: 'none', outline: 'none' }}>
-      <img src={loadUrl.src} className={style[loadUrl.class]}/>
-      {active && <div className={style.loading} style={{ display: loading ? 'flex' : 'none' }}>
+    <div className="pdf-box" style={{ width: '100%', height: '100%', border: 'none', outline: 'none' }}>
+      <img src="pdf-src" className={`pdf-${loadUrl.class}`}/>
+      {active && <div className="pdf-loading" style={{ display: loading ? 'flex' : 'none' }}>
         <LoadingComponent style={{ top: '50%' }} $id={$id}/>
       </div>}
     </div>
