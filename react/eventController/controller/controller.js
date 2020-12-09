@@ -26,7 +26,6 @@ export default class Controller extends EventEmitter {
   }
 
   setHandleSendEvent = (sendEventHandle)=>{
-    console.log('setHandleSendEvent', sendEventHandle);
     this.sendEventHandle = sendEventHandle;
   }
 
@@ -35,7 +34,7 @@ export default class Controller extends EventEmitter {
     const { name, data } = msg;
     const action = this.acceptAction[name];
     if (action) {
-      console.log('%c socket- receive:', 'color:#FF8C00', name, data);
+      console.log('%c player- receive:', 'color:#00FFFF', name, data);
       const playload = await action(this, data);
       this.emit(name, { data: playload });
     }
@@ -55,10 +54,10 @@ export default class Controller extends EventEmitter {
 
   // promise化
   emitSocket(event, ... arg) {
-    console.log('%c socket- request:', 'color:green', event, arg);
+    console.log('%c player-request:', 'color:#FFD700', event, arg);
     return new Promise((resolve) => {
       this.sendEventHandle(event, arg, (res)=>{
-        console.log('%c socket-response:', 'color:blue', event, res);
+        console.log('%c player-response:', 'color:#8A2BE2', event, res);
         resolve(res);
       });
     });

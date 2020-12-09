@@ -14,7 +14,6 @@ function createDemo() {
   });
 
   playInstance.on('zmlCoursePageTotal', (page, cb)=>{
-    console.log('zml的总页数', page);
     cb({ success: true });
   });
 
@@ -52,12 +51,10 @@ function createDemo() {
 
   }
   function handleWhiteboardData(data, cb) {
-    console.log('whiteboard_data:', data);
     cb({ success: true });
   }
 
   function handleWhiteboardPage(data, cb) {
-    console.log('whiteboard_page:', data);
     cb(datapage);
   }
   // let num = 2;

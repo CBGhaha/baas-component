@@ -85,7 +85,7 @@ export default function Pdf(props) {
   }, [pageNumValue, active]);
   return (
     <div className="pdf-box" style={{ width: '100%', height: '100%', border: 'none', outline: 'none' }}>
-      <img src="pdf-src" className={`pdf-${loadUrl.class}`}/>
+      <img src={loadUrl.src} className={`pdf-${loadUrl.class}`}/>
       {active && <div className="pdf-loading" style={{ display: loading ? 'flex' : 'none' }}>
         <LoadingComponent style={{ top: '50%' }} $id={$id}/>
       </div>}

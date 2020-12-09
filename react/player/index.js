@@ -38,7 +38,6 @@ export default function Room(props) {
   useEventController(eventControllersInstance, 'COURSE_EVENT', handleCourseEvent);
 
   function handleCourseEvent(res) {
-    console.log('handleCourseEvent', res);
     // track.push({ eventId: track.CBG_COMMON_EVENT, eventParam: { data: res, describe: 'QT传递过来的课件信息' } });
     const { data } = res;
     let num = 0;
@@ -98,7 +97,6 @@ export default function Room(props) {
     // if (!coursewareList.length > 0) return;
     if (histroryTimer.current) clearTimeout(histroryTimer.current);
     histroryTimer.current = setTimeout(()=>{
-      console.log('getHistroy');
       getHistroy();
     }, 200);
 
@@ -115,6 +113,8 @@ export default function Room(props) {
       }
       // 如果课件不存在 则刷新一次页面重新请求
       if (!currentWare && (`${coursewareId}` !== `${zmSessionStorage.unkonwCourseware}`)) {
+        eventControllersInstance.send('QtAction', { action: 'queryCourseResource' });
+        // QtBridge.sendMessageToQt('queryCourseResource'); // Qt课件强刷新一次
         console.error('课件不存在：', coursewareId, coursewareList, zmSessionStorage.coursewareReload);
         zmSessionStorage.unkonwCourseware = coursewareId;
         location.reload();
@@ -124,7 +124,6 @@ export default function Room(props) {
 
   // 监听页面大小改变
   function handleSize() {
-    console.log('handleSize');
     setScope(calZmlScope());
   }
   // didMount+willlUnMount
@@ -141,6 +140,21 @@ export default function Room(props) {
       whiteBoardController.removeListener('setPage', compositesSetPageNum);
       whiteBoardController.removeListener('changeCouerseId', compositesSetCoursewareId);
     };
+  }, []);
+
+  useEffect(() => {
+    setTimeout(()=>{
+      eventControllersInstance.send('current_whiteboard_data').then(res=>{
+        if (res && res.data) {
+          const { currentLoad, sliderCurrentPage } = res.data;
+          if (sliderCurrentPage && currentLoad) {
+            const $page = sliderCurrentPage[currentLoad];
+            compositesSetCoursewareId(currentLoad);
+            compositesSetPageNum($page ? $page : 0);
+          }
+        }
+      });
+    }, 3000);
   }, []);
 
   return (

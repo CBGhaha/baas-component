@@ -32,34 +32,24 @@ const acceptAction = {
 // 发送消息action
 const sendAction = {
   current_user_connect(controller, res) {
-    if (res && res.success && res.data) {
-      if (res.data.tutors) {
-        const activeTutor = res.data.tutors[0];
-        activeTutor && store.dispatch(commonAction('activeTutor', activeTutor));
-      }
-      if (res.data.studentGroups) {
-        const allRobotStudent = new Map();
-        res.data.studentGroups.forEach((group) => {
-          group.students.forEach((user) => {
-            if (user.robot) { allRobotStudent.set(user.userId, user); }
-          });
-        });
-        const studentMap = {};
-        res.data.studentGroups.forEach(group=>{
-          group.students.forEach(user=>{
-            studentMap[user.userId] = user;
-          });
-        });
-        store.dispatch(commonAction('allAistudentSet', allRobotStudent));
-        store.dispatch(commonAction('studentsMap', studentMap));
-        return studentMap;
-      }
+    if (res) {
+      store.dispatch(commonAction('studentsMap', res));
+      return res;
     }
   },
   zmlLoadfail(controller, res) {
     return res;
   },
   zmlCoursePageTotal(controller, res) {
+    return res;
+  },
+  zmlLoadSuccess(controller, res) {
+    return res;
+  },
+  getVideoDisable(controller, res) {
+    return res;
+  },
+  QtAction(controller, res) {
     return res;
   }
 };

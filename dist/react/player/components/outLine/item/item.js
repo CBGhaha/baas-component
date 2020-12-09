@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { preloadImageByUrl } from '../../../../utils/index.js';
-import { pdfHost } from '../../../../config';
+import { PlayerContext, pdfHost } from '../../../../config';
 import PropTypes from 'prop-types';
 import './item.less';
 import errImg from '../../../../assets/images/loaderror.png';
@@ -8,6 +8,7 @@ import errImg from '../../../../assets/images/loaderror.png';
 const format = '?x-oss-process=image/resize,w_261,h_147';
 
 function OutLineItem(props) {
+  const { eventControllersInstance } = useContext(PlayerContext);
   const [loading, setLoading] = useState(true);
   const $img = useRef(null);
 
@@ -27,6 +28,7 @@ function OutLineItem(props) {
   }, []);
   // 换页
   function slidePage() {
+    eventControllersInstance.send('QtAction', { action: 'pptSwitchPage', data: { id: coursewareId, pageNo: pageNumb } });
     // QtBridge.pptSwitchPage({ id: coursewareId, pageNo: pageNumb });
   }
 

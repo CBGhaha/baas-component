@@ -110,12 +110,7 @@ const acceptAction = {
   // 监听答题结果
   // 监听课件切换信息
   COURSE_EVENT(controller, data) {
-    const nData = data;
-    if (nData.data) {
-      nData.data = JSON.parse(nData.data);
-    }
-
-    return nData;
+    return data;
   }
 };
 

@@ -64,7 +64,6 @@ export default function Zml(props) {
       const currentZml = copyCoursewareList.find(i=>i.id === props.coursewareInfo.id);
       if (currentZml) {
         currentZml.pageTotal = data;
-        // QtBridge.zmlCoursePageTotal(data);
         setCoursewareList(copyCoursewareList);
       }
     }

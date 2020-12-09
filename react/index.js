@@ -43,6 +43,8 @@ export default class Play {
         handles.forEach($handle=>{
           $handle(data, cb);
         });
+      } else {
+        console.error('未注册事件处理函数：', event, data);
       }
     }, role);
   }

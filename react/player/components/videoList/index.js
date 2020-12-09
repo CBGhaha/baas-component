@@ -27,7 +27,8 @@ function OutLine(props) {
       mode: mode || 'manual', // 手动 manual, 自动 auto
       pageNo: currentPage
     };
-    QtBridge.openPlayer(param);
+    eventControllersInstance.send('QtAction', { action: 'openPlayer', data: param });
+    // QtBridge.openPlayer(param);
     setActive(index);
   }
 
@@ -58,6 +59,7 @@ function OutLine(props) {
   useEffect(()=>{
     setUnfold(true);
     setActive(0);
+    eventControllersInstance.send('QtAction', { action: 'closePlayer' });
     // QtBridge.closePlayer();
     setTimeout(()=>{
       openPlay(0, 'auto');

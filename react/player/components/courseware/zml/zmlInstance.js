@@ -56,6 +56,7 @@ export default class ZmInstance {
   postMessage(payload) {
     // 未初始化成功时保存消息到缓存列表
     if (!this.zmlWindow) {
+      console.log('课件链路：发送给课件信息-缓存', payload);
       this.histroyMessage.push(payload);
     } else {
       this.zmlWindow.postMessage(payload, '*');
@@ -101,6 +102,7 @@ export default class ZmInstance {
   }
   // 翻页
   setPageNo(num) {
+    console.log('课件链路：发送给课件信息-翻页', num);
     this.postMessage({ action: 'showPage', data: num });
   }
   // 获取课件中所有视频
@@ -138,7 +140,7 @@ export default class ZmInstance {
           showAnswer: false,
           tag: 'doAnswer'
         } }]] : null };
-      // console.log('sendIsAnsweringToQt', data);
+      this.eventControllersInstance.send('QtAction', { action: 'sendCommonMsgToQt', data: { event: 'zmlIsDoAnswer', data } });
       // QtBridge.sendCommonMsgToQt({ event: 'zmlIsDoAnswer', data });
     }, 100);
 
@@ -165,15 +167,14 @@ export default class ZmInstance {
     // zml总页数
     if (action === 'returnPageNumber') {
       this.handleMessage({ action: 'pageNumber', data: value });
+      this.eventControllersInstance.send('QtAction', { action: 'zmlCoursePageTotal', data: value });
       this.eventControllersInstance.send('zmlCoursePageTotal', value);
     }
 
     // 数据加载完毕
     if (action === 'dataReady') {
       this.chekckoutDeadline && clearTimeout(this.chekckoutDeadline);
-      console.log('课件链路：zml-dataReady');
-      await this.eventControllersInstance.send('current_user_connect');
-      this.setZmlUserGroup();
+      console.log('课件链路：zml-dataReady', this.histroyMessage);
       // 发送获取所有zml中的视频
       this.getAllVideo();
       // 发送缓存列表里的消息
@@ -187,6 +188,9 @@ export default class ZmInstance {
       if (!this.isDataReady) {
         this.isDataReady = true;
       }
+      this.eventControllersInstance.send('zmlLoadSuccess');
+      await this.eventControllersInstance.send('current_user_connect');
+      this.setZmlUserGroup();
     }
 
     // 答题相关操作
@@ -201,7 +205,7 @@ export default class ZmInstance {
     if (action === 'returnMediaData') {
       let zmlMedia = value;
       // 是否可以使用声网视频播放器的开关
-      const videoDisable = true;
+      const videoDisable = await this.eventControllersInstance.send('getVideoDisable');
       if (value && value.length > 0 && !videoDisable) {
         zmlMedia = value.map(item=>{
           if (item && item.length > 0) {

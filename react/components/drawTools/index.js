@@ -26,7 +26,6 @@ function DrawTool(props) {
   // 监听教具发来的
   useEventController(eventControllersInstance, 'PALETTE_EVENT', (res) => {
     const { data } = res;
-    console.log('PALETTE_EVENT:', res);
     setTool(data.kind, data.style, data.mark);
   });
 

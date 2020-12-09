@@ -25,13 +25,10 @@ export default class Base {
     this.init(dom);
   }
   init(dom) {
-    console.log('init');
     const { userInfo } = store.getState();
     if (userInfo.role !== USER_TYPE.student) {
-      console.log('init1');
       Base.zmSketchInstance = Object.freeze(zmSketchPad(dom, this.handleSendMassage, null, { disableScaleStage: true, drawingProcessCb: drawingCb }));
     } else {
-      console.log('init2');
       Base.zmSketchInstance = Object.freeze(zmSketchPad(dom, () => {}));
     }
     window.addEventListener('resize', this.handleWindowResize);

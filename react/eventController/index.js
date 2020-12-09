@@ -8,7 +8,7 @@ class SocketControllers {
   sendSignMap = {};
   sendEventHandle = null;
   constructor(sendEventHandle, role) {
-    store.dispatch(commonAction('userInfo', { role }));
+    store.dispatch(commonAction('userInfo', { role: role.toUpperCase() }));
     this.sendEventHandle = sendEventHandle;
     Object.keys(controllers).forEach(item=>{
       const $controller = controllers[item];

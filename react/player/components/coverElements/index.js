@@ -38,7 +38,7 @@ function CoverElements(props) {
           onClick={(e)=>inLesson && handleClickItem(e, area)}
           key={index}
           style={{ ...area, display: showCoverAreas ? 'block' : 'none' }}
-          className={`coverElements-coverIte ${!inLesson ? 'coverElements-disable' : 'none'}`}>
+          className={`coverElements-coverItem ${!inLesson ? 'coverElements-disable' : 'none'}`}>
         </div>)
       }
     </div>
