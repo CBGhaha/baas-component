@@ -49,6 +49,9 @@ const sendAction = {
   getVideoDisable(controller, res) {
     return res;
   },
+  playerTrackEvent(controller, res) {
+    return res;
+  },
   QtAction(controller, res) {
     return res;
   }

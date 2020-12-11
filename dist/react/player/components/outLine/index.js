@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import { Virtuoso } from 'react-virtuoso';
+import { PlayerContext } from '../../../config';
 import OutLineItem from './item/item';
 import PropTypes from 'prop-types';
 import './index.less';
@@ -9,6 +10,7 @@ function OutLine(props) {
   const [unfold, setUnfold] = useState(false);
   const virtuoso = useRef(null);
   const { coursewareId, pageTotal, currentPage, active } = props;
+  const { eventControllersInstance } = useContext(PlayerContext);
 
   useEffect(() => {
     if (!active) return;
@@ -19,7 +21,7 @@ function OutLine(props) {
 
   const changeUnfold = (unfold)=>{
     setUnfold(!unfold);
-    // track.push({ eventId: unfold ? track.CLASSROOM_OUTLINE_OFF : track.CLASSROOM_OUTLINE_ON });
+    eventControllersInstance.send('playerTrackEvent', { eventId: unfold ? 'CLASSROOM_OUTLINE_OFF' : 'CLASSROOM_OUTLINE_ON' });
   };
 
 

@@ -38,7 +38,7 @@ export default function Room(props) {
   useEventController(eventControllersInstance, 'COURSE_EVENT', handleCourseEvent);
 
   function handleCourseEvent(res) {
-    // track.push({ eventId: track.CBG_COMMON_EVENT, eventParam: { data: res, describe: 'QT传递过来的课件信息' } });
+    eventControllersInstance.send('playerTrackEvent', { eventId: 'CBG_COMMON_EVENT', eventParam: { data: res, describe: 'QT传递过来的课件信息' } });
     const { data } = res;
     let num = 0;
     if (data && data.page && typeof data.page === 'number') {
@@ -116,6 +116,7 @@ export default function Room(props) {
         eventControllersInstance.send('QtAction', { action: 'queryCourseResource' });
         // QtBridge.sendMessageToQt('queryCourseResource'); // Qt课件强刷新一次
         console.error('课件不存在：', coursewareId, coursewareList, zmSessionStorage.coursewareReload);
+        eventControllersInstance.send('playerTrackEvent', { eventId: 'CBG_ERROR_EVENT', eventParam: { id: coursewareId, list: coursewareList, describe: '没有收到课件id' } });
         zmSessionStorage.unkonwCourseware = coursewareId;
         location.reload();
       }

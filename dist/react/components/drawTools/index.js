@@ -10,11 +10,11 @@ import { PlayerContext } from '../../config';
 let lastToolType;
 
 function DrawTool(props) {
+  const { pageNumValue, coursewareId, signalType, dataPipe, userInfo } = props;
   const { eventControllersInstance } = useContext(PlayerContext);
   const { whiteBoardController } = eventControllersInstance.controllers;
   const [toolType, setToolType] = useState('');
-  const [cursorClassName, setCursorClassName] = useState('');
-  const { pageNumValue, coursewareId, signalType, dataPipe, userInfo } = props;
+  const [cursorClassName, setCursorClassName] = useState(userInfo.role === USER_TYPE.teacher ? 'pencursor-EF4C4F' : '');
   const drawToolsInstance = useRef(null);
   const mockEraser = useRef();
   const drawRef = useRef();

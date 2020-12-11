@@ -8,7 +8,7 @@ import './index.less';
 const preLoadImgSet = new Set();
 
 export default function Pdf(props) {
-  const { pageNum } = useContext(PlayerContext);
+  const { pageNum, eventControllersInstance } = useContext(PlayerContext);
   const [loadUrl, setLoadUrl] = useState({ class: '', src: '' });
   const [loading, setLoading] = useState(true);
   const pageNumInstance = useRef(0);
@@ -35,7 +35,7 @@ export default function Pdf(props) {
   async function loadPdf(bool) {
     if (active) {
       const pdfSrc = `${currentPdfHost}${id}/slide-${content[pageNumValue] || 0}.png`;
-      // track.push({ eventId: track.COURSEWARE_PPT_START, eventParam: { url: pdfSrc } });
+      eventControllersInstance.send('playerTrackEvent', { eventId: 'COURSEWARE_PPT_START', eventParam: { url: pdfSrc } });
       try {
         const data = await fetchResource(pdfSrc, { timeout: 5000 });
         if (pageNumInstance.current !== pageNumValue) return;
@@ -50,7 +50,7 @@ export default function Pdf(props) {
           setLoading(false);
           preload(pageNumValue + 1);
         };
-        // track.push({ eventId: track.COURSEWARE_PPT_SUCCESS, eventParam: { url: res } });
+        eventControllersInstance.send('playerTrackEvent', { eventId: 'COURSEWARE_PPT_SUCCESS', eventParam: { url: res } });
       } catch (err) { // 如果加载失败 切换资源域名再次加载
         if (currentPdfHost === pdfHost.IMG) {
           setCurrentPdfHost(pdfHost.DOC);
@@ -68,7 +68,7 @@ export default function Pdf(props) {
   }
 
   function loadFileTrack(pdfHost) {
-    // track.push({ eventId: track.PDF_LOADFAIL, eventParam: { host: pdfHost } });
+    eventControllersInstance.send('playerTrackEvent', { eventId: 'PDF_LOADFAIL', eventParam: { host: pdfHost } });
   }
 
   useEffect(()=>{

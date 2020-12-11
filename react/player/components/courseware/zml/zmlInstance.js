@@ -153,6 +153,7 @@ export default class ZmInstance {
       if (this.scrollRatio) {
         this.eventControllersInstance.controllers.whiteBoardController.emit('drawtoolScroll', { scrollRatio: this.scrollRatio, heightRatio: this.heightRatio });
       }
+      return;
     }
     // 课件准备完毕
     if (action === 'ready') {
@@ -160,8 +161,13 @@ export default class ZmInstance {
       this.zmlWindow = zmlIframe.contentWindow;
       this.setZmlInitialize();
       if (!this.isReady) {
+        this.readyTime = new Date().getTime();
+        const time = this.readyTime - this.mountedTime;
+        this.eventControllersInstance.send('playerTrackEvent', { eventId: 'COURSEWARE_ZML_READY', eventParam: { time } });
+        this.eventControllersInstance.send('playerTrackEvent', { eventId: 'ZML_READY', eventParam: { success: true, interval: time, host: this.zmlUrl } });
         this.isReady = true;
       }
+      return;
     }
 
     // zml总页数
@@ -169,6 +175,7 @@ export default class ZmInstance {
       this.handleMessage({ action: 'pageNumber', data: value });
       this.eventControllersInstance.send('QtAction', { action: 'zmlCoursePageTotal', data: value });
       this.eventControllersInstance.send('zmlCoursePageTotal', value);
+      return;
     }
 
     // 数据加载完毕
@@ -186,19 +193,28 @@ export default class ZmInstance {
       }
 
       if (!this.isDataReady) {
+        const now = new Date().getTime();
+        const time = now - this.readyTime;
+        this.eventControllersInstance.send('playerTrackEvent', { eventId: 'COURSEWARE_ZML_DATAREADY', eventParam: { time } });
+        this.eventControllersInstance.send('playerTrackEvent', { eventId: 'ZML_DATAREADY', eventParam: { success: true, interval: time, host: this.zmlUrl } });
         this.isDataReady = true;
       }
       this.eventControllersInstance.send('zmlLoadSuccess');
       await this.eventControllersInstance.send('current_user_connect');
       this.setZmlUserGroup();
+      return;
     }
 
     // 答题相关操作
     if (action === 'questionOperation') {
       const opt = [0, 0, -1, 'zmlMessage', ['questionOperation', value]];
-      const { operation: { doAnswer } } = value;
+      const { operation: { answer, doAnswer }, questionId } = value;
       this.sendIsAnsweringToQt(!!doAnswer, value);
+      if (answer && answer.length) {
+        this.eventControllersInstance.send('playerTrackEvent', { eventId: 'ZML_ANSWER_SUBMIT', ukeEventId: `${lessonId}_${window.userInfo.id}_${questionId}` });
+      }
       this.eventControllersInstance.send('whiteboard_data', opt);
+      return;
     }
 
     // zml所有视频
@@ -217,6 +233,7 @@ export default class ZmInstance {
       }
       window.zmlAllVideo = zmlMedia;
       this.eventControllersInstance.controllers.whiteBoardController.emit('zml_all_video', zmlMedia);
+      return;
     }
 
     // 课件的可点击区域
@@ -226,6 +243,7 @@ export default class ZmInstance {
         this.postMessage({ action: 'mockClick', data });
       } })
       )));
+      return;
     }
 
     // 课件产生滚动
@@ -234,9 +252,16 @@ export default class ZmInstance {
       this.eventControllersInstance.send('whiteboard_data', opt);
       this.scrollRatio = value.scrollRatio;
       this.eventControllersInstance.controllers.whiteBoardController.emit('drawtoolScroll', { ...value, heightRatio: this.heightRatio });
+      return;
     }
     if (action === 'sendClickAnswerDetail') {
       const opt = [0, 0, -1, 'zmlMessage', ['sendClickAnswerDetail', value]];
+      this.eventControllersInstance.send('whiteboard_data', opt);
+      this.eventControllersInstance.send('playerTrackEvent', { eventId: 'CLASSROOM_COMPLETION_ANSWER_DETAILS', eventParam: {} });
+      return;
+    }
+    if (action) {
+      const opt = [0, 0, -1, 'zmlMessage', [action, value]];
       this.eventControllersInstance.send('whiteboard_data', opt);
     }
   }

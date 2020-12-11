@@ -22,7 +22,7 @@ function Courseware(props) {
   const currentWare = coursewareList.find(i => i.id === coursewareId);
   const isZml = currentWare && currentWare.type === 'zml';
   return (
-    <div className={`zml-box ${role === USER_TYPE.student && isZml && isZmlExaming ? '`zml-top' : ''}`}>
+    <div className={`zml-box ${role === USER_TYPE.student && isZml && isZmlExaming ? 'zml-top' : ''}`}>
       {
         // 课件区
         coursewareList.map((item, index)=>
