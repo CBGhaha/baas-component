@@ -1,3 +1,6 @@
+import store from '../redux/store';
+import { lessonProgress } from '../config';
+
 /**
  * 加载图片
  * @param  {string} url 图片链接地址
@@ -39,5 +42,7 @@ export function calZmlScope() {
 }
 
 export function isAudience() {
+  const { userInfo: { role, progress } } = store.getState();
+  return (role === USER_TYPE.student) || (role === USER_TYPE.tutor && progress === lessonProgress.in);
   return true;
 }

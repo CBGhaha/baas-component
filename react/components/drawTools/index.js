@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { isAudience } from '../../utils';
 import './index.less';
 import './cursor.global.less';
 import useEventController from '../../hooks/useEventController';
@@ -10,11 +11,12 @@ import { PlayerContext } from '../../config';
 let lastToolType;
 
 function DrawTool(props) {
-  const { pageNumValue, coursewareId, signalType, dataPipe, userInfo } = props;
+  const isNotHold = isAudience();
+  const { pageNumValue, coursewareId, signalType, dataPipe } = props;
   const { eventControllersInstance } = useContext(PlayerContext);
   const { whiteBoardController } = eventControllersInstance.controllers;
   const [toolType, setToolType] = useState('');
-  const [cursorClassName, setCursorClassName] = useState(userInfo.role === USER_TYPE.teacher ? 'pencursor-EF4C4F' : '');
+  const [cursorClassName, setCursorClassName] = useState(!isNotHold ? 'pencursor-EF4C4F' : '');
   const drawToolsInstance = useRef(null);
   const mockEraser = useRef();
   const drawRef = useRef();
@@ -169,13 +171,13 @@ function DrawTool(props) {
 
   // 监听老师画板滚动
   function handleWheel(e) {
-    if (userInfo.role !== 'student' && e.deltaY !== 0) whiteBoardController.emit('teacherWheel', e.deltaY > 0);
+    if (!isNotHold && e.deltaY !== 0) whiteBoardController.emit('teacherWheel', e.deltaY > 0);
   }
 
   return (
     <div className="box">
       <div id="draw" ref={drawRef} onWheel={handleWheel} className={`drawTools-draw ${cursorClassName}`} style={{ zIndex: toolType === 'point' || isLoading ? -1 : 1 }} onClick={(e) => editText(e.nativeEvent)}>
-        {userInfo.role === 'student' && <div className="drawTools-cover"></div>}
+        {isNotHold && <div className="drawTools-cover"></div>}
         { <div style={{ opacity: currenttool.action !== 'eraser' ? 0 : 1 }} ref={mockEraser} className={'drawTool-mockEraser mockEraser'}></div>}
       </div>
     </div >

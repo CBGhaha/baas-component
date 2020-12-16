@@ -1,6 +1,5 @@
 import { APP_ID } from '../../../../config';
 import store from '../../../../redux/store';
-import { isAudience } from '../../../../utils/index';
 import commonAction from '../../../../redux/actions/common';
 export default class ZmInstance {
   zmlUrl='';
@@ -42,7 +41,7 @@ export default class ZmInstance {
 
       // 处理zml的内容滚动
 
-      if (action === 'scrollTop' && isAudience()) {
+      if (action === 'scrollTop' && role !== USER_TYPE.teacher) {
         this.scrollRatio = payload.data.scrollRatio;
         if (this.heightRatio) {
           this.eventControllersInstance.controllers.whiteBoardController.emit('drawtoolScroll', { ...payload.data, heightRatio: this.heightRatio });
@@ -94,11 +93,12 @@ export default class ZmInstance {
       setTrackData: trackData
     };
     const status = this.zmlUrl ? 0 : -1;
-    this.postMessage({
+    const zmlIframe = document.querySelector('#iframeId');
+    zmlIframe.contentWindow.postMessage({
       action: 'initialize',
       status,
       data
-    });
+    }, '*');
   }
   // 翻页
   setPageNo(num) {
@@ -157,8 +157,6 @@ export default class ZmInstance {
     }
     // 课件准备完毕
     if (action === 'ready') {
-      const zmlIframe = document.querySelector('#iframeId');
-      this.zmlWindow = zmlIframe.contentWindow;
       this.setZmlInitialize();
       if (!this.isReady) {
         this.readyTime = new Date().getTime();
@@ -180,10 +178,14 @@ export default class ZmInstance {
 
     // 数据加载完毕
     if (action === 'dataReady') {
+      const zmlIframe = document.querySelector('#iframeId');
+      this.zmlWindow = zmlIframe.contentWindow;
       this.chekckoutDeadline && clearTimeout(this.chekckoutDeadline);
       console.log('课件链路：zml-dataReady', this.histroyMessage);
       // 发送获取所有zml中的视频
       this.getAllVideo();
+      await this.eventControllersInstance.send('current_user_connect');
+      this.setZmlUserGroup();
       // 发送缓存列表里的消息
       if (this.histroyMessage.length) {
         this.histroyMessage.forEach((item)=>{
@@ -200,8 +202,6 @@ export default class ZmInstance {
         this.isDataReady = true;
       }
       this.eventControllersInstance.send('zmlLoadSuccess');
-      await this.eventControllersInstance.send('current_user_connect');
-      this.setZmlUserGroup();
       return;
     }
 
@@ -211,7 +211,7 @@ export default class ZmInstance {
       const { operation: { answer, doAnswer }, questionId } = value;
       this.sendIsAnsweringToQt(!!doAnswer, value);
       if (answer && answer.length) {
-        this.eventControllersInstance.send('playerTrackEvent', { eventId: 'ZML_ANSWER_SUBMIT', ukeEventId: `${lessonId}_${window.userInfo.id}_${questionId}` });
+        this.eventControllersInstance.send('playerTrackEvent', { eventId: 'ZML_ANSWER_SUBMIT', ukeEventId: `${questionId}` });
       }
       this.eventControllersInstance.send('whiteboard_data', opt);
       return;

@@ -23,3 +23,7 @@ zmlLoadfail  zml加载失败
 receive： 
 COURSE_EVENT  设置课件的id 和 page
 PALETTE_EVENT 老师设置画笔教具
+
+
+
+"controllerChange" zmg控制权切换

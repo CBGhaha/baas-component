@@ -48,7 +48,7 @@ const config = {
             options: {
               minimize: true,
               importLoaders: 2,
-              modules: { auto: true }
+              modules: false
             }
           },
           {

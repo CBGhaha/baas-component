@@ -22,31 +22,17 @@ function createDemo() {
   function handleGetCoursewareList(data, cb) {
     cb(
       [
-        { 'type': 'pdf',
-          'id': '36d44251-f048-42fd-b803-6415403301da',
-          '$id': 4747,
+        { 'type': 'zmg',
+          'id': 'zmg-1',
+          '$id': 'zmg-1',
           'name': 'PDF',
-          'content': [0],
-          'page': 0, 'pageTotal': 1
-        },
-        { 'type': 'zml',
-          'id': '867',
-          'name': 'ZML',
-          'origin': 'https://zml-test.zmlearn.com/',
-          'content': 'https://image.zmlearn.com/lecture/test/zml/courseware_867_2.json#867.3',
+          'content': 'http://172.25.152.48:8000/?role=teacher&usage=class&gameId=100&device=PC&kjType=zmg&local=true',
           'page': 0,
-          'pageTotal': 0
-        },
-        {
-          'type': 'draftboard',
-          'id': 'draftboard',
-          'name': '黑板',
-          'page': 0,
-          'pageTotal': 100
+          'pageTotal': 1
         }
       ]
     );
-    playInstance.triggleEvent('COURSE_EVENT', { page: 1, id: 'draftboard' });
+    playInstance.triggleEvent('COURSE_EVENT', { page: 1, id: 'zmg-1' });
     playInstance.triggleEvent('PALETTE_EVENT', { color: '#EF4C4F', strokeWidth: 2, type: 'brush' });
 
   }
