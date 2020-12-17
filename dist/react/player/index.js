@@ -68,11 +68,10 @@ export default function Room(props) {
   useEffect(() => {
     async function getHistroy() {
       if (coursewareId && pageNum !== null) {
-        // if (!histroyPageMap[`${coursewareId}_${pageNum}`]) {
-        const res = await eventControllersInstance.send('whiteboard_page', pageNum, coursewareId);
-        if (res && $pageNumSnapshot.current === pageNum && $coursewareIdSnapshot.current === coursewareId) {
-          const { drawToolDatas, zmlMessageDatas } = res;
-          if (!histroyPageMap[`${coursewareId}_${pageNum}`]) {
+        if (!histroyPageMap[`${coursewareId}_${pageNum}`]) {
+          const res = await eventControllersInstance.send('whiteboard_page', pageNum, coursewareId);
+          if (res && $pageNumSnapshot.current === pageNum && $coursewareIdSnapshot.current === coursewareId) {
+            const { drawToolDatas, zmlMessageDatas } = res;
             console.log('课件链路：获取历史白板：', coursewareId, pageNum);
             whiteBoardController.emit('drawTool', {
               action: 'pushDataToLayer',
@@ -80,27 +79,27 @@ export default function Room(props) {
               pageId: `${coursewareId}_${pageNum}`
             });
             histroyPageMap[`${coursewareId}_${pageNum}`] = true;
-          }
-          for (let key in zmlMessageDatas) {
-            zmlMessageDatas[key].forEach(item=>{
-              whiteBoardController.emit('zmlMessage', {
-                action: key,
-                data: item
+            for (let key in zmlMessageDatas) {
+              zmlMessageDatas[key].forEach(item=>{
+                whiteBoardController.emit('zmlMessage', {
+                  action: key,
+                  data: item
+                });
               });
-            });
+            }
+          } else {
+            console.error('获取白板历史出错');
           }
-        } else {
-          console.error('获取白板历史出错');
         }
       }
     }
-    // if (!coursewareList.length > 0) return;
+    if (!coursewareList.length > 0) return;
     if (histroryTimer.current) clearTimeout(histroryTimer.current);
     histroryTimer.current = setTimeout(()=>{
       getHistroy();
     }, 200);
 
-  }, [coursewareId, pageNum]);
+  }, [coursewareId, pageNum, coursewareList]);
 
   // ppt页数
   useEffect(() => {

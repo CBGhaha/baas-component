@@ -110,7 +110,8 @@ export default class ZmInstance {
     this.postMessage({ action: 'getMediaData' });
   }
   // 设置当前zml用户组
-  async setZmlUserGroup() {
+  async setZmlUserGroup(bool) {
+    if (bool) await this.eventControllersInstance.send('current_user_connect');
     const { userInfo: { role } } = store.getState();
     if (role !== USER_TYPE.tutor) {
       const { studentsMap } = store.getState();
@@ -184,8 +185,7 @@ export default class ZmInstance {
       console.log('课件链路：zml-dataReady', this.histroyMessage);
       // 发送获取所有zml中的视频
       this.getAllVideo();
-      await this.eventControllersInstance.send('current_user_connect');
-      this.setZmlUserGroup();
+      this.setZmlUserGroup(true);
       // 发送缓存列表里的消息
       if (this.histroyMessage.length) {
         this.histroyMessage.forEach((item)=>{

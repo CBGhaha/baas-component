@@ -1,7 +1,6 @@
 import React, { useEffect, useContext, useRef } from 'react';
 import PropTypes from 'prop-types';
 import store from '../../../../redux/store';
-import { isAudience } from '../../../../utils/index';
 import useEventController from '../../../../hooks/useEventController';
 import ZmlInstance from './zmlInstance';
 import { PlayerContext } from '../../../../config';
@@ -48,7 +47,7 @@ export default function Zml(props) {
       if (timer.current) clearTimeout(timer.current);
       timer.current = setTimeout(()=>{
         zmlInstance.current.setPageNo(pageNumValue);
-        if (!isAudience()) {
+        if (role === USER_TYPE.teacher) {
           zmlInstance.current.handleScroll({ deltaY: 5000000 });
         }
       }, 200);

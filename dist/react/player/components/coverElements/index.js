@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import store from '../../../redux/store';
 import { lessonProgress } from '../../../config';
 import { connect } from 'react-redux';
 import './index.less';
@@ -28,8 +29,8 @@ function CoverElements(props) {
       y: item.y + e.nativeEvent.offsetY
     });
   }
-  const { lesson_progress } = window.lessonInfo;
-  const inLesson = lesson_progress === lessonProgress.in;
+  const { userInfo: { progress } } = store.getState();
+  const inLesson = progress === lessonProgress.in;
   return (
     <div className="coverElements-box">
       {

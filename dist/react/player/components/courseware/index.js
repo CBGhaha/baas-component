@@ -4,12 +4,15 @@ import { connect } from 'react-redux';
 import store from '../../../redux/store';
 import Zml from './zml';
 import Pdf from './pdf';
+import Zmg from './zmg';
+import Other from './other';
 import Blackboard from '../../../components//blackboard';
 import { PlayerContext } from '../../../config';
 import './index.less';
 const coursewares = {
   zml: Zml,
   pdf: Pdf,
+  zmg: Zmg,
   draftboard: Blackboard
 };
 
@@ -27,7 +30,7 @@ function Courseware(props) {
         // 课件区
         coursewareList.map((item, index)=>
           <div key={index} className="zml-content" style={{ zIndex: coursewareId === item.id ? 0 : -1 }}>
-            { React.createElement(coursewares[item.type], { coursewareInfo: item, active: coursewareId === item.id }, null)}
+            { React.createElement(coursewares[item.type] || Other, { coursewareInfo: item, active: coursewareId === item.id }, null)}
           </div>
         )
       }

@@ -32,11 +32,16 @@ export default class Play {
   eventListeners = {};
   eventControllersInstance;
   dom;
-  constructor(dom, role) {
+  constructor(dom, userInfo) {
     this.dom = dom;
-    this.init(role || 'student');
+    if (typeof userInfo === 'string' || !userInfo) {
+      this.init({ role: (userInfo || 'student').toUpperCase() });
+    } else {
+      if (userInfo.role) userInfo.role = userInfo.role.toUpperCase();
+      this.init(userInfo);
+    }
   }
-  init(role) {
+  init(userInfo) {
     this.eventControllersInstance = new EventControllers((event, data, cb)=>{
       const handles = this.eventListeners[event];
       if (handles && handles.length > 0) {
@@ -46,7 +51,7 @@ export default class Play {
       } else {
         console.error('未注册事件处理函数：', event, data);
       }
-    }, role);
+    }, userInfo);
   }
   triggleEvent(event, data) {
     this.eventControllersInstance.handleEventMsg({ name: event, data });

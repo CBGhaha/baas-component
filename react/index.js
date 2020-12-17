@@ -35,8 +35,9 @@ export default class Play {
   constructor(dom, userInfo) {
     this.dom = dom;
     if (typeof userInfo === 'string' || !userInfo) {
-      this.init({ role: userInfo || 'student' });
+      this.init({ role: (userInfo || 'student').toUpperCase() });
     } else {
+      if (userInfo.role) userInfo.role = userInfo.role.toUpperCase();
       this.init(userInfo);
     }
   }

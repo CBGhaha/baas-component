@@ -33,7 +33,8 @@ const acceptAction = {
 const sendAction = {
   current_user_connect(controller, res) {
     if (res) {
-      store.dispatch(commonAction('studentsMap', res));
+      const { teacher, tutors, students } = res;
+      store.dispatch(commonAction('studentsMap', students));
       return res;
     }
   },
@@ -44,6 +45,9 @@ const sendAction = {
     return res;
   },
   zmlLoadSuccess(controller, res) {
+    return res;
+  },
+  zmgLoadSuccess() {
     return res;
   },
   getVideoDisable(controller, res) {

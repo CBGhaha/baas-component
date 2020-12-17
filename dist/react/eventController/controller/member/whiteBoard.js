@@ -36,11 +36,17 @@ const acceptAction = {
     }
     return data;
   },
+  zmg_data(controller, { data }) {
+    console.log('zmg_data-1:', data);
+    controller.emit('zmgMessage', data);
+    return data;
+  },
   closeZMLExam() {
     return true;
+  },
+  respondHistory() {
+    return true;
   }
-  // 监听答题结果
-
 };
 
 // 发送消息action
@@ -52,6 +58,12 @@ const sendAction = {
     return res;
   },
   whiteboard_data() {
+
+  },
+  zmg_data() {
+
+  },
+  zmgGetHistory() {
 
   },
   whiteboard_page(controller, ... res) {
