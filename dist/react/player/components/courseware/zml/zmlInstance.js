@@ -26,6 +26,7 @@ export default class ZmInstance {
     window.addEventListener('message', this.handlerIframeMsg);
     this.eventControllersInstance.controllers.otherController.on('user_connect', isUpdate => {if (isUpdate && isUpdate.data) {this.setZmlUserGroup();}});
     this.eventControllersInstance.controllers.whiteBoardController.on('zmlMessage', (payload)=>{
+      console.error('zmlMessage:', payload);
       const { action, data: { operation } } = payload;
       const { userInfo: { role } } = store.getState();
       // 处理zml的答题消息
@@ -148,7 +149,8 @@ export default class ZmInstance {
   }
   // 接受zml iframe发送来的消息
   handlerIframeMsg = async ({ data }) => {
-    const { action, data: value } = data;
+    const { action, kjType, data: value } = data;
+    if (!action || kjType === 'zmg') return;
     if (action === 'setHeightRatio') {
       this.heightRatio = value;
       if (this.scrollRatio) {

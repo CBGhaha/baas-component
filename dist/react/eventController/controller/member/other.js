@@ -27,6 +27,9 @@ const acceptAction = {
       return true;
     }
     return false;
+  },
+  zmgLocalhost(controller, data) {
+    return data;
   }
 };
 // 发送消息action

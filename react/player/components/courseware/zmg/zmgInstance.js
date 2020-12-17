@@ -13,6 +13,10 @@ export default class Zmgnstance {
     this.eventControllersInstance.controllers.whiteBoardController.on('zmgMessage', (payload)=>{
       this.postMessage(payload);
     });
+    this.eventControllersInstance.controllers.whiteBoardController.on('respondHistory', (payload)=>{
+      this.postMessage(payload.data);
+    });
+
   }
   // 发送消息
   postMessage(payload) {
@@ -29,7 +33,8 @@ export default class Zmgnstance {
   // 接受zml iframe发送来的消息
   handlerIframeMsg = async ({ data }) => {
     const { action, kjType, data: value } = data;
-    if (action && kjType) {
+    if (action && kjType && kjType !== 'zml') {
+      console.log('zmg消息:', action, data);
       if (action === 'gameReady') {
         this.eventControllersInstance.send('zmgLoadSuccess');
         const zmlIframe = document.querySelector('#zmg-iframe');
@@ -43,7 +48,7 @@ export default class Zmgnstance {
           this.histroyMessage = [];
         }
       } else if (action === 'getHistory') {
-        this.eventControllersInstance.send('zmgGetHistory');
+        this.eventControllersInstance.send('zmgGetHistory', data);
       } else {
         this.eventControllersInstance.send('zmg_data', data);
       }
@@ -52,7 +57,6 @@ export default class Zmgnstance {
 
   setUserInfo() {
     const { userInfo } = store.getState();
-    console.log('setUserInfo:', userInfo);
     this.postMessage({
       action: 'setUserInfo',
       data: { ...userInfo, role: userInfo.role.toLowerCase(), mobile: `${userInfo.id}`, userId: `${userInfo.id}` }

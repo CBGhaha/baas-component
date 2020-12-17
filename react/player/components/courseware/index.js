@@ -24,8 +24,9 @@ function Courseware(props) {
   const { isZmlExaming } = props;
   const currentWare = coursewareList.find(i => i.id === coursewareId);
   const isZml = currentWare && currentWare.type === 'zml';
+  const isZmg = currentWare && currentWare.type === 'zmg';
   return (
-    <div className={`zml-box ${role === USER_TYPE.student && isZml && isZmlExaming ? 'zml-top' : ''}`}>
+    <div className={`zml-box ${role === USER_TYPE.student && (isZml || isZmg) && isZmlExaming ? 'zml-top' : ''}`}>
       {
         // 课件区
         coursewareList.map((item, index)=>
