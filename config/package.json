@@ -1,6 +1,6 @@
 {
   "name": "@zm-youke/couserware-player",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "课件播放器",
   "main": "./main.js",
   "author": "bangguo.chen",

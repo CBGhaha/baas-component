@@ -26,7 +26,6 @@ export default class ZmInstance {
     window.addEventListener('message', this.handlerIframeMsg);
     this.eventControllersInstance.controllers.otherController.on('user_connect', isUpdate => {if (isUpdate && isUpdate.data) {this.setZmlUserGroup();}});
     this.eventControllersInstance.controllers.whiteBoardController.on('zmlMessage', (payload)=>{
-      console.error('zmlMessage:', payload);
       const { action, data: { operation } } = payload;
       const { userInfo: { role } } = store.getState();
       // 处理zml的答题消息

@@ -7,7 +7,7 @@ import { PlayerContext } from '../../../../config';
 
 export default function Zml(props) {
   const { userInfo } = store.getState();
-  const { role } = userInfo;
+  const { role, usage, mode } = userInfo;
   const { pageNum, courseware, eventControllersInstance } = useContext(PlayerContext);
   const { whiteBoardController } = eventControllersInstance.controllers;
   const { setCoursewareList, coursewareList } = courseware;
@@ -71,7 +71,7 @@ export default function Zml(props) {
   return (
     zmlInstance.current && <iframe
       id="iframeId"
-      src={`${coursewareInfo.origin}?role=${role === USER_TYPE.teacher ? 'teacher' : 'student'}&device=PC&usage=bigClass`}
+      src={`${coursewareInfo.origin}?role=${(role === USER_TYPE.teacher || mode === 'player') ? 'teacher' : 'student'}&device=PC&usage=${usage || 'bigClass'}`}
       style={{ width: '100%', height: '100%', display: 'block', border: 'none', outline: 'none' }}
     >
     </iframe>
