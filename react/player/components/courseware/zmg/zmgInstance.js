@@ -16,7 +16,11 @@ export default class Zmgnstance {
     this.eventControllersInstance.controllers.whiteBoardController.on('respondHistory', (payload)=>{
       this.postMessage(payload.data);
     });
-
+    this.eventControllersInstance.controllers.otherController.on('user_connect', isUpdate => {
+      if (isUpdate && isUpdate.data) {
+        this.setAddUsersInfo(isUpdate.data);
+      }
+    });
   }
   // 发送消息
   postMessage(payload) {
@@ -55,6 +59,13 @@ export default class Zmgnstance {
     }
   }
 
+  setAddUsersInfo(user) {
+    this.postMessage({
+      action: 'setAddUsersInfo',
+      data: { students: [{ ...user, role: user.role.toLowerCase(), mobile: `${user.id}`, userId: `${user.id}` }] }
+    });
+  }
+
   setUserInfo() {
     const { userInfo } = store.getState();
     this.postMessage({
@@ -62,6 +73,7 @@ export default class Zmgnstance {
       data: { ...userInfo, role: userInfo.role.toLowerCase(), mobile: `${userInfo.id}`, userId: `${userInfo.id}` }
     });
   }
+
   // 设置当前zmg用户
   async setUsersInfo() {
     const users = await this.eventControllersInstance.send('current_user_connect');

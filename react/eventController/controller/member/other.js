@@ -24,7 +24,7 @@ const acceptAction = {
     if (data && data.role === 'STUDENT') {
       const { studentsMap } = store.getState();
       store.dispatch(commonAction('studentsMap', { ...studentsMap, [data.userId]: data }));
-      return true;
+      return data;
     }
     return false;
   },
