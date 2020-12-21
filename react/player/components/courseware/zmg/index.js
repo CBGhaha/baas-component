@@ -39,6 +39,7 @@ export default function Zmg(props) {
   return (
     <iframe
       id="zmg-iframe"
+      className="zmgIframe"
       src={contentUrl || coursewareInfo.content}
       style={{ width: '100%', height: '100%', display: 'block', border: 'none', outline: 'none' }}
     >

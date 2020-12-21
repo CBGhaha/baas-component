@@ -4,7 +4,7 @@ import './index.less';
 export default function Blackboard(props) {
   const { className } = props;
   return (
-    <div className={`blackboard-box ${className}`}>
+    <div className={`blackboard-box ${className}`} id="iframeId">
     </div>
   );
 }

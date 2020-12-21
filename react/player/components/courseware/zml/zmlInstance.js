@@ -93,7 +93,7 @@ export default class ZmInstance {
       setTrackData: trackData
     };
     const status = this.zmlUrl ? 0 : -1;
-    const zmlIframe = document.querySelector('#iframeId');
+    const zmlIframe = document.getElementsByClassName('zmlIframe')[0];
     zmlIframe.contentWindow.postMessage({
       action: 'initialize',
       status,
@@ -180,7 +180,7 @@ export default class ZmInstance {
 
     // 数据加载完毕
     if (action === 'dataReady') {
-      const zmlIframe = document.querySelector('#iframeId');
+      const zmlIframe = document.getElementsByClassName('zmlIframe')[0];
       this.zmlWindow = zmlIframe.contentWindow;
       this.chekckoutDeadline && clearTimeout(this.chekckoutDeadline);
       console.log('课件链路：zml-dataReady', this.histroyMessage);

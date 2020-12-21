@@ -41,7 +41,7 @@ export default class Zmgnstance {
       console.log('zmg消息:', action, data);
       if (action === 'gameReady') {
         this.eventControllersInstance.send('zmgLoadSuccess');
-        const zmlIframe = document.querySelector('#zmg-iframe');
+        const zmlIframe = document.querySelector('.zmgIframe');
         this.zmlWindow = zmlIframe.contentWindow;
         this.setUserInfo();
         this.setUsersInfo();
