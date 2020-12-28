@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import { preloadImageByUrl } from '../../../../utils/index.js';
 import { PlayerContext, pdfHost } from '../../../../config';
 import PropTypes from 'prop-types';

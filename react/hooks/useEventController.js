@@ -8,7 +8,6 @@ import { useEffect } from 'react';
 
 
 export default function useEventController(eventControllersInstance, event, cb) {
-  // const { eventControllersInstance } = useContext(PlayerContext);
   useEffect(()=>{
     const $controllers = eventControllersInstance.acceptSignMap[event];
     $controllers.forEach(controller=>{

@@ -58,7 +58,9 @@ export default class Zmgnstance {
       }
     }
   }
+  setSpliteUsersInfo() {
 
+  }
   setAddUsersInfo(user) {
     this.postMessage({
       action: 'setAddUsersInfo',
@@ -80,8 +82,12 @@ export default class Zmgnstance {
     const { students, teacher, tutors } = users;
     const allUser = (Object.values(students).concat([...tutors, teacher])).map(user=>({ ... user, role: user.role.toLowerCase(), mobile: user.userId, id: user.userId }));
     this.postMessage({
-      action: 'setUsersInfo',
+      action: 'setAddUsersInfo',
       data: { students: allUser }
+    });
+    this.postMessage({
+      action: 'setSpliteUsersInfo',
+      data: { students: allUser.filter(user=>user.role === 'student') }
     });
   }
 

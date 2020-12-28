@@ -8,15 +8,15 @@ import './index.less';
 const preLoadImgSet = new Set();
 
 export default function Pdf(props) {
+  const { coursewareInfo, active } = props;
+  const { id, $id, content, host } = coursewareInfo;
   const { pageNum, eventControllersInstance } = useContext(PlayerContext);
   const [loadUrl, setLoadUrl] = useState({ class: '', src: '' });
   const [loading, setLoading] = useState(true);
   const pageNumInstance = useRef(0);
-  const [currentPdfHost, setCurrentPdfHost] = useState(pdfHost.IMG);
+  const [currentPdfHost, setCurrentPdfHost] = useState(host || pdfHost.IMG);
   const timer = useRef(null);
   const { value: pageNumValue } = pageNum;
-  const { coursewareInfo, active } = props;
-  const { id, $id, content } = coursewareInfo;
 
 
   // 预加载

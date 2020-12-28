@@ -11,11 +11,11 @@ export default class TeacherDrawTool extends Base {
     Base.zmSketchInstance.canvas.canvasaction.isFill = bool;
   }
   deleteSelectData() {
-    this.setToolKind('eraserrectangle');
     Base.zmSketchInstance.canvas.canvasaction.deleteSelectData();
+    this.setToolKind('eraserrectangle');
   }
   deletePageData() {
-    this.setToolKind('eraserrectangle');
     Base.zmSketchInstance.canvas.canvasaction.deletePageData();
+    this.setToolKind('eraserrectangle');
   }
 }
