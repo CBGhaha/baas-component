@@ -1,8 +1,9 @@
 import Player from './react/index';
 // import Player from './dist/main.js';
 // import './dist/main.css';
-import { datapage } from './mock';
-
+// import { datapage } from './mock';
+import mock from './mock';
+console.log('mock:', mock);
 createDemo();
 function createDemo() {
   const playInstance = new Player(document.getElementById('appContent'), 'teacher');
@@ -23,8 +24,8 @@ function createDemo() {
     cb(
       [
         { 'type': 'zmg',
-          'id': 'zmg-1',
-          '$id': 'zmg-1',
+          'id': '9a7e59f9-817f-4497-b5ad-1662fb9cef31',
+          '$id': '9a7e59f9-817f-4497-b5ad-1662fb9cef31',
           'name': 'PDF',
           'content': 'http://172.25.152.48:8000/?role=teacher&usage=class&gameId=100&device=PC&kjType=zmg&local=true',
           'page': 0,
@@ -32,7 +33,7 @@ function createDemo() {
         }
       ]
     );
-    playInstance.triggleEvent('COURSE_EVENT', { page: 1, id: 'zmg-1' });
+    playInstance.triggleEvent('COURSE_EVENT', { page: 8, id: '9a7e59f9-817f-4497-b5ad-1662fb9cef31' });
     playInstance.triggleEvent('PALETTE_EVENT', { color: '#EF4C4F', strokeWidth: 2, type: 'brush' });
 
   }
@@ -41,7 +42,9 @@ function createDemo() {
   }
 
   function handleWhiteboardPage(data, cb) {
-    cb(datapage);
+    const [page, id] = data;
+    cb(mock[id][page]);
+    console.log('handleWhiteboardPage:', data);
   }
   // let num = 2;
   // setInterval(()=>{

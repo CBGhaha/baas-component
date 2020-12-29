@@ -48,7 +48,6 @@ export default class Base {
     if (action === 'text_edit') {
       data[6][1] = data[6][1].replace(/\\/g, '|');
     }
-    this.sendData(data);
 
     if (data.length === 7) {
       this.isbush = action === 'brush';
@@ -64,6 +63,7 @@ export default class Base {
         this.compensation();
       }, 10000);
     }
+    this.sendData(data);
   }
   // 丢失结束画笔的补偿机制
   compensation() {

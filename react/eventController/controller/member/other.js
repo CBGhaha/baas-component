@@ -28,6 +28,19 @@ const acceptAction = {
     }
     return false;
   },
+  user_disconnect() {
+    if (data && data.role === 'STUDENT') {
+      const { studentsMap } = store.getState();
+      try {
+        delete studentsMap[data.userId];
+      } catch (err) {
+        console.log(err);
+      }
+      store.dispatch(commonAction('studentsMap', { ...studentsMap }));
+      return data;
+    }
+    return false;
+  },
   zmgLocalhost(controller, data) {
     return data;
   }
