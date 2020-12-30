@@ -1,4 +1,14 @@
 import store from '../../../../redux/store';
+function userTransfrom(user) {
+  const { id, name, avatar, userId, role } = user;
+  return {
+    userId: `${id || userId}`,
+    role: role.toLowerCase(),
+    avatar,
+    name,
+    mobile: `${id || userId}`
+  };
+}
 export default class Zmgnstance {
   zmlWindow = null;
   handleMessage = null;
@@ -21,6 +31,12 @@ export default class Zmgnstance {
         this.setAddUsersInfo(isUpdate.data);
       }
     });
+    this.eventControllersInstance.controllers.otherController.on('user_disconnect', isUpdate => {
+      if (isUpdate && isUpdate.data) {
+        this.setDelUsersInfo(isUpdate.data);
+      }
+    });
+
   }
   // 发送消息
   postMessage(payload) {
@@ -37,8 +53,7 @@ export default class Zmgnstance {
   // 接受zml iframe发送来的消息
   handlerIframeMsg = async ({ data }) => {
     const { action, kjType, data: value } = data;
-    if (action && kjType && kjType !== 'zml') {
-      console.log('zmg消息:', action, data);
+    if (action && kjType === 'zmg') {
       if (action === 'gameReady') {
         this.eventControllersInstance.send('zmgLoadSuccess');
         const zmlIframe = document.querySelector('.zmgIframe');
@@ -64,15 +79,21 @@ export default class Zmgnstance {
   setAddUsersInfo(user) {
     this.postMessage({
       action: 'setAddUsersInfo',
-      data: { students: [{ ...user, role: user.role.toLowerCase(), mobile: `${user.id}`, userId: `${user.id}` }] }
+      data: { students: [userTransfrom(user)] }
     });
   }
-
+  setDelUsersInfo(user) {
+    console.log('setDelUsersInfo', user);
+    this.postMessage({
+      action: 'setDelUsersInfo',
+      data: { students: [userTransfrom(user)] }
+    });
+  }
   setUserInfo() {
     const { userInfo } = store.getState();
     this.postMessage({
       action: 'setUserInfo',
-      data: { ...userInfo, role: userInfo.role.toLowerCase(), mobile: `${userInfo.id}`, userId: `${userInfo.id}` }
+      data: userTransfrom(userInfo)
     });
   }
 
@@ -80,15 +101,21 @@ export default class Zmgnstance {
   async setUsersInfo() {
     const users = await this.eventControllersInstance.send('current_user_connect');
     const { students, teacher, tutors } = users;
-    const allUser = (Object.values(students).concat([...tutors, teacher])).map(user=>({ ... user, role: user.role.toLowerCase(), mobile: user.userId, id: user.userId }));
+    const onlineStudents = Object.values(students).filter(user=>user.online);
+    const allUser = (onlineStudents.concat([...tutors, teacher])).map(userTransfrom);
     this.postMessage({
       action: 'setAddUsersInfo',
       data: { students: allUser }
     });
     this.postMessage({
       action: 'setSpliteUsersInfo',
-      data: { students: allUser.filter(user=>user.role === 'student') }
+      data: { students: Object.values(students).map(userTransfrom) }
     });
+    // this.postMessage({
+    //   action: 'setWatcherUserInfo',
+    //   data: allUser.find(user=>user.role === 'tutor')
+    // });
+
   }
 
   destroyed() {

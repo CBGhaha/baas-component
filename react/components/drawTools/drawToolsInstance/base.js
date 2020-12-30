@@ -11,7 +11,6 @@ export default class Base {
   id = null;
   isbush = false;
   lastSendData = [];
-  bushTimer = null;
   eventControllersInstance;
   constructor(dom, signalType, dataPipe, eventControllersInstance) {
     this.signalType = signalType;
@@ -48,20 +47,11 @@ export default class Base {
     if (action === 'text_edit') {
       data[6][1] = data[6][1].replace(/\\/g, '|');
     }
-
     if (data.length === 7) {
       this.isbush = action === 'brush';
       if (this.lastSendData.length === 3) {
         this.compensation();
-        if (this.bushTimer) clearTimeout(this.bushTimer);
       }
-    }
-    if (this.isbush) {
-      this.lastSendData = data;
-      if (this.bushTimer) clearTimeout(this.bushTimer);
-      this.bushTimer = setTimeout(()=>{
-        this.compensation();
-      }, 10000);
     }
     this.sendData(data);
   }
@@ -75,7 +65,6 @@ export default class Base {
   }
   showLayerById(wbLayerId) {
     this.id = wbLayerId;
-    if (this.bushTimer) clearTimeout(this.bushTimer);
     this.lastSendData = [];
     Base.zmSketchInstance.canvas.canvasaction.drawOuterStage();
     Base.zmSketchInstance.canvas.showLayerById(wbLayerId);
