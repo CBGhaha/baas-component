@@ -11,11 +11,9 @@ export default class Base {
   id = null;
   isbush = false;
   lastSendData = [];
-  bushTimer = null;
   eventControllersInstance;
-  constructor(dom, signalType, dataPipe, eventControllersInstance) {
+  constructor(dom, signalType, eventControllersInstance) {
     this.signalType = signalType;
-    this.dataPipe = dataPipe;
     this.handleSendMassage = this.handleSendMassage.bind(this);
     this.eventControllersInstance = eventControllersInstance;
     if (Base.zmSketchInstance) {
@@ -48,22 +46,13 @@ export default class Base {
     if (action === 'text_edit') {
       data[6][1] = data[6][1].replace(/\\/g, '|');
     }
-    this.sendData(data);
-
     if (data.length === 7) {
       this.isbush = action === 'brush';
       if (this.lastSendData.length === 3) {
         this.compensation();
-        if (this.bushTimer) clearTimeout(this.bushTimer);
       }
     }
-    if (this.isbush) {
-      this.lastSendData = data;
-      if (this.bushTimer) clearTimeout(this.bushTimer);
-      this.bushTimer = setTimeout(()=>{
-        this.compensation();
-      }, 10000);
-    }
+    this.sendData(data);
   }
   // 丢失结束画笔的补偿机制
   compensation() {
@@ -71,11 +60,10 @@ export default class Base {
     this.lastSendData = [];
   }
   sendData(data) {
-    this.dataPipe ? this.dataPipe(data) : this.eventControllersInstance.controllers.whiteBoardController.send(this.signalType, data);
+    this.eventControllersInstance.controllers.whiteBoardController.send(this.signalType, data);
   }
   showLayerById(wbLayerId) {
     this.id = wbLayerId;
-    if (this.bushTimer) clearTimeout(this.bushTimer);
     this.lastSendData = [];
     Base.zmSketchInstance.canvas.canvasaction.drawOuterStage();
     Base.zmSketchInstance.canvas.showLayerById(wbLayerId);

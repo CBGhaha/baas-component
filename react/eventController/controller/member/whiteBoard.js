@@ -73,6 +73,9 @@ const sendAction = {
   whiteboard_data() {
 
   },
+  draw_tools_data() {
+
+  },
   zmg_data() {
 
   },

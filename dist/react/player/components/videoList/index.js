@@ -25,7 +25,8 @@ function OutLine(props) {
       mediaUrl: videoItem.src,
       mediaName: videoItem.name,
       mode: mode || 'manual', // 手动 manual, 自动 auto
-      pageNo: currentPage
+      pageNo: currentPage,
+      type: videoItem.type
     };
     eventControllersInstance.send('QtAction', { action: 'openPlayer', data: param });
     // QtBridge.openPlayer(param);

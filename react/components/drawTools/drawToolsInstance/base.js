@@ -12,9 +12,8 @@ export default class Base {
   isbush = false;
   lastSendData = [];
   eventControllersInstance;
-  constructor(dom, signalType, dataPipe, eventControllersInstance) {
+  constructor(dom, signalType, eventControllersInstance) {
     this.signalType = signalType;
-    this.dataPipe = dataPipe;
     this.handleSendMassage = this.handleSendMassage.bind(this);
     this.eventControllersInstance = eventControllersInstance;
     if (Base.zmSketchInstance) {
@@ -61,7 +60,7 @@ export default class Base {
     this.lastSendData = [];
   }
   sendData(data) {
-    this.dataPipe ? this.dataPipe(data) : this.eventControllersInstance.controllers.whiteBoardController.send(this.signalType, data);
+    this.eventControllersInstance.controllers.whiteBoardController.send(this.signalType, data);
   }
   showLayerById(wbLayerId) {
     this.id = wbLayerId;

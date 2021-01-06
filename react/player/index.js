@@ -177,7 +177,7 @@ export default function Room(props) {
         <div className="player-content">
           <div className="player-main" style={{ ...scope, overflow: 'hidden' }}>
             {coursewareList.length > 0 && <Courseware />}
-            <DrawTools pageNumValue={pageNum} coursewareId={coursewareId} signalType="whiteboard_data"/>
+            <DrawTools pageNumValue={pageNum} coursewareId={coursewareId} signalType="draw_tools_data"/>
             {!isStudent && <div style={{ display: isPPT ? 'block' : 'none' }}><OutLine coursewareId={coursewareId} active={isPPT} pageTotal={pageTotal} currentPage={pageNum} /></div>}
             {isTeacher && isZML && <VideoList coursewareId={coursewareId} pageTotal={pageTotal} currentPage={pageNum} />}
           </div>

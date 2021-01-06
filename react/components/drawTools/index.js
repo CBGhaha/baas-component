@@ -12,7 +12,7 @@ let lastToolType;
 
 function DrawTool(props) {
   const isNotHold = isAudience();
-  const { pageNumValue, coursewareId, signalType, dataPipe } = props;
+  const { pageNumValue, coursewareId, signalType } = props;
   const { eventControllersInstance } = useContext(PlayerContext);
   const { whiteBoardController } = eventControllersInstance.controllers;
   const [toolType, setToolType] = useState('');
@@ -33,7 +33,7 @@ function DrawTool(props) {
 
   useEffect(() => {
     // 初始化教具实例
-    drawToolsInstance.current = dawToolsInstance(document.getElementById('draw'), USER_TYPE.teacher, signalType, dataPipe, eventControllersInstance);
+    drawToolsInstance.current = dawToolsInstance(document.getElementById('draw'), USER_TYPE.teacher, signalType, eventControllersInstance);
     whiteBoardController.on('drawTool', handleDraw);
     whiteBoardController.on('drawtoolScroll', handleDrawtoolScroll);
     const contentWidth = drawRef.current.offsetWidth;

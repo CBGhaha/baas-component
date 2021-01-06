@@ -23,6 +23,7 @@ export default class ZmInstance {
     this.heightRatio = 0;
     this.scrollRatio = 0;
     this.timer = null;
+    this.isAnswerData = null;
     window.addEventListener('message', this.handlerIframeMsg);
     this.eventControllersInstance.controllers.otherController.on('user_connect', isUpdate => {if (isUpdate && isUpdate.data) {this.setZmlUserGroup();}});
     this.eventControllersInstance.controllers.whiteBoardController.on('zmlMessage', (payload)=>{
@@ -103,6 +104,11 @@ export default class ZmInstance {
   // 翻页
   setPageNo(num) {
     console.log('课件链路：发送给课件信息-翻页', num);
+    if (this.isAnswerData && this.isAnswerData.state && this.isAnswerData.data[4]) {
+      console.log('课件链路：发送给课件信息-补偿结束答题', num);
+      const [action, data] = this.isAnswerData.data[4];
+      this.postMessage({ action, data });
+    }
     this.postMessage({ action: 'showPage', data: num });
   }
   // 获取课件中所有视频
@@ -132,17 +138,16 @@ export default class ZmInstance {
 
   sendIsAnsweringToQt(state, payload) {
     if (this.timer) clearTimeout(this.timer);
+    this.isAnswerData = { state, data: state ?
+      [0, 0, -1, 'zmlMessage', ['questionOperation', { ...payload, operation: {
+        doAnswer: false,
+        hasAnswered: true,
+        notShowModal: false,
+        showAnswer: false,
+        tag: 'doAnswer'
+      } }]] : null };
     this.timer = setTimeout(()=>{
-      const data = { state, data: state ?
-        [0, 0, -1, 'zmlMessage', ['questionOperation', { ...payload, operation: {
-          doAnswer: false,
-          hasAnswered: true,
-          notShowModal: false,
-          showAnswer: false,
-          tag: 'doAnswer'
-        } }]] : null };
-      this.eventControllersInstance.send('QtAction', { action: 'sendCommonMsgToQt', data: { event: 'zmlIsDoAnswer', data } });
-      // QtBridge.sendCommonMsgToQt({ event: 'zmlIsDoAnswer', data });
+      this.eventControllersInstance.send('QtAction', { action: 'sendCommonMsgToQt', data: { event: 'zmlIsDoAnswer', data: this.isAnswerData } });
     }, 100);
 
   }
@@ -155,7 +160,6 @@ export default class ZmInstance {
       if (this.scrollRatio) {
         this.eventControllersInstance.controllers.whiteBoardController.emit('drawtoolScroll', { scrollRatio: this.scrollRatio, heightRatio: this.heightRatio });
       }
-      return;
     }
     // 课件准备完毕
     if (action === 'ready') {

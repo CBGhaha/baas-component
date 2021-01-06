@@ -24,7 +24,20 @@ const acceptAction = {
     if (data && data.role === 'STUDENT') {
       const { studentsMap } = store.getState();
       store.dispatch(commonAction('studentsMap', { ...studentsMap, [data.userId]: data }));
-      return data;
+      return { ...data, id: data.userId };
+    }
+    return false;
+  },
+  user_disconnect(controller, data) {
+    if (data && data.role === 'STUDENT') {
+      const { studentsMap } = store.getState();
+      try {
+        delete studentsMap[data.userId];
+      } catch (err) {
+        console.log(err);
+      }
+      store.dispatch(commonAction('studentsMap', { ...studentsMap }));
+      return { ...data, id: data.userId };
     }
     return false;
   },
