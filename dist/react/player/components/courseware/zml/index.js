@@ -59,11 +59,9 @@ export default function Zml(props) {
     const { action, data } = payload;
     // 设置zml的总页数
     if (action === 'pageNumber') {
-      const copyCoursewareList = [... coursewareList];
-      const currentZml = copyCoursewareList.find(i=>i.id === props.coursewareInfo.id);
+      const currentZml = coursewareList.find(i=>i.id === props.coursewareInfo.id);
       if (currentZml) {
         currentZml.pageTotal = data;
-        setCoursewareList(copyCoursewareList);
       }
     }
   }

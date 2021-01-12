@@ -90,7 +90,6 @@ function OutLine(props) {
 
 OutLine.propTypes = {
   coursewareId: PropTypes.string,
-  pageTotal: PropTypes.number,
   currentPage: PropTypes.number
 };
 

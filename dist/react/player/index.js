@@ -68,10 +68,11 @@ export default function Room(props) {
   useEffect(() => {
     async function getHistroy() {
       if (coursewareId && pageNum !== null) {
-        if (!histroyPageMap[`${coursewareId}_${pageNum}`]) {
-          const res = await eventControllersInstance.send('whiteboard_page', pageNum, coursewareId);
-          if (res && $pageNumSnapshot.current === pageNum && $coursewareIdSnapshot.current === coursewareId) {
-            const { drawToolDatas, zmlMessageDatas } = res;
+        // if (!histroyPageMap[`${coursewareId}_${pageNum}`]) {
+        const res = await eventControllersInstance.send('whiteboard_page', pageNum, coursewareId);
+        if (res && $pageNumSnapshot.current === pageNum && $coursewareIdSnapshot.current === coursewareId) {
+          const { drawToolDatas, zmlMessageDatas } = res;
+          if (!histroyPageMap[`${coursewareId}_${pageNum}`]) {
             console.log('课件链路：获取历史白板：', coursewareId, pageNum);
             whiteBoardController.emit('drawTool', {
               action: 'pushDataToLayer',
@@ -79,17 +80,17 @@ export default function Room(props) {
               pageId: `${coursewareId}_${pageNum}`
             });
             histroyPageMap[`${coursewareId}_${pageNum}`] = true;
-            for (let key in zmlMessageDatas) {
-              zmlMessageDatas[key].forEach(item=>{
-                whiteBoardController.emit('zmlMessage', {
-                  action: key,
-                  data: item
-                });
-              });
-            }
-          } else {
-            console.error('获取白板历史出错');
           }
+          for (let key in zmlMessageDatas) {
+            zmlMessageDatas[key].forEach(item=>{
+              whiteBoardController.emit('zmlMessage', {
+                action: key,
+                data: item
+              });
+            });
+          }
+        } else {
+          console.error('获取白板历史出错');
         }
       }
     }
@@ -98,7 +99,6 @@ export default function Room(props) {
     histroryTimer.current = setTimeout(()=>{
       getHistroy();
     }, 200);
-
   }, [coursewareId, pageNum, coursewareList]);
 
   // ppt页数
@@ -179,7 +179,7 @@ export default function Room(props) {
             {coursewareList.length > 0 && <Courseware />}
             <DrawTools pageNumValue={pageNum} coursewareId={coursewareId} signalType="draw_tools_data"/>
             {!isStudent && <div style={{ display: isPPT ? 'block' : 'none' }}><OutLine coursewareId={coursewareId} active={isPPT} pageTotal={pageTotal} currentPage={pageNum} /></div>}
-            {isTeacher && isZML && <VideoList coursewareId={coursewareId} pageTotal={pageTotal} currentPage={pageNum} />}
+            {isTeacher && isZML && <VideoList coursewareId={coursewareId} currentPage={pageNum} />}
           </div>
         </div>
         {isTeacher && isZML && <CoverElements/>}

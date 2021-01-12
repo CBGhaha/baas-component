@@ -95,7 +95,7 @@ const sendAction = {
           const [action, payload] = msg.data[4];
           if (msg.data[3] === 'zmlMessage') {
             if (!actionMap[action]) actionMap[action] = [];
-            if (action === 'questionOperation') {
+            if (action === 'questionOperation' || action === 'animationMessage') {
               actionMap[action].push(payload);
             } else {
               actionMap[action] = [payload];
