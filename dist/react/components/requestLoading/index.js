@@ -18,7 +18,7 @@ export function LoadingComponent(props) {
   </div>;
 }
 LoadingComponent.propTypes = {
-  $id: PropsTypes.string,
+  $id: PropsTypes.any,
   style: PropsTypes.object
 };
 export default function loading(content) {

@@ -14,7 +14,7 @@ export default function Pdf(props) {
   const [loadUrl, setLoadUrl] = useState({ class: '', src: '' });
   const [loading, setLoading] = useState(true);
   const pageNumInstance = useRef(0);
-  const [currentPdfHost, setCurrentPdfHost] = useState(host || pdfHost.IMG);
+  const currentPdfHost = useRef(host || pdfHost.IMG);
   const timer = useRef(null);
   const { value: pageNumValue } = pageNum;
 
@@ -23,7 +23,7 @@ export default function Pdf(props) {
   function preload(page) {
 
     for (let i = page; i < Math.min(page + 5, content.length); i++) {
-      const pdfSrc = `${currentPdfHost}${id}/slide-${content[i] || 0}.png`;
+      const pdfSrc = `${currentPdfHost.current}${id}/slide-${content[i] || 0}.png`;
       if (!preLoadImgSet.has(pdfSrc)) {
         preLoadImgSet.add(pdfSrc);
         preloadImageByUrl(pdfSrc);
@@ -34,7 +34,7 @@ export default function Pdf(props) {
   // 加载当前pdf
   async function loadPdf(bool) {
     if (active) {
-      const pdfSrc = `${currentPdfHost}${id}/slide-${content[pageNumValue] || 0}.png`;
+      const pdfSrc = `${currentPdfHost.current}${id}/slide-${content[pageNumValue] || 0}.png`;
       eventControllersInstance.send('playerTrackEvent', { eventId: 'COURSEWARE_PPT_START', eventParam: { url: pdfSrc } });
       try {
         const data = await fetchResource(pdfSrc, { timeout: 5000 });
@@ -52,17 +52,18 @@ export default function Pdf(props) {
         };
         eventControllersInstance.send('playerTrackEvent', { eventId: 'COURSEWARE_PPT_SUCCESS', eventParam: { url: res } });
       } catch (err) { // 如果加载失败 切换资源域名再次加载
-        if (currentPdfHost === pdfHost.IMG) {
-          setCurrentPdfHost(pdfHost.DOC);
+        if (currentPdfHost.current === pdfHost.IMG) {
+          currentPdfHost.current = pdfHost.DOC;
+          loadPdf(bool);
           loadFileTrack(pdfHost.IMG);
-        } else if (currentPdfHost === pdfHost.DOC) {
-          setCurrentPdfHost(pdfHost.OSS);
+        } else if (currentPdfHost.current === pdfHost.DOC) {
+          currentPdfHost.current = pdfHost.OSS;
+          loadPdf(bool);
           loadFileTrack(pdfHost.DOC);
         } else {
           setCurrentPdfHost(pdfHost.IMG);
           loadFileTrack(pdfHost.OSS);
         }
-        loadPdf(bool);
       }
     }
   }
@@ -85,7 +86,7 @@ export default function Pdf(props) {
   }, [pageNumValue, active]);
   return (
     <div className="pdf-box" id="iframeId" style={{ width: '100%', height: '100%', border: 'none', outline: 'none' }}>
-      <img src={loadUrl.src} className={`pdf-${loadUrl.class}`}/>
+      {loadUrl.src && <img src={loadUrl.src} className={`pdf-${loadUrl.class}`}/>}
       {active && <div className="pdf-loading" style={{ display: loading ? 'flex' : 'none' }}>
         <LoadingComponent style={{ top: '50%' }} $id={$id}/>
       </div>}

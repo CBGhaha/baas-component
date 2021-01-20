@@ -37,12 +37,17 @@ function OutLine(props) {
   useEffect(() => {
     whiteBoardController.on('zml_all_video', (res) => {
       setAllVideoList(res);
-      setCurrentVideo(res[currentPage]);
     });
     return () => {
       whiteBoardController.removeAllListeners('zml_all_video');
     };
   }, []);
+
+  useEffect(() => {
+    if (allVideoList && allVideoList.length) {
+      setCurrentVideo(allVideoList[currentPage]);
+    }
+  }, [allVideoList, currentPage]);
 
   useEffect(() => {
     if (virtuoso.current) {
@@ -54,14 +59,12 @@ function OutLine(props) {
     if (!allVideoList.length && window.zmlAllVideo) {
       setAllVideoList(window.zmlAllVideo);
     }
-    setCurrentVideo(allVideoList[currentPage] || []);
   }, [currentPage]);
 
   useEffect(()=>{
     setUnfold(true);
     setActive(0);
     eventControllersInstance.send('QtAction', { action: 'closePlayer' });
-    // QtBridge.closePlayer();
     setTimeout(()=>{
       openPlay(0, 'auto');
     }, 1000);

@@ -104,11 +104,11 @@ export default class ZmInstance {
   // 翻页
   setPageNo(num) {
     console.log('课件链路：发送给课件信息-翻页', num);
-    if (this.isAnswerData && this.isAnswerData.state && this.isAnswerData.data[4]) {
-      console.log('课件链路：发送给课件信息-补偿结束答题', num);
-      const [action, data] = this.isAnswerData.data[4];
-      this.postMessage({ action, data });
-    }
+    // if (this.isAnswerData && this.isAnswerData.state && this.isAnswerData.data[4]) {
+    //   console.log('课件链路：发送给课件信息-补偿结束答题', num);
+    //   const [action, data] = this.isAnswerData.data[4];
+    //   this.postMessage({ action, data });
+    // }
     this.postMessage({ action: 'showPage', data: num });
   }
   // 获取课件中所有视频
@@ -214,6 +214,12 @@ export default class ZmInstance {
     if (action === 'questionOperation') {
       const opt = [0, 0, -1, 'zmlMessage', ['questionOperation', value]];
       const { operation: { answer, doAnswer }, questionId } = value;
+      if (value.questionTypeName !== '填空题') {
+        if (this.isAnswerData && this.isAnswerData.state && !doAnswer) {
+          console.log('zml的选择题结束答题了');
+          this.eventControllersInstance.send('QtAction', { action: 'sendCommonMsgToQt', data: { event: 'endZmlSingleQuestion', data: { questionId } } });
+        }
+      }
       this.sendIsAnsweringToQt(!!doAnswer, value);
       if (answer && answer.length) {
         this.eventControllersInstance.send('playerTrackEvent', { eventId: 'ZML_ANSWER_SUBMIT', ukeEventId: `${questionId}` });
