@@ -166,7 +166,7 @@ function DrawTool(props) {
       drawRef.current.addEventListener('mouseenter', handlerMouseEnter);
       drawRef.current.addEventListener('mouseleave', handlerMouseLeave);
     };
-  });
+  }, [currenttool]);
 
 
   // 监听老师画板滚动

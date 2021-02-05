@@ -27,12 +27,12 @@ export default class ZmInstance {
     window.addEventListener('message', this.handlerIframeMsg);
     this.eventControllersInstance.controllers.otherController.on('user_connect', isUpdate => {if (isUpdate && isUpdate.data) {this.setZmlUserGroup();}});
     this.eventControllersInstance.controllers.whiteBoardController.on('zmlMessage', (payload)=>{
-      const { action, data: { operation } } = payload;
+      const { action, data: { operation, role: zmlRole } } = payload;
       const { userInfo: { role } } = store.getState();
       // 处理zml的答题消息
       if (action === 'questionOperation') {
         const isDoAnswer = operation && operation.doAnswer;
-        if (role === USER_TYPE.teacher) {
+        if (role === USER_TYPE.teacher && zmlRole !== 'student') {
           this.sendIsAnsweringToQt(!!isDoAnswer, payload.data);
         } else if (role === USER_TYPE.tutor) {
           payload.data = {};
