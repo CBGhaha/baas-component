@@ -175,12 +175,12 @@ function DrawTool(props) {
   }
 
   return (
-    <div className="box">
-      <div id="draw" ref={drawRef} onWheel={handleWheel} className={`drawTools-draw ${cursorClassName}`} style={{ zIndex: toolType === 'point' || isLoading ? -1 : 1 }} onClick={(e) => editText(e.nativeEvent)}>
-        {isNotHold && <div className="drawTools-cover"></div>}
-        { <div style={{ opacity: currenttool.action !== 'eraser' ? 0 : 1 }} ref={mockEraser} className={'drawTool-mockEraser mockEraser'}></div>}
-      </div>
-    </div >
+    // <div className="box">
+    <div id="draw" ref={drawRef} onWheel={handleWheel} className={`drawTools-draw ${cursorClassName}`} style={{ zIndex: toolType === 'point' || isLoading ? -1 : 1 }} onClick={(e) => editText(e.nativeEvent)}>
+      {isNotHold && <div className="drawTools-cover"></div>}
+      { <div style={{ opacity: currenttool.action !== 'eraser' ? 0 : 1 }} ref={mockEraser} className={'drawTool-mockEraser mockEraser'}></div>}
+    </div>
+    // </div >
   );
 }
 DrawTool.propTypes = {
