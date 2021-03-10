@@ -112,7 +112,8 @@ export default function Room(props) {
       }
       // 如果课件不存在 则刷新一次页面重新请求
       if (!currentWare && (`${coursewareId}` !== `${zmSessionStorage.unkonwCourseware}`)) {
-        eventControllersInstance.send('QtAction', { action: 'queryCourseResource' });
+        // eventControllersInstance.send('QtAction', { action: 'queryCourseResource' });
+        eventControllersInstance.send('QtAction', { action: 'sendCommonMsgToQt', data: { event: 'queryCourseResource' } });
         // QtBridge.sendMessageToQt('queryCourseResource'); // Qt课件强刷新一次
         console.error('课件不存在：', coursewareId, coursewareList, zmSessionStorage.coursewareReload);
         eventControllersInstance.send('playerTrackEvent', { eventId: 'CBG_ERROR_EVENT', eventParam: { id: coursewareId, list: coursewareList, describe: '没有收到课件id' } });
