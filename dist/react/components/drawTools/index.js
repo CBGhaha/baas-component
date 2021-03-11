@@ -33,7 +33,7 @@ function DrawTool(props) {
 
   useEffect(() => {
     // 初始化教具实例
-    drawToolsInstance.current = dawToolsInstance(document.getElementById('draw'), USER_TYPE.teacher, signalType, eventControllersInstance);
+    drawToolsInstance.current = dawToolsInstance(document.getElementById('draw'), PLAYER_USER_TYPE.teacher, signalType, eventControllersInstance);
     whiteBoardController.on('drawTool', handleDraw);
     whiteBoardController.on('drawtoolScroll', handleDrawtoolScroll);
     const contentWidth = drawRef.current.offsetWidth;

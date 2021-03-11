@@ -47,7 +47,7 @@ export default function Zml(props) {
       if (timer.current) clearTimeout(timer.current);
       timer.current = setTimeout(()=>{
         zmlInstance.current.setPageNo(pageNumValue);
-        if (role === USER_TYPE.teacher) {
+        if (role === PLAYER_USER_TYPE.teacher) {
           zmlInstance.current.handleScroll({ deltaY: 5000000 });
         }
       }, 200);
@@ -70,7 +70,7 @@ export default function Zml(props) {
     zmlInstance.current && <iframe
       className="zmlIframe"
       id="iframeId"
-      src={`${coursewareInfo.origin}?role=${(role === USER_TYPE.teacher || mode === 'player') ? 'teacher' : 'student'}&device=PC&usage=${usage || 'bigClass'}`}
+      src={`${coursewareInfo.origin}?role=${(role === PLAYER_USER_TYPE.teacher || mode === 'player') ? 'teacher' : 'student'}&device=PC&usage=${usage || 'bigClass'}`}
       style={{ width: '100%', height: '100%', display: 'block', border: 'none', outline: 'none' }}
     >
     </iframe>

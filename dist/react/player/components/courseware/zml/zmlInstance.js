@@ -32,9 +32,9 @@ export default class ZmInstance {
       // 处理zml的答题消息
       if (action === 'questionOperation') {
         const isDoAnswer = operation && operation.doAnswer;
-        if (role === USER_TYPE.teacher && zmlRole !== 'student') {
+        if (role === PLAYER_USER_TYPE.teacher && zmlRole !== 'student') {
           this.sendIsAnsweringToQt(!!isDoAnswer, payload.data);
-        } else if (role === USER_TYPE.tutor) {
+        } else if (role === PLAYER_USER_TYPE.tutor) {
           payload.data = {};
         }
         store.dispatch(commonAction('isZmlExaming', !!isDoAnswer));
@@ -42,7 +42,7 @@ export default class ZmInstance {
 
       // 处理zml的内容滚动
 
-      if (action === 'scrollTop' && role !== USER_TYPE.teacher) {
+      if (action === 'scrollTop' && role !== PLAYER_USER_TYPE.teacher) {
         this.scrollRatio = payload.data.scrollRatio;
         if (this.heightRatio) {
           this.eventControllersInstance.controllers.whiteBoardController.emit('drawtoolScroll', { ...payload.data, heightRatio: this.heightRatio });
@@ -119,7 +119,7 @@ export default class ZmInstance {
   async setZmlUserGroup(bool) {
     if (bool) await this.eventControllersInstance.send('current_user_connect');
     const { userInfo: { role } } = store.getState();
-    if (role !== USER_TYPE.tutor) {
+    if (role !== PLAYER_USER_TYPE.tutor) {
       const { studentsMap } = store.getState();
       if (studentsMap) {
         const students = Object.values(studentsMap).map(user=>({ ... user, sid: user.userId, id: user.userId }));

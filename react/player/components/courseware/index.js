@@ -26,7 +26,7 @@ function Courseware(props) {
   const isZml = currentWare && currentWare.type === 'zml';
   const isZmg = currentWare && currentWare.type === 'zmg';
   return (
-    <div className={`zml-box ${role === USER_TYPE.student && (isZml || isZmg) && isZmlExaming ? 'zml-top' : ''}`}>
+    <div className={`zml-box ${role === PLAYER_USER_TYPE.student && (isZml || isZmg) && isZmlExaming ? 'zml-top' : ''}`}>
       {
         // 课件区
         coursewareList.map((item, index)=>

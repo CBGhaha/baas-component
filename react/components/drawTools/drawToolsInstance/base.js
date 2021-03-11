@@ -24,7 +24,7 @@ export default class Base {
   }
   init(dom) {
     const { userInfo } = store.getState();
-    if (userInfo.role !== USER_TYPE.student) {
+    if (userInfo.role !== PLAYER_USER_TYPE.student) {
       Base.zmSketchInstance = Object.freeze(zmSketchPad(dom, this.handleSendMassage, null, { disableScaleStage: true, drawingProcessCb: drawingCb }));
     } else {
       Base.zmSketchInstance = Object.freeze(zmSketchPad(dom, () => {}));

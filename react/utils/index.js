@@ -43,6 +43,6 @@ export function calZmlScope() {
 
 export function isAudience() {
   const { userInfo: { role, progress } } = store.getState();
-  return (role === USER_TYPE.student) || (role === USER_TYPE.tutor && progress === lessonProgress.in);
+  return (role === PLAYER_USER_TYPE.student) || (role === PLAYER_USER_TYPE.tutor && progress === lessonProgress.in);
   return true;
 }

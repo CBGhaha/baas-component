@@ -42,9 +42,6 @@ const config = {
     modules: ['node_modules']
   },
   plugins: [
-    new Dotenv({
-      path: path.join(__dirname, `../env/.env.${process.env.BUILD_ENV}`)
-    }),
     new CopyPlugin([
       {
         from: 'config/*',

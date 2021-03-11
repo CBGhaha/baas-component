@@ -3,7 +3,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import './module/localStorage';
 import './module/sessionStorage';
-window.USER_TYPE = {
+window.PLAYER_USER_TYPE = {
   student: 'STUDENT',
   teacher: 'TEACHER',
   tutor: 'TUTOR'

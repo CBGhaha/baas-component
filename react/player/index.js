@@ -38,7 +38,7 @@ export default function Room(props) {
   useEventController(eventControllersInstance, 'COURSE_EVENT', handleCourseEvent);
 
   function handleCourseEvent(res) {
-    eventControllersInstance.send('playerTrackEvent', { eventId: 'CBG_COMMON_EVENT', eventParam: { data: res, describe: 'QT传递过来的课件信息' } });
+    // eventControllersInstance.send('playerTrackEvent', { eventId: 'CBG_COMMON_EVENT', eventParam: { data: res, describe: 'QT传递过来的课件信息' } });
     const { data } = res;
     let num = 0;
     if (data && data.page && typeof data.page === 'number') {
