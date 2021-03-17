@@ -74,6 +74,9 @@ const sendAction = {
   },
   QtAction(controller, res) {
     return res;
+  },
+  get_zmgLocalhost(controller, data) {
+    return data;
   }
 };
 
