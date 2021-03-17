@@ -7,14 +7,14 @@ import fetchResource, { preloadImageByUrl } from '../../../../utils/fetchResourc
 import './index.less';
 const preLoadImgSet = new Set();
 
-export default React.memo(Pdf, (preProps, nextprops)=>{
-  if ((preProps.active === nextprops.active) && (preProps.coursewareInfo.id === nextprops.coursewareInfo.id)) {
-    return false;
-  }
-  return true;
-});
+// export default React.memo(Pdf, (preProps, nextprops)=>{
+//   if ((preProps.active === nextprops.active) && (preProps.coursewareInfo.id === nextprops.coursewareInfo.id)) {
+//     return false;
+//   }
+//   return true;
+// });
 
-function Pdf(props) {
+export default function Pdf(props) {
   const { coursewareInfo, active } = props;
   const { id, $id, content, host } = coursewareInfo;
   const { pageNum, eventControllersInstance } = useContext(PlayerContext);
