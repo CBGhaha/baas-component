@@ -40,9 +40,6 @@ const acceptAction = {
       return { ...data, id: data.userId };
     }
     return false;
-  },
-  zmgLocalhost(controller, data) {
-    return data;
   }
 };
 // 发送消息action
@@ -74,9 +71,6 @@ const sendAction = {
   },
   QtAction(controller, res) {
     return res;
-  },
-  get_zmgLocalhost(controller, data) {
-    return data;
   }
 };
 

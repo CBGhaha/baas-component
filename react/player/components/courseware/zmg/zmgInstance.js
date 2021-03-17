@@ -20,10 +20,10 @@ export default class Zmgnstance {
     this.handleMessage = handleMessage;
     this.handlerIframeMsg = this.handlerIframeMsg.bind(this);
     window.addEventListener('message', this.handlerIframeMsg);
-    this.eventControllersInstance.controllers.whiteBoardController.on('zmgMessage', (payload)=>{
+    this.eventControllersInstance.controllers.zmgController.on('zmgMessage', (payload)=>{
       this.postMessage(payload);
     });
-    this.eventControllersInstance.controllers.whiteBoardController.on('respondHistory', (payload)=>{
+    this.eventControllersInstance.controllers.zmgController.on('respondHistory', (payload)=>{
       this.postMessage(payload.data);
     });
     this.eventControllersInstance.controllers.otherController.on('user_connect', isUpdate => {
@@ -60,6 +60,7 @@ export default class Zmgnstance {
         this.zmlWindow = zmlIframe.contentWindow;
         this.setUserInfo();
         this.setUsersInfo();
+        this.setLessonInfo();
         if (this.histroyMessage.length) {
           this.histroyMessage.forEach((item)=>{
             this.postMessage(item);
@@ -97,6 +98,14 @@ export default class Zmgnstance {
     });
   }
 
+  setLessonInfo() {
+    const { userInfo: { lessonId, lessonName } } = store.getState();
+    // const { lessonId, lessonName } = window.lessonInfo;
+    this.postMessage({
+      action: 'setLessonInfo',
+      data: { lessonId, courseName: lessonName }
+    });
+  }
   // 设置当前zmg用户
   async setUsersInfo() {
     const users = await this.eventControllersInstance.send('current_user_connect');
@@ -105,6 +114,10 @@ export default class Zmgnstance {
     const allUser = (onlineStudents.concat([...tutors, teacher])).map(userTransfrom);
     this.postMessage({
       action: 'setAddUsersInfo',
+      data: { students: allUser }
+    });
+    this.postMessage({
+      action: 'setUsersInfo',
       data: { students: allUser }
     });
     this.postMessage({
