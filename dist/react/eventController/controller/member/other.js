@@ -40,9 +40,6 @@ const acceptAction = {
       return { ...data, id: data.userId };
     }
     return false;
-  },
-  zmgLocalhost(controller, data) {
-    return data;
   }
 };
 // 发送消息action

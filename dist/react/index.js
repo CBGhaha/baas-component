@@ -15,7 +15,7 @@ import { AppContainer } from 'react-hot-loader';
 import Player from './player/index';
 import './global-styles/index.less';
 
-function renderAPP(element, dom) {
+function renderAPP(element, dom, cb) {
   ReactDOM.render(
     <AppContainer>
       <Provider store={store}>
@@ -25,6 +25,7 @@ function renderAPP(element, dom) {
       </Provider>
     </AppContainer>,
     dom,
+    ()=>{cb && cb();}
   );
 }
 
@@ -71,8 +72,8 @@ export default class Play {
       delete this.eventListeners[$event];
     }
   }
-  render() {
-    renderAPP(<Player eventControllersInstance={this.eventControllersInstance}/>, this.dom);
+  render(cb) {
+    renderAPP(<Player eventControllersInstance={this.eventControllersInstance}/>, this.dom, cb);
   }
   setRole(role) {
     this.init(role);

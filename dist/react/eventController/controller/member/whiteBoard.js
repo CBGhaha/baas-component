@@ -36,29 +36,8 @@ const acceptAction = {
     }
     return data;
   },
-  zmg_data(controller, { data }) {
-    controller.emit('zmgMessage', data);
-    if (data.action === 'controllerChange') {
-      store.dispatch(commonAction('isZmlExaming', +data.data === -1));
-    }
-    return data;
-  },
   closeZMLExam() {
     return true;
-  },
-  respondHistory(controller, data) {
-    // console.log('respondHistory-sss',data);
-    if (data && data) {
-      const { packets } = data.data;
-      let isAnswering = false;
-      packets.forEach(i=>{
-        if (i.action === 'controllerChange') {
-          isAnswering = +i.data === -1;
-        }
-      });
-      store.dispatch(commonAction('isZmlExaming', isAnswering));
-    }
-    return data;
   }
 };
 
@@ -74,12 +53,6 @@ const sendAction = {
 
   },
   draw_tools_data() {
-
-  },
-  zmg_data() {
-
-  },
-  zmgGetHistory() {
 
   },
   whiteboard_page(controller, ... res) {

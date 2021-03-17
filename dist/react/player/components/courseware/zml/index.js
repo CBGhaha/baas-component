@@ -5,12 +5,19 @@ import useEventController from '../../../../hooks/useEventController';
 import ZmlInstance from './zmlInstance';
 import { PlayerContext } from '../../../../config';
 
-export default function Zml(props) {
+
+export default React.memo(Zml, (preProps, nextprops)=>{
+  if ((preProps.active === nextprops.active) && (preProps.coursewareInfo.content === nextprops.coursewareInfo.content)) {
+    return false;
+  }
+  return true;
+});
+function Zml(props) {
   const { userInfo } = store.getState();
   const { role, usage, mode } = userInfo;
   const { pageNum, courseware, eventControllersInstance } = useContext(PlayerContext);
   const { whiteBoardController } = eventControllersInstance.controllers;
-  const { setCoursewareList, coursewareList } = courseware;
+  const { coursewareList } = courseware;
   const { value: pageNumValue } = pageNum;
   const zmlInstance = useRef(null);
   const { active, coursewareInfo } = props;
