@@ -2,8 +2,8 @@
  * 课件白板答题信令
  */
 import SocketController from '../controller';
-import store from '@/redux/store';
-import commonAction from '@/redux/actions/common';
+import store from '../../../redux/store';
+import commonAction from '../../../redux/actions/common';
 
 
 export const ZMG_CONTROLLER = 'zmgController';

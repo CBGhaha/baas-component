@@ -1,12 +1,7 @@
 import React, { useEffect } from 'react';
-// import { preloadImageByUrl } from '@/utils/index.js';
-// import { pdfHost } from '@/config';
 import PropTypes from 'prop-types';
-// import ZmIcon from 'components/zmIcon';
 import './item.less';
-// import errImg from '@/assets/images/loaderror.png';
 
-// const format = '?x-oss-process=image/resize,h_90,w_160';
 
 export default function VideoListItem(props) {
   const { video, pageNumb, openPlay, active } = props;
