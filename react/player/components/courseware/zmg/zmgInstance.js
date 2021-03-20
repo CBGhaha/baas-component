@@ -60,7 +60,7 @@ export default class Zmgnstance {
         this.zmlWindow = zmlIframe.contentWindow;
         this.setUserInfo();
         this.setUsersInfo();
-        this.setLessonInfo();
+        // this.setLessonInfo();
         if (this.histroyMessage.length) {
           this.histroyMessage.forEach((item)=>{
             this.postMessage(item);
