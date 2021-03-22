@@ -19,8 +19,7 @@ const acceptAction = {
     return data;
   },
   respondHistory(controller, data) {
-    // console.log('respondHistory-sss',data);
-    if (data && data) {
+    if (data && data.data) {
       const { packets } = data.data;
       let isAnswering = false;
       packets.forEach(i=>{
