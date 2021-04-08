@@ -12,7 +12,9 @@ export default class Base {
   isbush = false;
   lastSendData = [];
   eventControllersInstance;
-  constructor(dom, signalType, eventControllersInstance) {
+  cb;
+  constructor(dom, signalType, eventControllersInstance, cb) {
+    this.cb = cb;
     this.signalType = signalType;
     this.handleSendMassage = this.handleSendMassage.bind(this);
     this.eventControllersInstance = eventControllersInstance;
@@ -25,9 +27,9 @@ export default class Base {
   init(dom) {
     const { userInfo } = store.getState();
     if (userInfo.role !== PLAYER_USER_TYPE.student) {
-      Base.zmSketchInstance = Object.freeze(zmSketchPad(dom, this.handleSendMassage, null, { disableScaleStage: true, drawingProcessCb: drawingCb }));
+      Base.zmSketchInstance = Object.freeze(zmSketchPad(dom, this.handleSendMassage, ()=>{ this.cb && this.cb();}, { disableScaleStage: true, drawingProcessCb: drawingCb }));
     } else {
-      Base.zmSketchInstance = Object.freeze(zmSketchPad(dom, () => {}));
+      Base.zmSketchInstance = Object.freeze(zmSketchPad(dom, () => {}, ()=>{ this.cb && this.cb();}));
     }
     window.addEventListener('resize', this.handleWindowResize);
   }
@@ -41,6 +43,7 @@ export default class Base {
 
   // 发送白板消息
   handleSendMassage(data) {
+    console.log('zmSketchInstance-data:', data);
     const action = data[3];
     // hack 转译符会造成解析出错 采用｜替换
     if (action === 'text_edit') {

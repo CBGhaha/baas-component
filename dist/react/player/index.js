@@ -98,7 +98,7 @@ export default function Room(props) {
     if (histroryTimer.current) clearTimeout(histroryTimer.current);
     histroryTimer.current = setTimeout(()=>{
       getHistroy();
-    }, 200);
+    }, 300);
   }, [coursewareId, pageNum, coursewareList]);
 
   // ppt页数

@@ -16,6 +16,8 @@ function DrawTool(props) {
   const { eventControllersInstance } = useContext(PlayerContext);
   const { whiteBoardController } = eventControllersInstance.controllers;
   const [toolType, setToolType] = useState('');
+  const initFinish = useRef(false);
+  const memeryData = useRef([]);
   const [cursorClassName, setCursorClassName] = useState(!isNotHold ? 'pencursor-EF4C4F' : '');
   const drawToolsInstance = useRef(null);
   const mockEraser = useRef();
@@ -33,7 +35,15 @@ function DrawTool(props) {
 
   useEffect(() => {
     // 初始化教具实例
-    drawToolsInstance.current = dawToolsInstance(document.getElementById('draw'), PLAYER_USER_TYPE.teacher, signalType, eventControllersInstance);
+    drawToolsInstance.current = dawToolsInstance(document.getElementById('draw'), PLAYER_USER_TYPE.teacher, signalType, eventControllersInstance, ()=>{
+      initFinish.current = true;
+      if (memeryData.current.length) {
+        memeryData.current.forEach(data=>{
+          handleDraw(data);
+        });
+        memeryData.current = [];
+      }
+    });
     whiteBoardController.on('drawTool', handleDraw);
     whiteBoardController.on('drawtoolScroll', handleDrawtoolScroll);
     const contentWidth = drawRef.current.offsetWidth;
@@ -49,8 +59,13 @@ function DrawTool(props) {
   function handleDraw(data) {
     // console.log('handleDraw:', data);
     const { action, payload, pageId } = data;
-    if (drawToolsInstance.current) {
+    if (action === 'pushDataToLayer') {
+      console.log('pushDataToLayer:', initFinish.current, pageId);
+    }
+    if (initFinish.current && drawToolsInstance.current) {
       drawToolsInstance.current[action](payload, pageId);
+    } else {
+      memeryData.current.push(data);
     }
   }
   // 根据课件滚动高度 设置白板的滚动高度
@@ -79,6 +94,7 @@ function DrawTool(props) {
     timer.current = setTimeout(()=>{
       drawToolsInstance.current.handleScroll(0);
       timer.current = null;
+      console.log('切换白板页面', `${coursewareId}_${pageNumValue}`);
       drawToolsInstance.current.showLayerById(`${coursewareId}_${pageNumValue}`);
       setIsLoading(false);
     }, 200);
