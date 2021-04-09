@@ -232,7 +232,8 @@ export default class ZmInstance {
     if (action === 'returnMediaData') {
       let zmlMedia = value;
       // 是否可以使用声网视频播放器的开关
-      const videoDisable = await this.eventControllersInstance.send('getVideoDisable');
+      const  res = await this.eventControllersInstance.send('getVideoDisable');
+      const  videoDisable = res && res.config.items.openVideoPlayer == 'true';
       if (value && value.length > 0 && !videoDisable) {
         zmlMedia = value.map(item=>{
           if (item && item.length > 0) {
