@@ -12,9 +12,10 @@ export default class ZmInstance {
   mountedTime = 0;
   histroyMessage= [];
   chekckoutDeadline = null;
-  constructor(url, handleMessage, eventControllersInstance) {
+  constructor(url, handleMessage, eventControllersInstance, coursewareId) {
     this.eventControllersInstance = eventControllersInstance;
     this.zmlUrl = url;
+    this.coursewareId = coursewareId;
     this.handleMessage = handleMessage;
     this.mountedTime = new Date().getTime();
     this.histroyMessage = [];
@@ -250,7 +251,9 @@ export default class ZmInstance {
 
     // 课件的可点击区域
     if (action === 'sendInteractionArea') {
+    
       const areas = (value && value.interactionArea) || [];
+      console.log("课件areas：", areas);
       store.dispatch(commonAction('zmlCoverEleList', areas.map(item=> ({ ...item, handleClick: (data)=>{
         this.postMessage({ action: 'mockClick', data });
       } })
@@ -271,6 +274,14 @@ export default class ZmInstance {
       this.eventControllersInstance.send('whiteboard_data', opt);
       this.eventControllersInstance.send('playerTrackEvent', { eventId: 'CLASSROOM_COMPLETION_ANSWER_DETAILS', eventParam: {} });
       return;
+    }
+    if(action === 'showPageIndex'){
+      this.setPageNo(value)
+      this.eventControllersInstance.send('QtAction', { action: 'pptSwitchPage', data: { id: this.coursewareId, pageNo: value } });
+      this.eventControllersInstance.send('playerTrackEvent', { eventId: 'ZBJ_ZML_DJML', eventParam: { pageNo: value } });
+    }
+    if(action === 'toggleShowSideBar'){
+      this.eventControllersInstance.send('playerTrackEvent', { eventId: value ? 'ZBJ_ZML_ZKML' : 'ZBJ_ZML_SQML', eventParam: {} });
     }
     if (action) {
       const opt = [0, 0, -1, 'zmlMessage', [action, value]];

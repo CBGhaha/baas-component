@@ -39,7 +39,7 @@ export default function Zml(props) {
 
   // Zml实例 初始化和销毁
   useEffect(()=>{
-    zmlInstance.current = new ZmlInstance(coursewareInfo.content, handleIframeMsg, eventControllersInstance);
+    zmlInstance.current = new ZmlInstance(coursewareInfo.content, handleIframeMsg, eventControllersInstance,coursewareInfo.id);
     whiteBoardController.on('teacherWheel', handleTeacherWheel);
     return ()=>{
       zmlInstance.current.destroyed();
@@ -72,12 +72,11 @@ export default function Zml(props) {
       }
     }
   }
-
   return (
     zmlInstance.current && <iframe
       className="zmlIframe"
       id="iframeId"
-      src={`${coursewareInfo.origin}?role=${(role === PLAYER_USER_TYPE.teacher || mode === 'player') ? 'teacher' : 'student'}&device=PC&usage=${usage || 'bigClass'}`}
+      src={`${coursewareInfo.origin}?role=${(role === PLAYER_USER_TYPE.teacher || mode === 'player') ? 'teacher' : 'student'}&device=PC&usage=${usage || 'preview'}&hidePreviewNav=true`}
       style={{ width: '100%', height: '100%', display: 'block', border: 'none', outline: 'none' }}
     >
     </iframe>
