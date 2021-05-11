@@ -76,7 +76,7 @@ export default function Zml(props) {
     zmlInstance.current && <iframe
       className="zmlIframe"
       id="iframeId"
-      src={`${coursewareInfo.origin}?role=${(role === PLAYER_USER_TYPE.teacher || mode === 'player') ? 'teacher' : 'student'}&device=PC&usage=${usage || 'preview'}&hidePreviewNav=true`}
+      src={`${coursewareInfo.origin}?role=${(role === PLAYER_USER_TYPE.teacher || mode === 'player') ? 'teacher' : 'student'}&device=PC&usage=${usage || 'bigClass'}`}
       style={{ width: '100%', height: '100%', display: 'block', border: 'none', outline: 'none' }}
     >
     </iframe>
