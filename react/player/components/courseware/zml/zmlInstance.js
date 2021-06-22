@@ -28,7 +28,7 @@ export default class ZmInstance {
     window.addEventListener('message', this.handlerIframeMsg);
     this.eventControllersInstance.controllers.otherController.on('user_connect', isUpdate => {if (isUpdate && isUpdate.data) {this.setZmlUserGroup();}});
     this.eventControllersInstance.controllers.whiteBoardController.on('zmlMessage', (payload)=>{
-      const { action, data: { operation, role: zmlRole } } = payload;
+      const { action, data: { operation, role: zmlRole, questionId } } = payload;
       const { userInfo: { role } } = store.getState();
       // 处理zml的答题消息
       if (action === 'questionOperation') {
@@ -37,6 +37,11 @@ export default class ZmInstance {
           this.sendIsAnsweringToQt(!!isDoAnswer, payload.data);
         } else if (role === PLAYER_USER_TYPE.tutor) {
           payload.data = {};
+        }
+        // 通知qt学生已经完成作答
+        if (role === PLAYER_USER_TYPE.student && zmlRole === 'student') {
+          console.log('学生已经答过题了');
+          this.eventControllersInstance.send('QtAction', { action: 'sendCommonMsgToQt', data: { event: 'studentZmlQuestionDone', data: { questionId } } });
         }
         store.dispatch(commonAction('isZmlExaming', !!isDoAnswer));
       }
@@ -214,13 +219,21 @@ export default class ZmInstance {
     // 答题相关操作
     if (action === 'questionOperation') {
       const opt = [0, 0, -1, 'zmlMessage', ['questionOperation', value]];
-      const { operation: { answer, doAnswer }, questionId } = value;
+      const { operation: { answer, doAnswer }, questionId, role: zmlRole } = value;
+      const { userInfo: { role } } = store.getState();
+      // 通知qt选择题答题结束
       if (value.questionTypeName !== '填空题') {
         if (this.isAnswerData && this.isAnswerData.state && !doAnswer) {
           console.log('zml的选择题结束答题了');
           this.eventControllersInstance.send('QtAction', { action: 'sendCommonMsgToQt', data: { event: 'endZmlSingleQuestion', data: { questionId } } });
         }
       }
+      // 通知qt学生已经作答
+      if (role === PLAYER_USER_TYPE.student && zmlRole === 'student') {
+        console.log('学生已经答过题了');
+        this.eventControllersInstance.send('QtAction', { action: 'sendCommonMsgToQt', data: { event: 'studentZmlQuestionDone', data: { questionId } } });
+      }
+
       this.sendIsAnsweringToQt(!!doAnswer, value);
       if (answer && answer.length) {
         this.eventControllersInstance.send('playerTrackEvent', { eventId: 'ZML_ANSWER_SUBMIT', ukeEventId: `${questionId}` });
@@ -233,8 +246,8 @@ export default class ZmInstance {
     if (action === 'returnMediaData') {
       let zmlMedia = value;
       // 是否可以使用声网视频播放器的开关
-      const  res = await this.eventControllersInstance.send('getVideoDisable');
-      const  videoDisable = res && res.config.items.openVideoPlayer == 'true';
+      const res = await this.eventControllersInstance.send('getVideoDisable');
+      const videoDisable = res && res.config.items.openVideoPlayer == 'true';
       if (value && value.length > 0 && !videoDisable) {
         zmlMedia = value.map(item=>{
           if (item && item.length > 0) {
@@ -251,9 +264,9 @@ export default class ZmInstance {
 
     // 课件的可点击区域
     if (action === 'sendInteractionArea') {
-    
+
       const areas = (value && value.interactionArea) || [];
-      console.log("课件areas：", areas);
+      console.log('课件areas：', areas);
       store.dispatch(commonAction('zmlCoverEleList', areas.map(item=> ({ ...item, handleClick: (data)=>{
         this.postMessage({ action: 'mockClick', data });
       } })
@@ -275,12 +288,12 @@ export default class ZmInstance {
       this.eventControllersInstance.send('playerTrackEvent', { eventId: 'CLASSROOM_COMPLETION_ANSWER_DETAILS', eventParam: {} });
       return;
     }
-    if(action === 'showPageIndex'){
-      this.setPageNo(value)
+    if (action === 'showPageIndex') {
+      this.setPageNo(value);
       this.eventControllersInstance.send('QtAction', { action: 'pptSwitchPage', data: { id: this.coursewareId, pageNo: value } });
       this.eventControllersInstance.send('playerTrackEvent', { eventId: 'ZBJ_ZML_DJML', eventParam: { pageNo: value } });
     }
-    if(action === 'toggleShowSideBar'){
+    if (action === 'toggleShowSideBar') {
       this.eventControllersInstance.send('playerTrackEvent', { eventId: value ? 'ZBJ_ZML_ZKML' : 'ZBJ_ZML_SQML', eventParam: {} });
     }
     if (action) {
