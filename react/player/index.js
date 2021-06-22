@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import store from '../redux/store';
 import useEventController from '../hooks/useEventController';
 import DrawTools from '../components/drawTools/index';
-import CoverElements from './components/coverElements/index';
 import Courseware from './components/courseware/index';
 import OutLine from './components/outLine/index';
 import VideoList from './components/videoList/index';
@@ -178,12 +177,11 @@ export default function Room(props) {
         <div className="player-content">
           <div className="player-main" style={{ ...scope, overflow: 'hidden' }}>
             {coursewareList.length > 0 && <Courseware />}
-            <DrawTools pageNumValue={pageNum} coursewareId={coursewareId} signalType="draw_tools_data"/>
+            <DrawTools isZML={isZML} isTeacher={isTeacher} pageNumValue={pageNum} coursewareId={coursewareId} signalType="draw_tools_data"/>
             {!isStudent && <div style={{ display: isPPT ? 'block' : 'none' }}><OutLine coursewareId={coursewareId} active={isPPT} pageTotal={pageTotal} currentPage={pageNum} /></div>}
             {isTeacher && isZML && <VideoList coursewareId={coursewareId} currentPage={pageNum} />}
           </div>
         </div>
-        {isTeacher && isZML && <CoverElements/>}
       </div>
     </PlayerContext.Provider>
   );

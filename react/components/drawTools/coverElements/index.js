@@ -31,6 +31,9 @@ function CoverElements(props) {
   }
   const { userInfo: { progress } } = store.getState();
   const inLesson = progress === lessonProgress.in;
+  // function handleWheel(e) {
+  //   if (!isNotHold && e.deltaY !== 0) whiteBoardController.emit('teacherWheel',  { deltaY: e.deltaY > 0 ? 50 : -50 });
+  // }
   return (
     <div className="coverElements-box">
       {

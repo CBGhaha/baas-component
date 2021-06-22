@@ -68,7 +68,7 @@ export default function Pdf(props) {
           loadPdf(bool);
           loadFileTrack(pdfHost.DOC);
         } else {
-          setCurrentPdfHost(pdfHost.IMG);
+          currentPdfHost.current(pdfHost.IMG);
           loadFileTrack(pdfHost.OSS);
         }
       }

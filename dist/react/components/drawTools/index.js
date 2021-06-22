@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import CoverElements from './coverElements/index';
 import { isAudience } from '../../utils';
 import './index.less';
 import './cursor.global.less';
@@ -12,7 +13,7 @@ let lastToolType;
 
 function DrawTool(props) {
   const isNotHold = isAudience();
-  const { pageNumValue, coursewareId, signalType } = props;
+  const { pageNumValue, coursewareId, signalType, isTeacher, isZML } = props;
   const { eventControllersInstance } = useContext(PlayerContext);
   const { whiteBoardController } = eventControllersInstance.controllers;
   const [toolType, setToolType] = useState('');
@@ -192,10 +193,14 @@ function DrawTool(props) {
 
   return (
     // <div className="box">
-    <div id="draw" ref={drawRef} onWheel={handleWheel} className={`drawTools-draw ${cursorClassName}`} style={{ zIndex: (toolType === 'point' && !isNotHold) || isLoading ? -1 : 1 }} onClick={(e) => editText(e.nativeEvent)}>
-      {isNotHold && <div className="drawTools-cover"></div>}
-      { <div style={{ opacity: currenttool.action !== 'eraser' ? 0 : 1 }} ref={mockEraser} className={'drawTool-mockEraser mockEraser'}></div>}
-    </div>
+    <React.Fragment>
+      <div id="draw" ref={drawRef} onWheel={handleWheel} className={`drawTools-draw ${cursorClassName}`} style={{ zIndex: (toolType === 'point' && !isNotHold) || isLoading ? -1 : 1 }} onClick={(e) => editText(e.nativeEvent)}>
+        {isNotHold && <div className="drawTools-cover"></div>}
+        { <div style={{ opacity: currenttool.action !== 'eraser' ? 0 : 1 }} ref={mockEraser} className={'drawTool-mockEraser mockEraser'}></div>}
+
+      </div>
+      {isTeacher && isZML && <div style={{ display: toolType === 'point' ? 'none' : 'block' }}><CoverElements/></div>}
+    </React.Fragment>
     // </div >
   );
 }
@@ -204,7 +209,9 @@ DrawTool.propTypes = {
   coursewareId: PropTypes.string,
   signalType: PropTypes.string,
   dataPipe: PropTypes.func,
-  userInfo: PropTypes.object
+  userInfo: PropTypes.object,
+  isTeacher: PropTypes.bool,
+  isZml: PropTypes.bool
 };
 export default connect(
   ({ userInfo })=>({ userInfo }),
