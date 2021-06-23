@@ -85,7 +85,7 @@ export default function Room(props) {
               whiteBoardController.emit('zmlMessage', {
                 action: key,
                 data: item
-              });
+              }, true);
             });
           }
         } else {
