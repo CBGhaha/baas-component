@@ -26,6 +26,7 @@ export default class ZmInstance {
     this.scrollRatio = 0;
     this.timer = null; // 定时器 用于防抖
     this.isAnswerData = null; // 当前zml题目状态的快照
+    this.pageInfo = null;
     window.addEventListener('message', this.handlerIframeMsg);
     this.eventControllersInstance.controllers.otherController.on('user_connect', isUpdate => {if (isUpdate && isUpdate.data) {this.setZmlUserGroup();}});
     this.eventControllersInstance.controllers.whiteBoardController.on('zmlMessage', (payload, isHistroy/*是否为历史信令*/)=>{
@@ -38,7 +39,7 @@ export default class ZmInstance {
 
         // 通知qt是否在答题中 （ qt会根据答题状态有一系列交互功能 ）
         if (role === PLAYER_USER_TYPE.teacher && zmlRole !== 'student') {
-          this.sendIsAnsweringToQt(!!isDoAnswer, payload.data);
+          this.sendIsAnsweringToQt(!!isDoAnswer, payload.data, isHistroy);
 
         }
 
@@ -66,7 +67,14 @@ export default class ZmInstance {
               rightAnswer = '';
             }
             console.log('学生已经答过题了', answerStr);
-            this.sendCommonMsgToQt('studentZmlQuestionDone', { questionId, isHistroy: true, rightAnswer, answerStr });
+            let questionTypeId = 1;
+            if (this.pageInfo && this.pageInfo.newPageInfo && this.pageInfo.newPageInfo.qid === questionId) {
+              const { typeId } = this.pageInfo.newPageInfo;
+              if (typeId && typeId <= 3) {
+                questionTypeId = typeId;
+              }
+            }
+            this.sendCommonMsgToQt('studentZmlQuestionDone', { questionId, questionTypeId, isHistroy: true, rightAnswer, answerStr });
           }
           // 答题中保存题目信息
           if (isDoAnswer) {
@@ -173,9 +181,9 @@ export default class ZmInstance {
     this.postMessage({ action: 'mockScroll', data });
   }
 
-  sendIsAnsweringToQt(state, payload) {
+  sendIsAnsweringToQt(state, payload, isHistroy = false) {
     if (this.timer) clearTimeout(this.timer);
-    this.isAnswerData = { state, data: state ?
+    this.isAnswerData = { state, isHistroy, data: state ?
       [0, 0, -1, 'zmlMessage', ['questionOperation', { ...payload, operation: {
         doAnswer: false,
         hasAnswered: true,
@@ -269,7 +277,14 @@ export default class ZmInstance {
           rightAnswer = '';
         }
         console.log('学生已经答过题了');
-        this.sendCommonMsgToQt('studentZmlQuestionDone', { questionId, isHistroy: false, rightAnswer, answerStr });
+        let questionTypeId = 1;
+        if (this.pageInfo && this.pageInfo.newPageInfo) {
+          const { typeId } = this.pageInfo.newPageInfo;
+          if (typeId && typeId <= 3) {
+            questionTypeId = typeId;
+          }
+        }
+        this.sendCommonMsgToQt('studentZmlQuestionDone', { questionId, questionTypeId, isHistroy: false, rightAnswer, answerStr });
       }
 
       role !== PLAYER_USER_TYPE.student && this.sendIsAnsweringToQt(!!doAnswer, value);
@@ -335,13 +350,21 @@ export default class ZmInstance {
       this.eventControllersInstance.send('QtAction', { action: 'pptSwitchPage', data: { id: this.coursewareId, pageNo: value } });
       this.eventControllersInstance.send('playerTrackEvent', { eventId: 'ZBJ_ZML_DJML', eventParam: { pageNo: value } });
     }
+
     if (action === 'toggleShowSideBar') {
       this.eventControllersInstance.send('playerTrackEvent', { eventId: value ? 'ZBJ_ZML_ZKML' : 'ZBJ_ZML_SQML', eventParam: {} });
     }
+
+    if (action === 'sendPageInfo') {
+      this.pageInfo = value;
+    }
+
     if (action) {
+      console.log('其他action', action, value);
       const opt = [0, 0, -1, 'zmlMessage', [action, value]];
       this.eventControllersInstance.send('whiteboard_data', opt);
     }
+
   }
   checkoutZmlLoadSuccess() {
     // 进行zml课件加载失败的兜底重加载
