@@ -1,6 +1,7 @@
 import { APP_ID } from '../../../../config';
 import store from '../../../../redux/store';
 import commonAction from '../../../../redux/actions/common';
+
 export default class ZmInstance {
   zmlUrl='';
   zmlWindow = null;
@@ -18,43 +19,69 @@ export default class ZmInstance {
     this.coursewareId = coursewareId;
     this.handleMessage = handleMessage;
     this.mountedTime = new Date().getTime();
-    this.histroyMessage = [];
+    this.histroyMessage = []; // zml消息缓冲池 用于缓存zml还没有dataReady时socket发送来的数据
     this.handlerIframeMsg = this.handlerIframeMsg.bind(this);
     this.setZmlUserGroup = this.setZmlUserGroup.bind(this);
     this.heightRatio = 0;
     this.scrollRatio = 0;
-    this.timer = null;
-    this.isAnswerData = null;
+    this.timer = null; // 定时器 用于防抖
+    this.isAnswerData = null; // 当前zml题目状态的快照
     window.addEventListener('message', this.handlerIframeMsg);
     this.eventControllersInstance.controllers.otherController.on('user_connect', isUpdate => {if (isUpdate && isUpdate.data) {this.setZmlUserGroup();}});
     this.eventControllersInstance.controllers.whiteBoardController.on('zmlMessage', (payload, isHistroy/*是否为历史信令*/)=>{
       const { action, data: { operation, role: zmlRole, questionId } } = payload;
       const { userInfo: { role } } = store.getState();
-      // 处理zml的答题消息
+      // 处理zml的答题信令
       if (action === 'questionOperation') {
-        const isDoAnswer = operation && operation.doAnswer;
-        // 通知qt是否在答题中
+
+        const isDoAnswer = operation && operation.doAnswer; // 答题中
+
+        // 通知qt是否在答题中 （ qt会根据答题状态有一系列交互功能 ）
         if (role === PLAYER_USER_TYPE.teacher && zmlRole !== 'student') {
           this.sendIsAnsweringToQt(!!isDoAnswer, payload.data);
-        } else if (role === PLAYER_USER_TYPE.tutor) {
+
+        }
+
+        // 班主任不需要接受zml答题信令
+        if (role === PLAYER_USER_TYPE.tutor) {
           payload.data = {};
-        // 通知qt zml答题结束
-        } else if (role === PLAYER_USER_TYPE.student && !isHistroy && operation && zmlRole !== 'student') {
-          const { doAnswer, hasAnswered, showAnswer } = operation;
-          if (hasAnswered && !showAnswer && !doAnswer) {
-            console.log('zml答题结束');
-            this.sendCommonMsgToQt('teaherZmlQuestionClose', { questionId });
+        }
+
+        if (role === PLAYER_USER_TYPE.student) {
+          // 通知qt 学生收到老师主动结束了zml答题（用于qt交互功能）
+          if (operation && !isHistroy && zmlRole !== 'student') {
+            const { doAnswer, hasAnswered, showAnswer } = operation;
+            if (hasAnswered && !showAnswer && !doAnswer) {
+              console.log('zml答题结束');
+              this.sendCommonMsgToQt('teaherZmlQuestionClose', { questionId });
+            }
+          }
+          // 通知qt学生已经完成作答（用于qt交互功能）
+          if (zmlRole === 'student') {
+            let { answer, rightAnswerStr: rightAnswer } = operation;
+            let answerStr = '';
+            if (typeof rightAnswer === 'string' && Array.isArray(answer)) {
+              answer.forEach((item, index)=>{ if (item === true) answerStr += String.fromCodePoint(65 + index); });
+            } else {
+              rightAnswer = '';
+            }
+            console.log('学生已经答过题了', answerStr);
+            this.sendCommonMsgToQt('studentZmlQuestionDone', { questionId, isHistroy: true, rightAnswer, answerStr });
+          }
+          // 答题中保存题目信息
+          if (isDoAnswer) {
+            this.isAnswerData = payload.data;
+            console.log(' this.isAnswerData:', this.isAnswerData);
+          } else {
+            this.isAnswerData = null;
           }
         }
-        // 通知qt学生已经完成作答
-        if (role === PLAYER_USER_TYPE.student && zmlRole === 'student') {
-          console.log('学生已经答过题了');
-          this.sendCommonMsgToQt('studentZmlQuestionDone', { questionId });
-        }
+
+        // 通知qt当前是否在答题中（用于qt交互功能）
         store.dispatch(commonAction('isZmlExaming', !!isDoAnswer));
       }
 
-      // 处理zml的内容滚动
+      // 处理zml的内容滚动 （发送信令， 供学生同步老师滚动）
       if (action === 'scrollTop' && role !== PLAYER_USER_TYPE.teacher) {
         this.scrollRatio = payload.data.scrollRatio;
         if (this.heightRatio) {
@@ -96,7 +123,7 @@ export default class ZmInstance {
     };
 
     const data = {
-      // setPagesUrl: JSON.stringify({ url: 'https://image.zmlearn.com/lecture/product/zml/courseware_13519_2.json#13519.3' }),
+      // setPagesUrl: JSON.stringify({ url: 'https://image.zmlearn.com/lecture/test/zml/courseware_2549_3.json#2549.3' }),
       setPagesUrl: JSON.stringify({ url: this.zmlUrl }),
       setUserInfo: {
         avatar: '',
@@ -117,17 +144,14 @@ export default class ZmInstance {
   // 翻页
   setPageNo(num) {
     console.log('课件链路：发送给课件信息-翻页', num);
-    // if (this.isAnswerData && this.isAnswerData.state && this.isAnswerData.data[4]) {
-    //   console.log('课件链路：发送给课件信息-补偿结束答题', num);
-    //   const [action, data] = this.isAnswerData.data[4];
-    //   this.postMessage({ action, data });
-    // }
     this.postMessage({ action: 'showPage', data: num });
   }
+
   // 获取课件中所有视频
   getAllVideo() {
     this.postMessage({ action: 'getMediaData' });
   }
+
   // 设置当前zml用户组
   async setZmlUserGroup(bool) {
     if (bool) await this.eventControllersInstance.send('current_user_connect');
@@ -226,7 +250,7 @@ export default class ZmInstance {
     // 答题相关操作
     if (action === 'questionOperation') {
       const opt = [0, 0, -1, 'zmlMessage', ['questionOperation', value]];
-      const { operation: { answer, doAnswer }, questionId, role: zmlRole } = value;
+      const { operation: { answer, doAnswer, rightAnswerStr }, questionId, role: zmlRole } = value;
       const { userInfo: { role } } = store.getState();
       // 通知qt选择题答题结束
       if (value.questionTypeName !== '填空题') {
@@ -237,13 +261,23 @@ export default class ZmInstance {
       }
       // 通知qt学生已经作答
       if (role === PLAYER_USER_TYPE.student && zmlRole === 'student') {
+        let answerStr = '', rightAnswer;
+        if (typeof rightAnswerStr === 'string' && Array.isArray(answer)) {
+          rightAnswer = rightAnswerStr;
+          answer.forEach((item, index)=>{ if (item === true) answerStr += String.fromCodePoint(65 + index); });
+        } else {
+          rightAnswer = '';
+        }
         console.log('学生已经答过题了');
-        this.sendCommonMsgToQt('studentZmlQuestionDone', { questionId });
+        this.sendCommonMsgToQt('studentZmlQuestionDone', { questionId, isHistroy: false, rightAnswer, answerStr });
       }
-      this.sendIsAnsweringToQt(!!doAnswer, value);
+
+      role !== PLAYER_USER_TYPE.student && this.sendIsAnsweringToQt(!!doAnswer, value);
+
       if (answer && answer.length) {
         this.eventControllersInstance.send('playerTrackEvent', { eventId: 'ZML_ANSWER_SUBMIT', ukeEventId: `${questionId}` });
       }
+
       this.eventControllersInstance.send('whiteboard_data', opt);
       return;
     }
@@ -288,12 +322,14 @@ export default class ZmInstance {
       this.eventControllersInstance.controllers.whiteBoardController.emit('drawtoolScroll', { ...value, heightRatio: this.heightRatio });
       return;
     }
+    // 填空题答题详情
     if (action === 'sendClickAnswerDetail') {
       const opt = [0, 0, -1, 'zmlMessage', ['sendClickAnswerDetail', value]];
       this.eventControllersInstance.send('whiteboard_data', opt);
       this.eventControllersInstance.send('playerTrackEvent', { eventId: 'CLASSROOM_COMPLETION_ANSWER_DETAILS', eventParam: {} });
       return;
     }
+    //
     if (action === 'showPageIndex') {
       this.setPageNo(value);
       this.eventControllersInstance.send('QtAction', { action: 'pptSwitchPage', data: { id: this.coursewareId, pageNo: value } });
