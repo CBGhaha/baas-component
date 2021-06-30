@@ -49,12 +49,24 @@ export default class ZmInstance {
         }
 
         if (role === PLAYER_USER_TYPE.student) {
-          // 通知qt 学生收到老师主动结束了zml答题（用于qt交互功能）
-          if (operation && !isHistroy && zmlRole !== 'student') {
+          let questionTypeId = 1;
+          if (this.pageInfo && this.pageInfo.newPageInfo && this.pageInfo.newPageInfo.qid === questionId) {
+            const { typeId } = this.pageInfo.newPageInfo;
+            if (typeId && typeId <= 3) {
+              questionTypeId = typeId;
+            }
+          }
+
+          if (operation && zmlRole !== 'student') {
             const { doAnswer, hasAnswered, showAnswer } = operation;
-            if (hasAnswered && !showAnswer && !doAnswer) {
+            // 通知qt 学生收到老师主动结束了zml答题（用于qt交互功能）
+            if (hasAnswered && !showAnswer && !doAnswer && !isHistroy) {
               console.log('zml答题结束');
-              this.sendCommonMsgToQt('teaherZmlQuestionClose', { questionId });
+              this.sendCommonMsgToQt('teaherZmlQuestionClose', { questionId, questionTypeId, isHistroy: !!isHistroy });
+            }
+            if (doAnswer && !hasAnswered && !showAnswer) {
+              console.log('zml答题开始');
+              this.sendCommonMsgToQt('teaherZmlQuestionStart', { questionId, questionTypeId, isHistroy: !!isHistroy });
             }
           }
           // 通知qt学生已经完成作答（用于qt交互功能）
@@ -67,13 +79,6 @@ export default class ZmInstance {
               rightAnswer = '';
             }
             console.log('学生已经答过题了', answerStr);
-            let questionTypeId = 1;
-            if (this.pageInfo && this.pageInfo.newPageInfo && this.pageInfo.newPageInfo.qid === questionId) {
-              const { typeId } = this.pageInfo.newPageInfo;
-              if (typeId && typeId <= 3) {
-                questionTypeId = typeId;
-              }
-            }
             this.sendCommonMsgToQt('studentZmlQuestionDone', { questionId, questionTypeId, isHistroy: true, rightAnswer, answerStr });
           }
           // 答题中保存题目信息
