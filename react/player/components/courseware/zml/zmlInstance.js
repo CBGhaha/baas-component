@@ -26,12 +26,18 @@ export default class ZmInstance {
     this.scrollRatio = 0;
     this.timer = null; // 定时器 用于防抖
     this.isAnswerData = null; // 当前zml题目状态的快照
-    this.pageInfo = null;
+    this.pageInfo = {};
     window.addEventListener('message', this.handlerIframeMsg);
     this.eventControllersInstance.controllers.otherController.on('user_connect', isUpdate => {if (isUpdate && isUpdate.data) {this.setZmlUserGroup();}});
     this.eventControllersInstance.controllers.whiteBoardController.on('zmlMessage', (payload, isHistroy/*是否为历史信令*/)=>{
       const { action, data: { operation, role: zmlRole, questionId } } = payload;
       const { userInfo: { role } } = store.getState();
+      if (action === 'sendPageInfo') {
+        if (payload && payload.data && payload.data.newPageInfo) {
+          const { qid, typeId } = payload.data.newPageInfo;
+          this.pageInfo[qid] = typeId;
+        }
+      }
       // 处理zml的答题信令
       if (action === 'questionOperation') {
 
@@ -40,7 +46,6 @@ export default class ZmInstance {
         // 通知qt是否在答题中 （ qt会根据答题状态有一系列交互功能 ）
         if (role === PLAYER_USER_TYPE.teacher && zmlRole !== 'student') {
           this.sendIsAnsweringToQt(!!isDoAnswer, payload.data, isHistroy);
-
         }
 
         // 班主任不需要接受zml答题信令
@@ -49,13 +54,7 @@ export default class ZmInstance {
         }
 
         if (role === PLAYER_USER_TYPE.student) {
-          let questionTypeId = 1;
-          if (this.pageInfo && this.pageInfo.newPageInfo && this.pageInfo.newPageInfo.qid === questionId) {
-            const { typeId } = this.pageInfo.newPageInfo;
-            if (typeId && typeId <= 3) {
-              questionTypeId = typeId;
-            }
-          }
+          let questionTypeId = this.pageInfo[questionId] || 1000;
 
           if (operation && zmlRole !== 'student') {
             const { doAnswer, hasAnswered, showAnswer } = operation;
@@ -84,7 +83,7 @@ export default class ZmInstance {
           // 答题中保存题目信息
           if (isDoAnswer) {
             this.isAnswerData = payload.data;
-            console.log(' this.isAnswerData:', this.isAnswerData);
+            console.log('this.isAnswerData:', this.isAnswerData);
           } else {
             this.isAnswerData = null;
           }
@@ -282,13 +281,7 @@ export default class ZmInstance {
           rightAnswer = '';
         }
         console.log('学生已经答过题了');
-        let questionTypeId = 1;
-        if (this.pageInfo && this.pageInfo.newPageInfo) {
-          const { typeId } = this.pageInfo.newPageInfo;
-          if (typeId && typeId <= 3) {
-            questionTypeId = typeId;
-          }
-        }
+        let questionTypeId = this.pageInfo[questionId] || 1000;
         this.sendCommonMsgToQt('studentZmlQuestionDone', { questionId, questionTypeId, isHistroy: false, rightAnswer, answerStr });
       }
 
@@ -361,7 +354,10 @@ export default class ZmInstance {
     }
 
     if (action === 'sendPageInfo') {
-      this.pageInfo = value;
+      if (value && value.newPageInfo) {
+        const { qid, typeId } = value.newPageInfo;
+        this.pageInfo[qid] = typeId;
+      }
     }
 
     if (action) {
