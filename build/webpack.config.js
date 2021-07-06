@@ -4,7 +4,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const common = require('./webpack.common.js');
 const merge = require('webpack-merge');
-const config = {
+
+const proConfig = {
   //配置模块的读取和解析规则
   mode: 'production',
   entry: path.resolve(__dirname, '../react'),
@@ -95,4 +96,7 @@ const config = {
     })
   ]
 };
-module.exports = merge(common, config);
+module.exports = function(config = {}) {
+  return merge(merge(common, proConfig), config);
+};
+

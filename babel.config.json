@@ -3,7 +3,7 @@
     [
       "@babel/env",
       {
-        "modules": "umd",
+        "modules": false,
         "targets": {
           "edge": "17",
           "firefox": "60",
@@ -13,9 +13,12 @@
         "corejs": "3.6.5"
       }
     ],
-    "@babel/preset-react"
+    [
+      "@babel/preset-react"
+    ]
   ],
   "plugins": [
+    "@babel/plugin-syntax-jsx",
     "@babel/plugin-proposal-class-properties",
     "@babel/plugin-syntax-dynamic-import",
     "@babel/plugin-transform-runtime",
