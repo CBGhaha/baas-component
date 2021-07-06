@@ -7,7 +7,7 @@ import babel from 'rollup-plugin-babel';
 import commonjs from '@rollup/plugin-commonjs';
 import postcss from 'rollup-plugin-postcss';
 import image from '@rollup/plugin-image';
-import postcssModules from 'postcss-modules';
+// import postcssModules from 'postcss-modules';
 import nested from 'postcss-nested';
 import postcssPresetEnv from 'postcss-preset-env';
 import cssnano from 'cssnano';
@@ -52,7 +52,7 @@ let extensions = ['react', 'react-dom'];
   }
 
 });
-console.log('extensions:', extensions);
+// console.log('extensions:', extensions);
 
 function createConfig(format, output) {
   output.name = name;

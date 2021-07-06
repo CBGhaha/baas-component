@@ -10,7 +10,7 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production node ./scripts/build.js",
     "dev": "cross-env BUILD_ENV=development webpack-dev-server --config ./build/webpack.dev.config.js --devtool eval --progress --colors",
-    "publish": "npm publish dist"
+    "publish": "node ./scripts/publish.js"
   },
   "author": "bangguo.chen",
   "license": "ISC",
@@ -41,6 +41,7 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
+    "chalk": "^4.1.1",
     "core-js": "^3.8.0",
     "cross-env": "^7.0.2",
     "cssnano": "^5.0.6",
@@ -50,6 +51,7 @@
     "execa": "^5.1.1",
     "inquirer": "^8.1.1",
     "less": "^3.0.4",
+    "ora": "^5.4.1",
     "postcss": "^8.3.5",
     "postcss-loader": "^2.1.5",
     "postcss-modules": "^4.1.3",
