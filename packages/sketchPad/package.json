@@ -1,9 +1,10 @@
 {
-  "name": "@yk-web-component/youkeSketchPad",
+  "name": "@youke-web-libs/sketchPad",
   "version": "1.0.0",
   "main": "dist/index.cjs.js",
   "module":"dist/index.esm-bounder.js",
   "license": "MIT",
+  "description": "课件画笔组件",
   "dependencies": {
     "@redom/store": "^1.0.0",
     "konva": "^4.1.3",

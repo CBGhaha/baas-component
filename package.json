@@ -1,7 +1,7 @@
 {
-  "name": "courseware-paly",
+  "name": "@youke-web-libs",
   "version": "1.0.0",
-  "description": "课件播放器源码",
+  "description": "优课课堂内web组件和类库",
   "main": "./index.js",
   "workspaces": [
     "packages/*"
@@ -49,6 +49,7 @@
     "eslint-plugin-html": "^6.0.2",
     "eslint-plugin-react": "^7.10.0",
     "execa": "^5.1.1",
+    "inquirer": "^8.1.1",
     "less": "^3.0.4",
     "postcss": "^8.3.5",
     "postcss-loader": "^2.1.5",

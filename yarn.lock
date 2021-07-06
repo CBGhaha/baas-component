@@ -1489,6 +1489,13 @@ ansi-escapes@^3.0.0, ansi-escapes@^3.2.0:
   resolved "http://npm.zmops.cc/ansi-escapes/-/ansi-escapes-3.2.0.tgz#8780b98ff9dbf5638152d1f1fe5c1d7b4442976b"
   integrity sha1-h4C5j/nb9WOBUtHx/lwde0RCl2s=
 
+ansi-escapes@^4.2.1:
+  version "4.3.2"
+  resolved "http://npm.zmops.cc/ansi-escapes/-/ansi-escapes-4.3.2.tgz#6b2291d1db7d98b6521d5f1efa42d0f3a9feb65e"
+  integrity sha1-ayKR0dt9mLZSHV8e+kLQ86n+tl4=
+  dependencies:
+    type-fest "^0.21.3"
+
 ansi-html@0.0.7:
   version "0.0.7"
   resolved "http://npm.zmops.cc/ansi-html/-/ansi-html-0.0.7.tgz#813584021962a9e9e6fd039f940d12f56ca7859e"
@@ -1508,6 +1515,11 @@ ansi-regex@^4.1.0:
   version "4.1.0"
   resolved "http://npm.zmops.cc/ansi-regex/-/ansi-regex-4.1.0.tgz#8b9f8f08cf1acb843756a839ca8c7e3168c51997"
   integrity sha1-i5+PCM8ay4Q3Vqg5yox+MWjFGZc=
+
+ansi-regex@^5.0.0:
+  version "5.0.0"
+  resolved "http://npm.zmops.cc/ansi-regex/-/ansi-regex-5.0.0.tgz#388539f55179bf39339c81af30a654d69f87cb75"
+  integrity sha1-OIU59VF5vzkznIGvMKZU1p+Hy3U=
 
 ansi-styles@^2.2.1:
   version "2.2.1"
@@ -2793,7 +2805,7 @@ base64-arraybuffer@0.1.5:
   resolved "http://npm.zmops.cc/base64-arraybuffer/-/base64-arraybuffer-0.1.5.tgz#73926771923b5a19747ad666aa5cd4bf9c6e9ce8"
   integrity sha1-c5JncZI7Whl0etZmqlzUv5xunOg=
 
-base64-js@^1.0.2:
+base64-js@^1.0.2, base64-js@^1.3.1:
   version "1.5.1"
   resolved "http://npm.zmops.cc/base64-js/-/base64-js-1.5.1.tgz#1b1b440160a5bf7ad40b650f095963481903930a"
   integrity sha1-GxtEAWClv3rUC2UPCVljSBkDkwo=
@@ -2870,6 +2882,15 @@ bitsyntax@~0.1.0:
     buffer-more-ints "~1.0.0"
     debug "~2.6.9"
     safe-buffer "~5.1.2"
+
+bl@^4.1.0:
+  version "4.1.0"
+  resolved "http://npm.zmops.cc/bl/-/bl-4.1.0.tgz#451535264182bec2fbbc83a62ab98cf11d9f7b3a"
+  integrity sha1-RRU1JkGCvsL7vIOmKrmM8R2fezo=
+  dependencies:
+    buffer "^5.5.0"
+    inherits "^2.0.4"
+    readable-stream "^3.4.0"
 
 bl@~1.1.2:
   version "1.1.2"
@@ -3147,6 +3168,14 @@ buffer@^4.3.0:
     ieee754 "^1.1.4"
     isarray "^1.0.0"
 
+buffer@^5.5.0:
+  version "5.7.1"
+  resolved "http://npm.zmops.cc/buffer/-/buffer-5.7.1.tgz#ba62e7c13133053582197160851a8f648e99eed0"
+  integrity sha1-umLnwTEzBTWCGXFghRqPZI6Z7tA=
+  dependencies:
+    base64-js "^1.3.1"
+    ieee754 "^1.1.13"
+
 buildmail@4.0.1:
   version "4.0.1"
   resolved "http://npm.zmops.cc/buildmail/-/buildmail-4.0.1.tgz#877f7738b78729871c9a105e3b837d2be11a7a72"
@@ -3346,7 +3375,7 @@ chalk@^2.0.0, chalk@^2.0.1, chalk@^2.1.0, chalk@^2.3.1, chalk@^2.3.2, chalk@^2.4
     escape-string-regexp "^1.0.5"
     supports-color "^5.3.0"
 
-chalk@^4.0.0, chalk@^4.1.0:
+chalk@^4.0.0, chalk@^4.1.0, chalk@^4.1.1:
   version "4.1.1"
   resolved "http://npm.zmops.cc/chalk/-/chalk-4.1.1.tgz#c80b3fab28bf6371e6863325eee67e618b77e6ad"
   integrity sha1-yAs/qyi/Y3HmhjMl7uZ+YYt35q0=
@@ -3461,15 +3490,32 @@ cli-cursor@^2.1.0:
   dependencies:
     restore-cursor "^2.0.0"
 
+cli-cursor@^3.1.0:
+  version "3.1.0"
+  resolved "http://npm.zmops.cc/cli-cursor/-/cli-cursor-3.1.0.tgz#264305a7ae490d1d03bf0c9ba7c925d1753af307"
+  integrity sha1-JkMFp65JDR0Dvwybp8kl0XU68wc=
+  dependencies:
+    restore-cursor "^3.1.0"
+
 cli-spinners@^1.1.0:
   version "1.3.1"
   resolved "http://npm.zmops.cc/cli-spinners/-/cli-spinners-1.3.1.tgz#002c1990912d0d59580c93bd36c056de99e4259a"
   integrity sha1-ACwZkJEtDVlYDJO9NsBW3pnkJZo=
 
+cli-spinners@^2.5.0:
+  version "2.6.0"
+  resolved "http://npm.zmops.cc/cli-spinners/-/cli-spinners-2.6.0.tgz#36c7dc98fb6a9a76bd6238ec3f77e2425627e939"
+  integrity sha1-NsfcmPtqmna9YjjsP3fiQlYn6Tk=
+
 cli-width@^2.0.0:
   version "2.2.1"
   resolved "http://npm.zmops.cc/cli-width/-/cli-width-2.2.1.tgz#b0433d0b4e9c847ef18868a4ef16fd5fc8271c48"
   integrity sha1-sEM9C06chH7xiGik7xb9X8gnHEg=
+
+cli-width@^3.0.0:
+  version "3.0.0"
+  resolved "http://npm.zmops.cc/cli-width/-/cli-width-3.0.0.tgz#a2f48437a2caa9a22436e794bf071ec9e61cedf6"
+  integrity sha1-ovSEN6LKqaIkNueUvwceyeYc7fY=
 
 cliui@^4.0.0:
   version "4.1.0"
@@ -4705,6 +4751,11 @@ emoji-regex@^7.0.1:
   resolved "http://npm.zmops.cc/emoji-regex/-/emoji-regex-7.0.3.tgz#933a04052860c85e83c122479c4748a8e4c72156"
   integrity sha1-kzoEBShgyF6DwSJHnEdIqOTHIVY=
 
+emoji-regex@^8.0.0:
+  version "8.0.0"
+  resolved "http://npm.zmops.cc/emoji-regex/-/emoji-regex-8.0.0.tgz#e818fd69ce5ccfcb404594f842963bf53164cc37"
+  integrity sha1-6Bj9ac5cz8tARZT4QpY79TFkzDc=
+
 emojis-list@^2.0.0:
   version "2.1.0"
   resolved "http://npm.zmops.cc/emojis-list/-/emojis-list-2.1.0.tgz#4daa4d9db00f9819880c79fa457ae5b09a1fd389"
@@ -5442,6 +5493,13 @@ figures@2.0.0, figures@^2.0.0:
   version "2.0.0"
   resolved "http://npm.zmops.cc/figures/-/figures-2.0.0.tgz#3ab1a2d2a62c8bfb431a0c94cb797a2fce27c962"
   integrity sha1-OrGi0qYsi/tDGgyUy3l6L84nyWI=
+  dependencies:
+    escape-string-regexp "^1.0.5"
+
+figures@^3.0.0:
+  version "3.2.0"
+  resolved "http://npm.zmops.cc/figures/-/figures-3.2.0.tgz#625c18bd293c604dc4a8ddb2febf0c88341746af"
+  integrity sha1-YlwYvSk8YE3EqN2y/r8MiDQXRq8=
   dependencies:
     escape-string-regexp "^1.0.5"
 
@@ -6482,7 +6540,7 @@ icss-utils@^5.0.0:
   resolved "http://npm.zmops.cc/icss-utils/-/icss-utils-5.1.0.tgz#c6be6858abd013d768e98366ae47e25d5887b1ae"
   integrity sha1-xr5oWKvQE9do6YNmrkfiXViHsa4=
 
-ieee754@^1.1.11, ieee754@^1.1.4:
+ieee754@^1.1.11, ieee754@^1.1.13, ieee754@^1.1.4:
   version "1.2.1"
   resolved "http://npm.zmops.cc/ieee754/-/ieee754-1.2.1.tgz#8eb7a10a63fff25d15a57b001586d177d1b0d352"
   integrity sha1-jrehCmP/8l0VpXsAFYbRd9Gw01I=
@@ -6674,6 +6732,26 @@ inquirer@^6.2.2:
     rxjs "^6.4.0"
     string-width "^2.1.0"
     strip-ansi "^5.1.0"
+    through "^2.3.6"
+
+inquirer@^8.1.1:
+  version "8.1.1"
+  resolved "http://npm.zmops.cc/inquirer/-/inquirer-8.1.1.tgz#7c53d94c6d03011c7bb2a947f0dca3b98246c26a"
+  integrity sha1-fFPZTG0DARx7sqlH8NyjuYJGwmo=
+  dependencies:
+    ansi-escapes "^4.2.1"
+    chalk "^4.1.1"
+    cli-cursor "^3.1.0"
+    cli-width "^3.0.0"
+    external-editor "^3.0.3"
+    figures "^3.0.0"
+    lodash "^4.17.21"
+    mute-stream "0.0.8"
+    ora "^5.3.0"
+    run-async "^2.4.0"
+    rxjs "^6.6.6"
+    string-width "^4.1.0"
+    strip-ansi "^6.0.0"
     through "^2.3.6"
 
 internal-ip@1.2.0:
@@ -6945,6 +7023,11 @@ is-fullwidth-code-point@^2.0.0:
   resolved "http://npm.zmops.cc/is-fullwidth-code-point/-/is-fullwidth-code-point-2.0.0.tgz#a3b30a5c4f199183167aaab93beefae3ddfb654f"
   integrity sha1-o7MKXE8ZkYMWeqq5O+764937ZU8=
 
+is-fullwidth-code-point@^3.0.0:
+  version "3.0.0"
+  resolved "http://npm.zmops.cc/is-fullwidth-code-point/-/is-fullwidth-code-point-3.0.0.tgz#f116f8064fe90b3f7844a38997c0b75051269f1d"
+  integrity sha1-8Rb4Bk/pCz94RKOJl8C3UFEmnx0=
+
 is-generator-function@^1.0.8, is-generator-function@^1.0.9:
   version "1.0.9"
   resolved "http://npm.zmops.cc/is-generator-function/-/is-generator-function-1.0.9.tgz#e5f82c2323673e7fcad3d12858c83c4039f6399c"
@@ -6977,6 +7060,11 @@ is-html@^1.1.0:
   integrity sha1-4E8cGNOUhRETlvmgJz6rUa8hhGQ=
   dependencies:
     html-tags "^1.0.0"
+
+is-interactive@^1.0.0:
+  version "1.0.0"
+  resolved "http://npm.zmops.cc/is-interactive/-/is-interactive-1.0.0.tgz#cea6e6ae5c870a7b0a0004070b7b587e0252912e"
+  integrity sha1-zqbmrlyHCnsKAAQHC3tYfgJSkS4=
 
 is-map@^2.0.1, is-map@^2.0.2:
   version "2.0.2"
@@ -7151,6 +7239,11 @@ is-typedarray@~1.0.0:
   version "1.0.0"
   resolved "http://npm.zmops.cc/is-typedarray/-/is-typedarray-1.0.0.tgz#e479c80858df0c1b11ddda6940f96011fcda4a9a"
   integrity sha1-5HnICFjfDBsR3dppQPlgEfzaSpo=
+
+is-unicode-supported@^0.1.0:
+  version "0.1.0"
+  resolved "http://npm.zmops.cc/is-unicode-supported/-/is-unicode-supported-0.1.0.tgz#3f26c76a809593b52bfa2ecb5710ed2779b522a7"
+  integrity sha1-PybHaoCVk7Ur+i7LVxDtJ3m1Iqc=
 
 is-url@^1.2.2:
   version "1.2.4"
@@ -7752,6 +7845,14 @@ log-symbols@^2.1.0, log-symbols@^2.2.0:
   dependencies:
     chalk "^2.0.1"
 
+log-symbols@^4.1.0:
+  version "4.1.0"
+  resolved "http://npm.zmops.cc/log-symbols/-/log-symbols-4.1.0.tgz#3fbdbb95b4683ac9fc785111e792e558d4abd503"
+  integrity sha1-P727lbRoOsn8eFER55LlWNSr1QM=
+  dependencies:
+    chalk "^4.1.0"
+    is-unicode-supported "^0.1.0"
+
 log4js@^2.5.3:
   version "2.11.0"
   resolved "http://npm.zmops.cc/log4js/-/log4js-2.11.0.tgz#bf3902eff65c6923d9ce9cfbd2db54160e34005a"
@@ -8268,6 +8369,11 @@ mute-stream@0.0.7:
   version "0.0.7"
   resolved "http://npm.zmops.cc/mute-stream/-/mute-stream-0.0.7.tgz#3075ce93bc21b8fab43e1bc4da7e8115ed1e7bab"
   integrity sha1-MHXOk7whuPq0PhvE2n6BFe0ee6s=
+
+mute-stream@0.0.8:
+  version "0.0.8"
+  resolved "http://npm.zmops.cc/mute-stream/-/mute-stream-0.0.8.tgz#1630c42b2251ff81e2a283de96a5497ea92e5e0d"
+  integrity sha1-FjDEKyJR/4HiooPelqVJfqkuXg0=
 
 nan@^2.12.1:
   version "2.14.2"
@@ -8800,7 +8906,7 @@ onetime@^2.0.0:
   dependencies:
     mimic-fn "^1.0.0"
 
-onetime@^5.1.2:
+onetime@^5.1.0, onetime@^5.1.2:
   version "5.1.2"
   resolved "http://npm.zmops.cc/onetime/-/onetime-5.1.2.tgz#d0e96ebb56b07476df1dd9c4806e5237985ca45e"
   integrity sha1-0Oluu1awdHbfHdnEgG5SN5hcpF4=
@@ -8883,6 +8989,21 @@ ora@^2.1.0:
     cli-spinners "^1.1.0"
     log-symbols "^2.2.0"
     strip-ansi "^4.0.0"
+    wcwidth "^1.0.1"
+
+ora@^5.3.0:
+  version "5.4.1"
+  resolved "http://npm.zmops.cc/ora/-/ora-5.4.1.tgz#1b2678426af4ac4a509008e5e4ac9e9959db9e18"
+  integrity sha1-GyZ4Qmr0rEpQkAjl5KyemVnbnhg=
+  dependencies:
+    bl "^4.1.0"
+    chalk "^4.1.0"
+    cli-cursor "^3.1.0"
+    cli-spinners "^2.5.0"
+    is-interactive "^1.0.0"
+    is-unicode-supported "^0.1.0"
+    log-symbols "^4.1.0"
+    strip-ansi "^6.0.0"
     wcwidth "^1.0.1"
 
 original@>=0.0.5:
@@ -10853,7 +10974,7 @@ readable-stream@1.1.x, "readable-stream@1.x >=1.1.9":
     isarray "0.0.1"
     string_decoder "~0.10.x"
 
-readable-stream@^3.1.1, readable-stream@^3.6.0:
+readable-stream@^3.1.1, readable-stream@^3.4.0, readable-stream@^3.6.0:
   version "3.6.0"
   resolved "http://npm.zmops.cc/readable-stream/-/readable-stream-3.6.0.tgz#337bbda3adc0706bd3e024426a286d4b4b2c9198"
   integrity sha1-M3u9o63AcGvT4CRCaihtS0sskZg=
@@ -11282,6 +11403,14 @@ restore-cursor@^2.0.0:
     onetime "^2.0.0"
     signal-exit "^3.0.2"
 
+restore-cursor@^3.1.0:
+  version "3.1.0"
+  resolved "http://npm.zmops.cc/restore-cursor/-/restore-cursor-3.1.0.tgz#39f67c54b3a7a58cea5236d95cf0034239631f7e"
+  integrity sha1-OfZ8VLOnpYzqUjbZXPADQjljH34=
+  dependencies:
+    onetime "^5.1.0"
+    signal-exit "^3.0.2"
+
 ret@~0.1.10:
   version "0.1.15"
   resolved "http://npm.zmops.cc/ret/-/ret-0.1.15.tgz#b8a4825d5bdb1fc3f6f53c2bc33f81388681c7bc"
@@ -11411,7 +11540,7 @@ rollup@^2.52.1:
   optionalDependencies:
     fsevents "~2.3.2"
 
-run-async@^2.2.0:
+run-async@^2.2.0, run-async@^2.4.0:
   version "2.4.1"
   resolved "http://npm.zmops.cc/run-async/-/run-async-2.4.1.tgz#8440eccf99ea3e70bd409d49aab88e10c189a455"
   integrity sha1-hEDsz5nqPnC9QJ1JqriOEMGJpFU=
@@ -11440,7 +11569,7 @@ rx@^4.1.0:
   resolved "http://npm.zmops.cc/rx/-/rx-4.1.0.tgz#a5f13ff79ef3b740fe30aa803fb09f98805d4782"
   integrity sha1-pfE/957zt0D+MKqAP7CfmIBdR4I=
 
-rxjs@^6.1.0, rxjs@^6.4.0:
+rxjs@^6.1.0, rxjs@^6.4.0, rxjs@^6.6.6:
   version "6.6.7"
   resolved "http://npm.zmops.cc/rxjs/-/rxjs-6.6.7.tgz#90ac018acabf491bf65044235d5863c4dab804c9"
   integrity sha1-kKwBisq/SRv2UEQjXVhjxNq4BMk=
@@ -12144,6 +12273,15 @@ string-width@^3.0.0:
     is-fullwidth-code-point "^2.0.0"
     strip-ansi "^5.1.0"
 
+string-width@^4.1.0:
+  version "4.2.2"
+  resolved "http://npm.zmops.cc/string-width/-/string-width-4.2.2.tgz#dafd4f9559a7585cfba529c6a0a4f73488ebd4c5"
+  integrity sha1-2v1PlVmnWFz7pSnGoKT3NIjr1MU=
+  dependencies:
+    emoji-regex "^8.0.0"
+    is-fullwidth-code-point "^3.0.0"
+    strip-ansi "^6.0.0"
+
 string.prototype.matchall@^4.0.5:
   version "4.0.5"
   resolved "http://npm.zmops.cc/string.prototype.matchall/-/string.prototype.matchall-4.0.5.tgz#59370644e1db7e4c0c045277690cf7b01203c4da"
@@ -12218,6 +12356,13 @@ strip-ansi@^5.1.0:
   integrity sha1-jJpTb+tq/JYr36WxBKUJHBrZwK4=
   dependencies:
     ansi-regex "^4.1.0"
+
+strip-ansi@^6.0.0:
+  version "6.0.0"
+  resolved "http://npm.zmops.cc/strip-ansi/-/strip-ansi-6.0.0.tgz#0b1571dd7669ccd4f3e06e14ef1eed26225ae532"
+  integrity sha1-CxVx3XZpzNTz4G4U7x7tJiJa5TI=
+  dependencies:
+    ansi-regex "^5.0.0"
 
 strip-bom@^2.0.0:
   version "2.0.0"
@@ -12623,6 +12768,11 @@ type-check@~0.3.2:
   integrity sha1-WITKtRLPHTVeP7eE8wgEsrUg23I=
   dependencies:
     prelude-ls "~1.1.2"
+
+type-fest@^0.21.3:
+  version "0.21.3"
+  resolved "http://npm.zmops.cc/type-fest/-/type-fest-0.21.3.tgz#d260a24b0198436e133fa26a524a6d65fa3b2e37"
+  integrity sha1-0mCiSwGYQ24TP6JqUkptZfo7Ljc=
 
 type-is@~1.6.17, type-is@~1.6.18:
   version "1.6.18"
