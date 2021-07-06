@@ -27,7 +27,7 @@ const pkg = require(resolve('package.json'));
 // 对打包类型先做一个映射表，根据你提供的formats来格式化需要打包的内容
 const outputConfig = {
   'esm-bundler': {
-    file: resolve('./dist/index.esm-boundle.js'),
+    file: resolve('./dist/index.esm.js'),
     format: 'es'
   },
   'cjs': {
@@ -67,11 +67,11 @@ function createConfig(format, output) {
         plugins: [
           nested(),
           postcssPresetEnv(),
-          cssnano(),
-          postcssModules()
+          cssnano()
+          // postcssModules()
         ],
-        extensions: ['.css', 'less'],
-        modules: true
+        extensions: ['.css', 'less']
+        // modules: true
       }),
       babel({
         exclude: '**/node_modules/**',
@@ -82,8 +82,8 @@ function createConfig(format, output) {
       tsPlugin({
         tsconfig: path.resolve(__dirname, './tsconfig.json')
       }),
-      resolvePlugin(),
-      terser()
+      resolvePlugin()
+      // terser()
     ],
     external: format !== 'global' ? extensions : false
   };

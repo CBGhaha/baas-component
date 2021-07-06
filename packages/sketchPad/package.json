@@ -2,8 +2,9 @@
   "name": "@youke-web-libs/sketch-pad",
   "version": "1.0.0",
   "main": "dist/index.cjs.js",
-  "module":"dist/index.esm-bounder.js",
-  "license": "MIT",
+  "module":"dist/index.esm.js",
+  "license": "ISC",
+  "author": "bangguo.chen",
   "description": "课件画笔组件",
   "dependencies": {
     "@redom/store": "^1.0.0",

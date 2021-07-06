@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "dist/index.cjs.js",
   "description": "qt客户端与js交互通用",
-  "module":"dist/index.esm-bounder.js",
+  "module":"dist/index.esm.js",
   "license": "MIT",
   "buildOptions":{
     "name":"youkeQtBridge",
