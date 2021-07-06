@@ -1,10 +1,10 @@
-export const CANVAS_RATIO = 9/16 ;
+export const CANVAS_RATIO = 9 / 16 ;
 export const CANVAS_WIDTH = 800;
 export const CANVAS_HEIGHT = 450;
 export const EDIT_LABLE_DXY = {
-    dx:5,
-    dy:-15
-}
+  dx: 5,
+  dy: -15
+};
 export const RECOVER_NUM = 10;
 export const EDIT_CIRCLE_RADIUS = 4;
 export const DRAWTOOL_PENCIL = 'brush';
@@ -32,8 +32,8 @@ export const DRAWTOOL_LINE_EDIT = 'line_edit';
 export const DRAWTOOL_LINEDASH_EDIT = 'linedash_edit';
 export const DRAWTOOL_LINEARROW_EDIT = 'linearrow_edit';
 export const DRAWTOOL_LINEARROWDASH_EDIT = 'linearrowdash_edit';
-export const DRAWTOOL_TEXTTOOL_EDIT ='text_edit';
-export const DRAWTOOL_COORDSYS_EDIT ='coord_sys';
+export const DRAWTOOL_TEXTTOOL_EDIT = 'text_edit';
+export const DRAWTOOL_COORDSYS_EDIT = 'coord_sys';
 
 
 //选择工具
