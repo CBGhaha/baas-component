@@ -8,7 +8,7 @@
   ],
   "private": true,
   "scripts": {
-    "component": "node ./scripts/build.js",
+    "component": "cross-env NODE_ENV=production node ./scripts/build.js",
     "build": "webpack --config ./build/webpack.config.js --progress --colors",
     "dev": "cross-env BUILD_ENV=development webpack-dev-server --config ./build/webpack.dev.config.js --devtool eval --progress --colors",
     "publish": "npm publish dist"
@@ -48,7 +48,6 @@
     "eslint": "^5.1.0",
     "eslint-plugin-html": "^6.0.2",
     "eslint-plugin-react": "^7.10.0",
-    "eventemitter3": "^4.0.4",
     "execa": "^5.1.1",
     "less": "^3.0.4",
     "postcss": "^8.3.5",
@@ -56,24 +55,14 @@
     "postcss-modules": "^4.1.3",
     "postcss-nested": "^5.0.5",
     "postcss-preset-env": "^6.7.0",
-    "prop-types": "^15.7.2",
-    "qs": "^6.9.4",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-redux": "^5.0.7",
-    "react-router-dom": "^4.3.1",
-    "redux": "^4.0.0",
     "rollup": "^2.52.1",
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-postcss": "^4.0.0",
     "rollup-plugin-postcss-modules": "^2.0.2",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.30.0",
-    "socket.io-client": "^2.3.0",
-    "svgaplayerweb": "^2.3.1",
     "transform-runtime": "0.0.0",
-    "typescript": "^4.3.4",
-    "zmSketchpad": "^0.10.48"
+    "typescript": "^4.3.4"
   },
   "repository": "https://gitlab.zmaxis.com/uke-web/zm-courseware-player.git"
 }

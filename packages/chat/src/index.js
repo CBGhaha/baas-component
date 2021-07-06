@@ -1,4 +1,4 @@
-import 'regenerator-runtime/runtime';
+// import 'regenerator-runtime/runtime';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -14,6 +14,8 @@ export default function renderAPP(element, dom, cb) {
   );
 }
 
-export function aaa() {
-  console.log('style', style);
-}
+// export function aaa() {
+//   React.createElement();
+//   ReactDOM.render();
+//   console.log('style', style);
+// }

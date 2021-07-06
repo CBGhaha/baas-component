@@ -1,0 +1,26 @@
+{
+  "name": "@yk-web-component/youkeSketchPad",
+  "version": "1.0.0",
+  "main": "dist/index.cjs.js",
+  "module":"dist/index.esm-bounder.js",
+  "license": "MIT",
+  "dependencies": {
+    "@redom/store": "^1.0.0",
+    "konva": "^4.1.3",
+    "redom": "3.12.7",
+    "zmKonvaPlugin": "^1.0.3",
+    "zmMovedDom": "^1.1.1",
+    "zmSmoothLine": "^1.0.4"
+  },
+  "devDependencies": {
+    "nwb": "^0.23.0",
+    "parcel-bundler": "^1.12.4"
+  },
+  "buildOptions":{
+    "name":"youkeSketchPad",
+    "formats":[
+      "esm-bundler",
+      "global"
+    ]
+  }
+}
