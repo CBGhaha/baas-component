@@ -1,6 +1,6 @@
 export class CacheData {
-  constructor() {
-    this.layerCachData = {};
-    this.currentLayerId = '1';
-  }
+    constructor(){
+        this.layerCachData = {};
+        this.currentLayerId = "1";
+    }
 }

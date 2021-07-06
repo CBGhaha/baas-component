@@ -10,11 +10,11 @@ export const api = (app) => {
     hello (subject) {
       set('hello.subject', subject);
     },
-    playingtime(data) {
+    playingtime(data){
       set('hello.playingtime', data);
       //console.log('playingtime',data);
     },
-    duration(data) {
+    duration(data){
       set('hello.duration', data);
     }
   });
