@@ -1,5 +1,5 @@
 {
-  "name": "@youke-web-libs",
+  "name": "youke-web-libs",
   "version": "1.0.0",
   "description": "优课课堂内web组件和类库",
   "main": "./index.js",
