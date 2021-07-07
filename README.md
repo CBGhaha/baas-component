@@ -47,22 +47,24 @@ npm run publish
 * global (script标签引入)
 
 ## 目录结构
-.
+```
 ├── README.md
 ├── babel.config.js babel // 配置文件
-├── package.json 
-├── .eslintrc 
+├── package.json
+├── .eslintrc
 ├── tsconfig.json
 ├── rollup.config.js //rollup配置
 ├── scripts // 脚本库
-│   ├── build.js // 生产编译
-│   ├── create.js // 创建package
-│   ├── dev.js // 开发实时编译
-│   ├── publish.js // 发布npm
-│   ├── utils.js // 工具类
-|   └-- ....
-├── packages  
+│   ├── build.js // 生产编译
+│   ├── create.js // 创建package
+│   ├── dev.js // 开发实时编译
+│   ├── publish.js // 发布npm
+│   ├── utils.js // 工具类
+| └-- ....
+├── packages
 └── yarn.lock
+```
+
 
 ## 其他 
 * package源码支持 Typescript
