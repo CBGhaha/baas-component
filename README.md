@@ -37,8 +37,7 @@ npm run publish
 ##  支持的package类型
 * 支持js工具类库
 * 支持react组件
-* 支持vue2组件
-* 支持vue3组件
+* 支持vue组件
 * 支持node模块
 
 ##  支持输出的模块化规范
