@@ -82,8 +82,8 @@ function createConfig(format, output) {
       tsPlugin({
         tsconfig: path.resolve(__dirname, './tsconfig.json')
       }),
-      resolvePlugin()
-      // terser()
+      resolvePlugin(),
+      terser()
     ],
     external: format !== 'global' ? extensions : false
   };

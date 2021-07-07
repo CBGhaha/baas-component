@@ -1,6 +1,6 @@
 {
   "name": "@youke-web-libs/sketch-pad",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "dist/index.cjs.js",
   "module":"dist/index.esm.js",
   "license": "ISC",
