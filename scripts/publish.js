@@ -20,13 +20,14 @@ async function publish(package){
   const resolve = (file)=>{return path.resolve(packageDir, file);};
   const pagPath = resolve('package.json');
   const pkg = require(pagPath);
-  const { packageVersion } = await inquirer.prompt([
+  let { packageVersion } = await inquirer.prompt([
     {
       name: 'packageVersion',
       type: 'input',
       message: `请设置package版本(当前版本 ${chalk.yellow(pkg.version)})`,
     }
   ]);
+  packageVersion = packageVersion || pkg.version;
   const { check } = await inquirer.prompt([
     {
       name: 'check',
@@ -44,12 +45,13 @@ async function publish(package){
   const spinner  = ora(`开始发布 ${chalk.blue(`${package}@${packageVersion}`)}`);
   spinner.start();
   try{
-    // const res = await execCmd(`npm publish ${`./packages/${package}`}`);
+    const res = await execCmd(`npm publish ${`./packages/${package}`}`);
     spinner.succeed();
     console.log(chalk.green('发布成功！'))
   }catch(err){
+    console.log(err);
+    console.log('\n');
     spinner.fail(chalk.red('发布失败：\n'));
-    console.log(err)
   }
 }
 
