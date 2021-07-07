@@ -9,22 +9,26 @@ const packagesPath = path.resolve(__dirname, '../packages');
 const packages = fs.readdirSync(packagesPath).filter(dir => {
   return fs.statSync(`${packagesPath}/${dir}`).isDirectory();
 });
-async function runParallel(packages, iteratorFn) {
+async function runParallel(packages, iteratorFn, allOption) {
   const taskArray = [];
+  const choices = [...packages.map(i => {
+    const packageName = path.basename(i);
+    return {
+      name: packageName, value: i
+    };
+  })];
+  if (allOption) {
+    choices.push({ name: '全部package', value: 'all' });
+  }
   const { selectPackage } = await inquirer.prompt([
     {
       name: 'selectPackage',
       type: 'list',
       message: '选择你想要操作的package',
-      choices: [...packages.map(i => {
-        const packageName = path.basename(i);
-        return {
-          name: packageName, value: i
-        };
-      }), { name: '全部package', value: 'all' }
-      ]
+      choices
     }
   ]);
+
   if (selectPackage !== 'all') packages = [selectPackage];
   packages.forEach(item => {
     taskArray.push(iteratorFn(item));
@@ -32,8 +36,8 @@ async function runParallel(packages, iteratorFn) {
   return Promise.all(taskArray);
 }
 
-function selectPackage(exeFn) {
-  return runParallel(packages, exeFn);
+function selectPackage(exeFn, allOption) {
+  return runParallel(packages, exeFn, allOption);
 }
 
 module.exports = {

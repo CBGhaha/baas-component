@@ -1,0 +1,19 @@
+{
+    "name": "@youke-web-libs/vue-demo",
+    "version": "1.0.0",
+    "main": "dist/index.cjs.js",
+    "module": "dist/index.esm.js",
+    "license": "ISC",
+    "author": "",
+    "description": "demoe(可删除)",
+    "dependencies": {},
+    "devDependencies": {
+        "vue": "^3.0.1"
+    },
+    "buildOptions": {
+        "name": "youkeVueDemo",
+        "formats": [
+            "esm-bundler"
+        ]
+    }
+}

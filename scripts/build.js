@@ -8,7 +8,7 @@ async function build(package){
     {stdio:'inherit'} // 子进程打包的信息共享给父进程
   )
 }
-selectPackage(build).then(res=>{
+selectPackage(build, true).then(res=>{
   console.log(chalk.green('打包成功'));
 }).catch(err=>{
   console.log(chalk.red('打包失败\n'), res);

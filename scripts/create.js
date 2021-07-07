@@ -34,6 +34,7 @@ async function create() {
       message: '请输入package的名称'
     }
   ]);
+
   const packagePath = path.resolve(__dirname, `../packages/${packageName}`);
   const dirExist = fs.existsSync(packagePath);
   if (dirExist) {
@@ -41,10 +42,33 @@ async function create() {
     return;
   }
 
+  const { moduleType } = await inquirer.prompt({
+    type: 'checkbox',
+    message: '请选择模块化规范:',
+    name: 'moduleType',
+    choices: [
+      {
+        name: 'ES Modules',
+        value: 'esm-bundler',
+        checked: true
+      },
+      {
+        name: 'CommonJs',
+        value: 'cjs'
+      },
+      {
+        name: 'global(script标签引入)',
+        value: 'global'
+      }
+    ] });
+  // console.log('moduleTyoe', moduleType);
+
+
   fs.mkdirSync(packagePath);
   fs.mkdirSync(`${packagePath}/src`);
   fs.writeFileSync(`${packagePath}/src/index.js`, '', 'utf8');
   const packageJson = packageTemplateCreator(packageName);
+  packageJson.buildOptions.formats = moduleType;
   fs.writeFileSync(`${packagePath}/package.json`, JSON.stringify(packageJson, null, 4), 'utf8');
   console.log(chalk.green('创建成功成功！'));
 }
