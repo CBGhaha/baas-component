@@ -14,7 +14,7 @@
 * 6.编译package
 * 7.发布到npm
 
-## 命令行
+## 命令行脚本
 * 新建自己的npm package：
 ```node
 npm run create
@@ -31,7 +31,7 @@ yarn build / npm run build
 ```
 * 发布到npm：
 ```node
-yarn publish / npm run publish
+npm run publish
 ```
 
 ##  支持的package类型

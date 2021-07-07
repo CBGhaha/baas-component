@@ -5,10 +5,9 @@
     "module": "dist/index.esm.js",
     "license": "ISC",
     "author": "",
-    "description": "demoe(可删除)",
-    "dependencies": {},
-    "devDependencies": {
-        "vue": "^3.0.1"
+    "description": "demo(可删除)",
+    "dependencies": {
+        "vue": "^2.6.7"
     },
     "buildOptions": {
         "name": "youkeVueDemo",

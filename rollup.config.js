@@ -7,8 +7,8 @@ import babel from 'rollup-plugin-babel';
 import commonjs from '@rollup/plugin-commonjs';
 import postcss from 'rollup-plugin-postcss';
 import image from '@rollup/plugin-image';
-import vue2 from 'rollup-plugin-vue2';
-import vue3 from 'rollup-plugin-vue';
+import vue from 'rollup-plugin-vue2';
+// import vue3 from 'rollup-plugin-vue';
 // import postcssModules from 'postcss-modules';
 import nested from 'postcss-nested';
 import postcssPresetEnv from 'postcss-preset-env';
@@ -18,7 +18,6 @@ import { terser } from 'rollup-plugin-terser';
 const path = require('path');
 
 // 根据环境变量中的target属性 获取对应模版中的package.json
-
 const packageDir = path.resolve(__dirname, `./packages/${process.env.TARGET}`);
 
 const resolve = (file)=>{return path.resolve(packageDir, file);};
@@ -50,7 +49,7 @@ formats = formats.filter((i)=>{
 
 let extensions = ['react', 'react-dom'];
 
-let vueVersion = '2';
+let vueVersion = '';
 [devDependencies, dependencies].forEach(dependent=>{
   try {
     if (dependent) {
@@ -67,19 +66,16 @@ let vueVersion = '2';
 
 });
 
-// console.log('extensions:', extensions);
-
 function createConfig(format, output) {
   output.name = name;
   output.sourcemap = true;//生成sourcemap
-  const vuePlugin = Number(vueVersion) === 2 ? vue2 : vue3;
   return {
     input: resolve('./src/index.js'),
     output,
     plugins: [
       jsonPlugin(),
       image(),
-      vuePlugin({
+      vueVersion && vue({
         css: true,
         compileTemplate: true
       }),

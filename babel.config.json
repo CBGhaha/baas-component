@@ -16,8 +16,7 @@
     ],
     [
       "@babel/preset-react"
-    ],
-    ["@vue/app"]
+    ]
   ],
   "plugins": [
     "@babel/plugin-syntax-jsx",
