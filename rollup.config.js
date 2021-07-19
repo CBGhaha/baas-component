@@ -86,7 +86,10 @@ function createConfig(format, output) {
           cssnano()
           // postcssModules()
         ],
-        extensions: ['.css', 'less']
+        extensions: ['.css', 'less'],
+        use: [['less', {
+          javascriptEnabled: true
+        }]]
         // modules: true
       }),
       babel({

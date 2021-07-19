@@ -2,7 +2,7 @@
  * 聊天相关信令
  */
 import SocketController from '../controller';
-import { setAllSingleForbidChatStudent, tutorOpenAllSingleForbidChatStudent } from '../../../utils/index';
+import { setAllSingleForbidChatStudent, tutorOpenAllSingleForbidChatStudent } from '../../../../chat/utils/index';
 import commonAction from '../../../../common/redux/actions/common';
 import verifyImg from '../../../../common/assets/images/verifyError.png';
 
