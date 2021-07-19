@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import store from '../../../redux/store';
 import { lessonProgress } from '../../../config';
 import { connect } from 'react-redux';
 import './index.less';
@@ -8,7 +7,7 @@ import './index.less';
 
 function CoverElements(props) {
   const [showCoverAreas, setShowCoverAreas] = useState(true);
-  const { zmlCoverEleList } = props;
+  const { zmlCoverEleList, userInfo } = props;
   useEffect(()=>{
     const handleDown = ()=>setShowCoverAreas(false);
     const handleUp = ()=>setShowCoverAreas(true);
@@ -29,7 +28,7 @@ function CoverElements(props) {
       y: item.y + e.nativeEvent.offsetY
     });
   }
-  const { userInfo: { progress } } = store.getState();
+  const { progress } = userInfo;
   const inLesson = progress === lessonProgress.in;
   // function handleWheel(e) {
   //   if (!isNotHold && e.deltaY !== 0) whiteBoardController.emit('teacherWheel',  { deltaY: e.deltaY > 0 ? 50 : -50 });
@@ -49,8 +48,9 @@ function CoverElements(props) {
   );
 }
 CoverElements.propTypes = {
-  zmlCoverEleList: PropTypes.array
+  zmlCoverEleList: PropTypes.array,
+  userInfo: PropTypes.object
 };
 export default connect(
-  ({ zmlCoverEleList })=>({ zmlCoverEleList }),
-  ()=>({}))(CoverElements);
+  ({ zmlCoverEleList, userInfo })=>({ zmlCoverEleList, userInfo }),
+  ({ })=>({ }))(CoverElements);

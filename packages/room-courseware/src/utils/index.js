@@ -41,7 +41,7 @@ export function calZmlScope() {
   return { width, height };
 }
 
-export function isAudience() {
-  const { userInfo: { role, progress } } = store.getState();
+export function isAudience(userInfo) {
+  const { role, progress } = userInfo;
   return (role === PLAYER_USER_TYPE.student) || (role === PLAYER_USER_TYPE.tutor && progress === lessonProgress.in);
 }

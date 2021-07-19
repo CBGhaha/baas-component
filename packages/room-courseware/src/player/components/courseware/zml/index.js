@@ -39,7 +39,7 @@ export default function Zml(props) {
 
   // Zml实例 初始化和销毁
   useEffect(()=>{
-    zmlInstance.current = new ZmlInstance(coursewareInfo.content, handleIframeMsg, eventControllersInstance,coursewareInfo.id);
+    zmlInstance.current = new ZmlInstance(coursewareInfo.content, handleIframeMsg, eventControllersInstance, coursewareInfo.id);
     whiteBoardController.on('teacherWheel', handleTeacherWheel);
     return ()=>{
       zmlInstance.current.destroyed();

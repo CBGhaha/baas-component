@@ -9,7 +9,7 @@ import VideoList from './components/videoList/index';
 import { calZmlScope } from '../utils/index';
 import { PlayerContext } from '../config';
 import './index.less';
-const histroyPageMap = {};
+// const histroyPageMap = {};
 // const initScope = calZmlScope();
 
 // room 内容宽高比自适应
@@ -29,7 +29,7 @@ export default function Room(props) {
   const { userInfo } = store.getState();
   const isTeacher = userInfo.role === 'TEACHER';
   const isStudent = !isTeacher;
-
+  const histroyPageMap = useRef({});
   $pageNumSnapshot.current = pageNum;
   $coursewareIdSnapshot.current = coursewareId;
 
@@ -71,14 +71,14 @@ export default function Room(props) {
         const res = await eventControllersInstance.send('whiteboard_page', pageNum, coursewareId);
         if (res && $pageNumSnapshot.current === pageNum && $coursewareIdSnapshot.current === coursewareId) {
           const { drawToolDatas, zmlMessageDatas } = res;
-          if (!histroyPageMap[`${coursewareId}_${pageNum}`]) {
+          if (!histroyPageMap.current[`${coursewareId}_${pageNum}`]) {
             console.log('课件链路：获取历史白板：', coursewareId, pageNum);
             whiteBoardController.emit('drawTool', {
               action: 'pushDataToLayer',
               payload: drawToolDatas,
               pageId: `${coursewareId}_${pageNum}`
             });
-            histroyPageMap[`${coursewareId}_${pageNum}`] = true;
+            histroyPageMap.current[`${coursewareId}_${pageNum}`] = true;
           }
           for (let key in zmlMessageDatas) {
             zmlMessageDatas[key].forEach(item=>{

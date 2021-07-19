@@ -2,13 +2,15 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import './module/localStorage';
 import './module/sessionStorage';
+
 window.PLAYER_USER_TYPE = {
   student: 'STUDENT',
   teacher: 'TEACHER',
   tutor: 'TUTOR'
 };
+
 import EventControllers from './eventController/index';
-import store from './redux/store.js';
+import store, { resetStore } from './redux/store.js';
 import ReactDOM from 'react-dom';
 import Player from './player/index';
 import './global-styles/index.less';
@@ -50,6 +52,9 @@ export default class Play {
       }
     }, userInfo);
   }
+  setPlayerParams(params) {
+    this.eventControllersInstance && this.eventControllersInstance.setUserInfo(params);
+  }
   triggleEvent(event, data) {
     this.eventControllersInstance.handleEventMsg({ name: event, data });
   }
@@ -71,7 +76,12 @@ export default class Play {
   render(cb) {
     renderAPP(<Player eventControllersInstance={this.eventControllersInstance}/>, this.dom, cb);
   }
+  destroy() {
+    ReactDOM.unmountComponentAtNode(this.dom);
+    resetStore(); // 初始化store的状态
+  }
   setRole(role) {
+    this.destroy();
     this.init(role);
     this.render();
   }

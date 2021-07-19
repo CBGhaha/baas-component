@@ -12,7 +12,7 @@ import { PlayerContext } from '../../config';
 let lastToolType;
 
 function DrawTool(props) {
-  const isNotHold = isAudience();
+  const isNotHold = isAudience(props.userInfo);
   const { pageNumValue, coursewareId, signalType, isTeacher, isZML } = props;
   const { eventControllersInstance } = useContext(PlayerContext);
   const { whiteBoardController } = eventControllersInstance.controllers;

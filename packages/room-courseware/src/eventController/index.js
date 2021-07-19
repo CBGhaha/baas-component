@@ -8,7 +8,7 @@ class SocketControllers {
   sendSignMap = {};
   sendEventHandle = null;
   constructor(sendEventHandle, userInfo) {
-    store.dispatch(commonAction('userInfo', userInfo));
+    this.setUserInfo(userInfo);
     this.sendEventHandle = sendEventHandle;
     Object.keys(controllers).forEach(item=>{
       const $controller = controllers[item];
@@ -25,6 +25,9 @@ class SocketControllers {
         });
       }
     });
+  }
+  setUserInfo(userInfo) {
+    store.dispatch(commonAction('userInfo', userInfo));
   }
   async send(action, ... args) {
     if (this.sendSignMap[action]) {

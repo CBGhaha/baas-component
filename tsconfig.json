@@ -33,11 +33,11 @@
       "es7",
       "es2018"
     ],
-    "baseUrl": "./src",
+    "baseUrl": "./",
     "paths": {
       "@/*": ["src/*"],
       "components/*": ["src/components/*"],
-      "@yk-web-component/*":["packages/*/src"]
+      "@youke-web-libs/*":["packages/*/src"]
     }
   }
 }
