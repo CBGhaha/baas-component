@@ -1,0 +1,75 @@
+@import '../../../../themeConf.less';
+.redPackage-box {
+  // padding: 6px 16px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #aeb4cb;
+  .specify {
+    font-size: 14px;
+    text-align: center;
+    margin: 14px 0;
+    >p{
+      display: inline-flex;
+      padding: 4px 14px;
+      .MessageBg(background-color);
+      border-radius: 4px;
+    }
+    .repack {
+      .SubUserNameFont(color);
+    }
+    .name {
+      display: inline-block;
+      max-width: 60px;
+      text-overflow: ellipsis;
+      word-break: keep-all;
+      overflow: hidden;
+      white-space: nowrap;
+      margin: 0 4px;
+      .SubUserNameFont(color);
+    }
+    .img {
+      width: 16px;
+      height: 16px;
+      margin: 0 5px;
+      vertical-align: middle;
+    }
+    .coin {
+      font-size: 12px;
+      font-weight: 600;
+      // .LikeColor(color);
+      .SubUserNameFont(color);
+    }
+  }
+  .whole {
+    box-sizing: border-box;
+    text-align: center;
+    .conent {
+      display: inline-block;
+      padding: 4px 14px;
+      .MessageBg(background-color);
+      border-radius: 4px;
+      cursor: pointer;
+      .name {
+        max-width: 128px;
+        display: inline-block;
+        text-overflow: ellipsis;
+        word-break: keep-all;
+        overflow: hidden;
+        white-space: nowrap;
+        vertical-align: bottom;
+        .SubUserNameFont(color);
+      }
+      .img {
+        width: 20px;
+        height: 20px;
+        vertical-align: -4px;
+        margin: 0 5px;
+      }
+      .arrow {
+        width: 12px;
+        height: 12px;
+        .SubUserNameFont(fill);
+      }
+    }
+  }
+}

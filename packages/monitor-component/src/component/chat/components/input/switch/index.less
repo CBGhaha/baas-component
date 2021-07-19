@@ -1,0 +1,46 @@
+@import '../../../themeConf.less';
+.input-switch{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  >button{
+    position: relative;
+    width: 30px;
+    height: 14px;
+    .switchBtnBg(background-color);
+    // background: #393d4a;
+    border-radius: 36px;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    opacity: 0.6;
+    background-size: 9px 9px;
+    background-repeat: no-repeat;
+    background-position: 17px center;
+    >span{
+      display: block;
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      background: #ffffff;
+      box-shadow: 0px 3px 4px 0px rgba(119, 119, 119, 0.3), 0px 10px 20px 0px rgba(0, 0, 0, 0.1);
+      border: 1px solid #e5e5e5;
+      border-radius: 7px;
+      top: 0px;
+      // right: 20px;
+      // transition: 0.3s ease-in-out;
+    }
+    &:disabled{
+      cursor: not-allowed;
+      
+    }
+  }
+  >.opened{
+    background-size: 8px 8px;
+    background-position: 6px center;
+    opacity: 1;
+    >span{
+      right: -2px;
+    }
+  }
+}

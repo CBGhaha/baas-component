@@ -1,0 +1,33 @@
+{
+    "name": "@youke-web-libs/monitor-component",
+    "version": "1.0.0",
+    "main": "dist/index.cjs.js",
+    "module": "dist/index.esm.js",
+    "license": "ISC",
+    "author": "",
+    "description": "",
+    "dependencies": {
+        "react": "^16.8.6",
+        "react-dom": "^16.8.6",
+        "react-redux": "^5.0.7",
+        "react-router-dom": "^4.3.1",
+        "redux": "^4.0.0",
+        "eventemitter3": "^4.0.4",
+        "prop-types": "^15.7.2",
+        "classnames": "^2.2.6",
+        "qs": "^6.9.4",
+        "zm-cloud-toolbar-ui": "^1.0.23",
+        "zm-tk-ace-utils": "0.0.43-beta.18",
+        "zmClassRoomToolBar": "^1.2.27",
+        "react-virtuoso": "^0.16.7",
+        "axios": "^0.18.0",
+        "@youke-web-libs/sketch-pad": "*"
+    },
+    "devDependencies": {},
+    "buildOptions": {
+        "name": "youkeMonitorComponent",
+        "formats": [
+            "esm-bundler"
+        ]
+    }
+}

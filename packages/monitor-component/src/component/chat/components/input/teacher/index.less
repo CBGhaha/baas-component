@@ -1,0 +1,212 @@
+@import '../../../themeConf.less';
+.role-chat-inputBox {
+  width: 100%;
+  min-height: 114px;
+  border-radius: 2px;
+  // overflow: hidden;
+  padding: 10px;
+  .inputOut {
+    .chatInput {
+      display: block;
+      width: 100%;
+      height: 54px;
+      font-size: 12px;
+      line-height: 1.2;
+      .SubMessageFont(color);
+      .ChatInputBoxBg(background-color);
+      border-radius: 4px;
+      border: none;
+      .ChatInputBoxBg(border-color);
+      outline: 0;
+      box-sizing: border-box;
+      color: #8c8d8e;
+      padding: 8px;
+      resize: none;
+      &::placeholder {
+        
+      }
+
+      &[disabled='disabled'] {
+        cursor: not-allowed;
+      }
+      &::-webkit-scrollbar {
+        /*滚动条整体样式*/
+        width: 6px; /*高宽分别对应横竖滚动条的尺寸*/
+        height: 3px;
+      }
+      &::-webkit-scrollbar-thumb {
+        /*滚动条里面小方块*/
+        border-radius: 5px;
+        box-shadow: inset 0 0 5px #606270;
+        background: #606270;
+      }
+      &::-webkit-scrollbar-track {
+        /*滚动条里面轨道*/
+        box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+        border-radius: 0;
+        background: rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+
+  .chatFooter {
+    padding-top: 10px;
+    display: flex;
+    justify-content:flex-end;
+  } 
+    .chatTools {
+      min-height: 30px;
+      line-height: 30px;
+      padding-right: 8px;
+      padding-left: 8px;
+      display: flex;
+      justify-content: space-between;
+      color: #8c8d8e;
+      margin-bottom: 5px;
+      align-items: center;
+      >div{
+        display: flex;
+        align-items: center;
+      }
+      .forbidChat {
+        display: flex;
+        align-items: center;
+        position: relative;
+        .forbidChatIcon {
+          width: 20px;
+          height: 20px;
+          fill: #8c8d8e;
+          cursor: pointer;
+          &.isAllforbidChat{
+            fill: #fff;
+          }
+        }
+        margin-right: 8px;
+      }
+
+      .forbidChat {
+        .pop {
+          display: none;
+          position: absolute;
+          padding: 0px 8px;
+          height: 30px;
+          line-height: 30px;
+          background: #fff;
+          top: -40px;
+          left: -5px;
+          font-size: 12px;
+          width: 120px;
+          border-radius: 4px;
+          color: #666;
+          &::after {
+            width: 0;
+            height: 0;
+            display: block;
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 10px;
+            padding: 0px;
+            border-top: 5px solid #fff;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+          }
+        }
+        .pop2{
+          width: 65px;
+        }
+        .forbidChatIcon:hover ~ .pop,
+        .icon:hover ~ .pop {
+          display: block;
+        }
+      }
+    }
+    .sendWrap {
+      display: flex;
+      .target {
+        user-select: none;
+        width: 80px;
+        color: #717275;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        cursor: pointer;
+        .arrow {
+          width: 12px;
+          height: 12px;
+          fill: #717275;
+          transform: rotateZ(-90deg);
+          margin-left: 5px;
+          margin-top: 1px;
+          transition-duration: 0.3s;
+          transition-timing-function: ease-in-out;
+        }
+        .select {
+          position: absolute;
+          background-color: #3c3e46;
+          border: 1px solid #3c3e46;
+          bottom: 40px;
+          border-radius: 4px;
+          padding: 0 5px;
+          &::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 0;
+            border-top: 5px solid #3c3e46;
+            border-bottom: 5px solid transparent;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            position: absolute;
+            left: 50px;
+          }
+          li {
+            height: 30px;
+            line-height: 30px;
+            font-size: 13px;
+            width: 110px;
+            text-align: center;
+            color: #606266;
+            &:first-child {
+              border-bottom: 1px solid #32343b;
+            }
+            &.actived {
+              color: #ddd;
+            }
+          }
+          li:hover {
+            color: #707177;
+          }
+        }
+      }
+      .showTarget {
+        .arrow {
+          transform: rotateZ(90deg);
+        }
+      }
+      .sendBtn {
+        display: inline-block;
+        height: 28px;
+        width: 78px;
+        line-height: 28px;
+        font-size: 12px;
+        margin-left: 5px;
+        text-align: center;
+        cursor: pointer;
+        border-radius: 15px;
+        background: #ef4c4f;
+        .BaseFont(color);
+        &:disabled {
+          opacity: .3;
+          cursor: not-allowed;
+          color: #fff;
+          // .SendBtnDisabled(background-color);
+          background: #EF4C4F;
+        }
+      }
+    }
+  
+}
