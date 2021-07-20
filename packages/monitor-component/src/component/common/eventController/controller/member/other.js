@@ -33,7 +33,7 @@ const acceptAction = {
       try {
         delete studentsMap[data.userId];
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
       controller.parent.$store.dispatch(commonAction('studentsMap', { ...studentsMap }));
       return { ...data, id: data.userId };
@@ -46,6 +46,7 @@ const sendAction = {
   current_user_connect(controller, res) {
     if (res) {
       const { teacher, tutors, students } = res;
+      if (!students) return;
       const allRobotStudent = new Map();
       const forbidMap = { ...controller.parent.$store.getState()['allSingleForbidChatStudent'] };
       Object.values(students).forEach(user=>{
@@ -85,5 +86,5 @@ const sendAction = {
   }
 };
 
-const otherController = new SocketController(OTHER_CONTROLLER, acceptAction, sendAction);
+const otherController = () => new SocketController(OTHER_CONTROLLER, acceptAction, sendAction);
 export default otherController;

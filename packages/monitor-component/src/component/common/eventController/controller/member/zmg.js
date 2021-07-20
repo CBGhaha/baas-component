@@ -47,5 +47,5 @@ const sendAction = {
     return data;
   }
 };
-const zmgController = new SocketController(ZMG_CONTROLLER, acceptAction, sendAction);
+const zmgController = () => new SocketController(ZMG_CONTROLLER, acceptAction, sendAction);
 export default zmgController;

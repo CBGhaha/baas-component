@@ -29,5 +29,5 @@ const sendAction = {
     //
   }
 };
-const praiseController = new SocketController(PRAISE_CONTROLLER, acceptAction, sendAction);
+const praiseController = () => new SocketController(PRAISE_CONTROLLER, acceptAction, sendAction);
 export default praiseController;

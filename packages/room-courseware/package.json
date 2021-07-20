@@ -1,6 +1,6 @@
 {
     "name": "@youke-web-libs/room-courseware",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "main": "dist/index.cjs.js",
     "module": "dist/index.esm.js",
     "license": "ISC",
@@ -28,6 +28,6 @@
         "zmClassRoomToolBar": "^1.2.27",
         "react-virtuoso": "^0.16.7",
         "axios": "^0.18.0",
-        "@youke-web-libs/sketch-pad": "*"
+        "@youke-web-libs/sketch-pad": "~1.0.2"
     }
 }

@@ -142,7 +142,7 @@ const acceptAction = {
       });
 
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   },
   on_chat(controller, res) {
@@ -209,7 +209,7 @@ const acceptAction = {
         content: chatTips
       });
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   },
   update_reputation(controller, res) {
@@ -224,7 +224,7 @@ const acceptAction = {
         });
       });
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
     return true;
   },
@@ -285,7 +285,7 @@ const acceptAction = {
       const { stuPicChatSwitchOn } = res;
       controller.parent.$store.dispatch(commonAction('stuForbidScreenshot', stuPicChatSwitchOn));
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
 
   }
@@ -300,7 +300,7 @@ const sendAction = {
         controller.parent.chatUtilsInstance.addChatMsg(data);
       }
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   },
   // 发送聊天
@@ -342,7 +342,7 @@ const sendAction = {
       }
 
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   },
   on_chat(controller, res) {
@@ -364,7 +364,7 @@ const sendAction = {
         controller.parent.$store.dispatch(commonAction('allSingleForbidChatStudent', forbidMap));
       }
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   },
   remove_chat_message() {},
@@ -407,5 +407,5 @@ function handleStuOnTableAndMic(store, data) {
   }
 }
 
-const chatController = new SocketController(CHAT_CONTORLLOR, acceptAction, sendAction);
+const chatController = () => new SocketController(CHAT_CONTORLLOR, acceptAction, sendAction);
 export default chatController;

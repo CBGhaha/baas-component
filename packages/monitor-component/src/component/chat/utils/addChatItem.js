@@ -66,7 +66,7 @@ class Chat extends Base {
       }
       track.push(this.controllerInstance, { eventId: 'ROOM_SING_SEND_RED_PACK', eventParam: { username: this.username, num } });
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   }
   tableUp() {
@@ -97,7 +97,7 @@ class PRAISE extends Base {
         this.controllerInstance.controllers.praiseController.emit('getDetail', { ts: this.ts, data });
       }
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
 
   }
@@ -113,7 +113,7 @@ class Redpackage extends Base {
         this.controllerInstance.controllers.redPackageController.emit('getDetail', { ts: this.ts, data });
       }
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   }
 }

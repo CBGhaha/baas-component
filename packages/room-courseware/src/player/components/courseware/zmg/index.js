@@ -29,7 +29,6 @@ export default function Zmg(props) {
   }, []);
 
   function handleZmgLocalhost(res) {
-    console.log('handleZmgLocalhost:', res);
     setContentUrl(res.data);
     // zmgInstance.current.destroyed();
     // zmgInstance.current = new ZmgInstance(handleIframeMsg, eventControllersInstance);

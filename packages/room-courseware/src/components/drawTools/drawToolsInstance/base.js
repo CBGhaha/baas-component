@@ -43,7 +43,6 @@ export default class Base {
 
   // 发送白板消息
   handleSendMassage(data) {
-    console.log('zmSketchInstance-data:', data);
     const action = data[3];
     // hack 转译符会造成解析出错 采用｜替换
     if (action === 'text_edit') {

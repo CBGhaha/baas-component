@@ -88,12 +88,12 @@ const sendAction = {
       //   });
       // }
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   },
   zmlIsDoAnswer(self, res) {
     return res;
   }
 };
-const whiteBoardController = new SocketController(WHITEBOARD_CONTROLLER, acceptAction, sendAction);
+const whiteBoardController = () => new SocketController(WHITEBOARD_CONTROLLER, acceptAction, sendAction);
 export default whiteBoardController;

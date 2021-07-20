@@ -36,5 +36,5 @@ const sendAction = {
   }
 
 };
-const redPackageController = new SocketController(REDPACKAGE_CONTROLLER, acceptAction, sendAction);
+const redPackageController = () => new SocketController(REDPACKAGE_CONTROLLER, acceptAction, sendAction);
 export default redPackageController;

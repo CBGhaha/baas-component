@@ -71,7 +71,7 @@ class Chat extends PureComponent {
         }
 
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
     });
     // 开始消息轮询

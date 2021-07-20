@@ -83,7 +83,6 @@ export default class ZmInstance {
           // 答题中保存题目信息
           if (isDoAnswer) {
             this.isAnswerData = payload.data;
-            console.log('this.isAnswerData:', this.isAnswerData);
           } else {
             this.isAnswerData = null;
           }

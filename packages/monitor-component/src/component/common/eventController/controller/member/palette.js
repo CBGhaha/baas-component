@@ -119,5 +119,5 @@ const acceptAction = {
 // 发送消息action
 const sendAction = {
 };
-const paletteController = new SocketController(PALETTE_CONTROLLER, acceptAction, sendAction);
+const paletteController = () => new SocketController(PALETTE_CONTROLLER, acceptAction, sendAction);
 export default paletteController;

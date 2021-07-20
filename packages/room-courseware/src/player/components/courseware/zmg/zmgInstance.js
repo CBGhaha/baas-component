@@ -84,7 +84,6 @@ export default class Zmgnstance {
     });
   }
   setDelUsersInfo(user) {
-    console.log('setDelUsersInfo', user);
     this.postMessage({
       action: 'setDelUsersInfo',
       data: { students: [userTransfrom(user)] }

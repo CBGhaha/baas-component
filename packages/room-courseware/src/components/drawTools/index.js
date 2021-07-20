@@ -58,11 +58,7 @@ function DrawTool(props) {
 
   /*————图案填充————*/
   function handleDraw(data) {
-    // console.log('handleDraw:', data);
     const { action, payload, pageId } = data;
-    if (action === 'pushDataToLayer') {
-      console.log('pushDataToLayer:', initFinish.current, pageId);
-    }
     if (initFinish.current && drawToolsInstance.current) {
       drawToolsInstance.current[action](payload, pageId);
     } else {

@@ -124,7 +124,12 @@ function ClickStudentFrame(props) {
             {forbidChat && <ForbidChat instance={chatInfo} updateDataList={updateDataList} witchShow={witchShow} />}
           </Fragment> : null}
         { isAIstudent(chatInfo.userId) ? <span className={'leaveLine'}>非当前课学生</span> : null }
-        { !isOnline(chatInfo.userId) && !isAIstudent(chatInfo.userId) ? <span className={'leaveLine'}>学生已离线</span> : null }
+        { !isOnline(chatInfo.userId) && !isAIstudent(chatInfo.userId) ?
+          <Fragment>
+            <span className={'leaveLine'}>学生已离线</span>
+            {forbidChat && <ForbidChat instance={chatInfo} updateDataList={updateDataList} witchShow={witchShow} />}
+          </Fragment> :
+          null }
       </div> : ''}
       {/* <DeleteChat instance={chatInfo} updateDataList={updateDataList} hideFrame={()=>witchShow(false)}/> */}
     </div>
