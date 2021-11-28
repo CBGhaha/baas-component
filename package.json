@@ -35,6 +35,8 @@
     "@rollup/plugin-image": "^2.0.6",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^13.0.0",
+    "@rollup/plugin-replace": "^3.0.0",
+    "@typescript-eslint/eslint-plugin": "^4.29.2",
     "@vue/babel-preset-app": "^4.5.13",
     "@vue/compiler-sfc": "^3.1.4",
     "babel-eslint": "^10.1.0",
@@ -55,13 +57,14 @@
     "inquirer": "^8.1.1",
     "less": "^3.0.4",
     "ora": "^5.4.1",
-    "postcss": "^8.3.5",
-    "postcss-loader": "^2.1.5",
-    "postcss-modules": "^4.1.3",
-    "postcss-nested": "^5.0.5",
-    "postcss-preset-env": "^6.7.0",
+    "postcss": "8.3.5",
+    "postcss-loader": "2.1.5",
+    "postcss-modules": "4.1.3",
+    "postcss-nested": "5.0.5",
+    "postcss-preset-env": "6.7.0",
     "rollup": "^2.52.1",
     "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-external-globals": "^0.6.1",
     "rollup-plugin-postcss": "^4.0.0",
     "rollup-plugin-postcss-modules": "^2.0.2",
     "rollup-plugin-terser": "^7.0.2",
@@ -70,5 +73,11 @@
     "transform-runtime": "0.0.0",
     "typescript": "^4.3.4"
   },
-  "repository": "https://gitlab.zmaxis.com/uke-web/zm-courseware-player.git"
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.zmaxis.com/uke-web/zm-courseware-player.git"
+  },
+  "directories": {
+    "example": "example"
+  }
 }

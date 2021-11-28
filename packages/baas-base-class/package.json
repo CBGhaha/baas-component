@@ -1,0 +1,17 @@
+{
+    "name": "@youke-web-libs/baas-base-class",
+    "version": "1.0.0",
+    "main": "dist/index.cjs.js",
+    "module": "dist/index.esm.js",
+    "license": "ISC",
+    "author": "",
+    "description": "",
+    "dependencies": {},
+    "devDependencies": {},
+    "buildOptions": {
+        "name": "youkeBaasBaseClass",
+        "formats": [
+            "esm-bundler"
+        ]
+    }
+}

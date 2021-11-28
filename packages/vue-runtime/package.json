@@ -1,16 +1,17 @@
 {
-    "name": "@youke-web-libs/vue-demo",
+    "name": "@youke-web-libs/vue-runtime",
     "version": "1.0.0",
     "main": "dist/index.cjs.js",
     "module": "dist/index.esm.js",
     "license": "ISC",
     "author": "",
-    "description": "demo(可删除)",
+    "description": "",
     "dependencies": {
         "vue": "^2.6.7"
     },
+    "devDependencies": {},
     "buildOptions": {
-        "name": "youkeVueDemo",
+        "name": "youkeVueRuntime",
         "formats": [
             "esm-bundler",
             "global"

@@ -8,6 +8,8 @@ import commonjs from '@rollup/plugin-commonjs';
 import postcss from 'rollup-plugin-postcss';
 import image from '@rollup/plugin-image';
 import vue from 'rollup-plugin-vue2';
+import replace from '@rollup/plugin-replace';
+import externalGlobals from 'rollup-plugin-external-globals';
 // import vue3 from 'rollup-plugin-vue';
 // import postcssModules from 'postcss-modules';
 import nested from 'postcss-nested';
@@ -73,6 +75,9 @@ function createConfig(format, output) {
     input: resolve('./src/index.js'),
     output,
     plugins: [
+      replace({
+        'process.env.NODE_ENV': JSON.stringify('production')
+      }),
       jsonPlugin(),
       image(),
       vueVersion && vue({
@@ -92,19 +97,27 @@ function createConfig(format, output) {
         }]]
         // modules: true
       }),
+      tsPlugin({
+        tsconfig: path.resolve(__dirname, './tsconfig.json')
+      }),
       babel({
         exclude: '**/node_modules/**',
         runtimeHelpers: true,
         extensions: ['js', 'ts', 'jsx', 'vue']
       }),
       commonjs(),
-      tsPlugin({
-        tsconfig: path.resolve(__dirname, './tsconfig.json')
-      }),
       resolvePlugin(),
+      externalGlobals({
+        jquery: '$',
+        vue: 'myVue'
+      }),
       terser()
     ],
     external: format !== 'global' ? extensions : false
+    // globals: {
+    //   vue: 'myVue',
+    //   Vue: 'myVue'
+    // }
   };
 
 }
