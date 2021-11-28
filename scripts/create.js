@@ -4,7 +4,7 @@ const path = require('path');
 const chalk = require('chalk');
 
 const packageTemplateCreator = (name)=>({
-  'name': `@youke-web-libs/${name}`,
+  'name': `@bass-component-demo/${name}`,
   'version': '1.0.0',
   'main': 'dist/index.cjs.js',
   'module': 'dist/index.esm.js',

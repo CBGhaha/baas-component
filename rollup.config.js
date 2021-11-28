@@ -114,10 +114,7 @@ function createConfig(format, output) {
       terser()
     ],
     external: format !== 'global' ? extensions : false
-    // globals: {
-    //   vue: 'myVue',
-    //   Vue: 'myVue'
-    // }
+
   };
 
 }

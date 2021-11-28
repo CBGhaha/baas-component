@@ -1,7 +1,7 @@
 {
-  "name": "youke-web-libs",
+  "name": "baas-component-demo",
   "version": "1.0.0",
-  "description": "优课课堂内web组件和类库",
+  "description": "demo",
   "main": "./index.js",
   "workspaces": [
     "packages/*"
@@ -75,7 +75,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://gitlab.zmaxis.com/uke-web/zm-courseware-player.git"
+    "url": ""
   },
   "directories": {
     "example": "example"

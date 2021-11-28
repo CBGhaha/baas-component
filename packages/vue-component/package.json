@@ -1,19 +1,19 @@
 {
-    "name": "@baas-component-demo/vue-demo",
+    "name": "@baas-component-demo/vue-component",
     "version": "1.0.0",
     "main": "dist/index.cjs.js",
     "module": "dist/index.esm.js",
     "license": "ISC",
     "author": "",
-    "description": "",
-    "dependencies": {},
-    "devDependencies": {
+    "description": "demo(可删除)",
+    "dependencies": {
         "vue": "^2.6.7"
     },
     "buildOptions": {
-        "name": "youkeDemo",
+        "name": "youkeVueDemo",
         "formats": [
-            "esm-bundler"
+            "esm-bundler",
+            "global"
         ]
     }
 }

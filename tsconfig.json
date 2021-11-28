@@ -26,7 +26,6 @@
     "noEmitOnError":false,
     "target": "es5",
     "jsx": "react",
-    // "declaration": true,
     "lib": [
       "es5",
       "es2015",

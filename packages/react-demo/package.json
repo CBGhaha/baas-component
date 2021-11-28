@@ -1,5 +1,5 @@
 {
-    "name": "@youke-web-libs/react-demo",
+    "name": "@baas-component-demo/react-demo",
     "version": "1.0.0",
     "main": "dist/index.cjs.js",
     "module": "dist/index.esm.js",

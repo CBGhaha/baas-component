@@ -1,5 +1,5 @@
 {
-    "name": "@youke-web-libs/baas-base-class",
+    "name": "@baas-component-demo/baas-base-class",
     "version": "1.0.0",
     "main": "dist/index.cjs.js",
     "module": "dist/index.esm.js",
