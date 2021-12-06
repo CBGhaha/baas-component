@@ -1,33 +1,59 @@
 
 import Vue from 'vue';
 
-const createBaasComponent = (com, config)=>{
+
+// 重写Vue的emit方法，在组件通信时同时向 web component 调用方通信
+const emitFn = Vue.prototype.$emit;
+Vue.prototype.$emit = function(name, ...args) {
+  if (this.$parent.baasComponentBroadcast) {
+    this.$parent.baasComponentBroadcast(name, ...args);
+  }
+  emitFn.call(this, name, ...args);
+};
+
+const createBaasComponent = (com)=>{
   class BaasVueBase extends HTMLElement {
     static props;
-    static component;
-    vm;
+    static component; // Vue组件
+    vm; // Vue实例
     constructor() {
       super();
     }
+
+    connectedCallback() {
+      this.mount();
+    }
+
     mount() {
       const content = document.createElement('div');
-      const attributes = {};
-      BaasVueBase.props.forEach(prop => {
-        attributes[prop] = this.getAttribute(prop);
-      });
-      console.log('attributes is:', attributes);
       this.appendChild(content);
-      this.vm = new Vue({
+
+      // 收集attributes
+      const attributes = {};
+      try {
+        for (let i = 0; i < this.attributes.length; i++) {
+          attributes[this.attributes[i].name] = this.attributes[i].value;
+        }
+      } catch (err) {
+        console.error('err:', err);
+      }
+   
+      const that = this;
+      const vm = new Vue({
         el: content,
         data: attributes,
+        methods: {
+          baasComponentBroadcast(name, ...args) {
+            that.dispatchEvent(new CustomEvent(name, { detail: args }));
+          }
+        },
         render(h) {
           return h(BaasVueBase.component, { props: attributes });
         }
       });
+      this.vm = vm;
     }
-    connectedCallback() {
-      this.mount();
-    }
+
     static get observedAttributes() {
       return BaasVueBase.props;
     }
@@ -37,8 +63,9 @@ const createBaasComponent = (com, config)=>{
       }
     }
   }
+
   BaasVueBase.component = com;
-  BaasVueBase.props = config;
+  BaasVueBase.props = Array.isArray(com.props) ? com.props : Object.keys(com.props);
   return BaasVueBase;
 };
 export default createBaasComponent;

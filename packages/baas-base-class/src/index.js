@@ -1,5 +1,5 @@
-import createBaasComponent from './vue';
+import createVueBaasComponent from './vue';
 
 export {
-  createBaasComponent
+  createVueBaasComponent
 };
