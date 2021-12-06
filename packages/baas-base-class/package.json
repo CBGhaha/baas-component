@@ -1,17 +1,18 @@
 {
-    "name": "@baas-component-demo/baas-base-class",
-    "version": "1.0.0",
+    "name": "baas-base-vue",
+    "version": "1.0.1",
     "main": "dist/index.cjs.js",
     "module": "dist/index.esm.js",
     "license": "ISC",
     "author": "",
     "description": "",
     "dependencies": {
-        "@vue/web-component-wrapper": "^1.3.0"
+        "@vue/web-component-wrapper": "^1.3.0",
+        "baas-vue-runtime": "^1.0.0"
     },
     "devDependencies": {},
     "buildOptions": {
-        "name": "youkeBaasBaseClass",
+        "name": "baasBaseClass",
         "formats": [
             "esm-bundler"
         ]
