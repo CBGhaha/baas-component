@@ -7,6 +7,7 @@
     "author": "",
     "description": "",
     "dependencies": {
+        "baas-base-vue": "^1.0.1",
         "vue": "^2.6.7"
     },
     "devDependencies": {},

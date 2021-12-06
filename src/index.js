@@ -1,8 +1,6 @@
-import Vue from 'vue';
 
+import { createVueBaasComponent } from 'baas-base-vue'; // Vue BaaS组件工厂函数
+import Test from './demo.vue';
 
-window.myVue = Vue;
-
-export default Vue;
-
-
+const webCompnentInstance = createVueBaasComponent(Test);
+window.customElements.define('test-component', webCompnentInstance);
