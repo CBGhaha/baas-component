@@ -109,7 +109,7 @@ function createConfig(format, output) {
       resolvePlugin(),
       externalGlobals({
         jquery: '$',
-        vue: 'myVue'
+        vue: 'Vue'
       }),
       terser()
     ],

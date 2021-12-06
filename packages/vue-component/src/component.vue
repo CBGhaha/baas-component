@@ -5,37 +5,76 @@
      <input v-model="nameVal" type="text"/>
    </div>
    <div class="mobile">
-     <label>电话</label>
+     <label>电话:</label>
      <input  v-model="mobileVal" type="number"/>
    </div>
-   <div @click="submit">提交</div>
+   <button @click="submit">提交</button>
+   <slot name="sss"></slot>
   </div>
 </template>
-
 <script>
 export default {
-  props:['name', 'mobile', 'handleSubmit'],
-  name: "Page404",
+  name: "vue-component",
+  props:['names', 'mobile'],
   data(){
     return {
-      nameVal: this.name,
+      nameVal: this.names,
       mobileVal: this.mobile,
     }
   },
   computed: {
   },
-  mounted(){
-    console.log("mounted:", this.name, this.mobile)
+  watch:{
+    names(val){
+      this.nameVal = val;
+    },
+    mobile(val){
+      this.mobileVal = val;
+    }
   },
   methods:{
     submit(){
-      console.log('this.handleSubmit', typeof this.handleSubmit);
-      // this.handleSubmit();
+      this.$emit('handleSubmit', {nameVal: this.nameVal, mobileVal: this.mobileVal})
     }
   }
 };
 </script>
 
 <style rel="stylesheet/scss" lang="less" scoped>
-
+.demo{
+  width: 300px;
+  >div{
+    display: flex;
+    align-items: center;
+    height: 50px;
+    label{
+      display: block;
+      width: 80px;
+      font-size: 14px;
+      font-weight: normal;
+    }
+    input{
+      display: block;
+      height: 28px;
+      border: 1px solid #999;
+      color: #333;
+      font-size: 14px;
+      border-radius: 4px;
+      text-indent: 8px;
+      width: 240px;
+    }
+  }
+  button{
+    background: cornflowerblue;
+    border: none;
+    border-radius: 5px;
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
+    width: 80px;
+    height: 32px;
+    color: #fff;
+    cursor: pointer;
+  }
+}
 </style>
