@@ -1,15 +1,15 @@
 <template>
   <div>
     <!-- <test-component :names="name" :mobile="mobile" @handleSubmit="handleSubmit"/> -->
-    <test-component2 :names="name" :mobile="mobile" @handleSubmit="handleSubmit">
+    <test-component :names="name" :mobile="mobile" @handleSubmit="handleSubmit">
       <div slot="sss">
         i am a solt
       </div>
-    </test-component2>
+    </test-component>
   </div>
 </template>
 <script>
-import '@baas-component-demo/vue-component';
+import '../../vue-component/dist/index.esm';
 
 export default {
   name: "Demo",

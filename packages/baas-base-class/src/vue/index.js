@@ -160,7 +160,9 @@ export default function wrap (Vue, Component) {
           this.childNodes
         ));
         wrapper.$mount();
-        this.shadowRoot.appendChild(wrapper.$el);
+        const content = document.createElement('div');
+        this.appendChild(content);
+        content.appendChild(wrapper.$el);
       } else {
         callHooks(this.vueComponent, 'activated');
       }
