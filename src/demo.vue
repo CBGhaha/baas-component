@@ -38,7 +38,7 @@ export default {
 };
 </script>
 
-<style rel="stylesheet/scss" lang="less" scoped>
+<style lang="less" scoped>
 .demo{
   width: 300px;
   >div{

@@ -2,17 +2,11 @@
 # yarn lockfile v1
 
 
-"@vue/web-component-wrapper@^1.3.0":
-  version "1.3.0"
-  resolved "https://registry.npmjs.org/@vue/web-component-wrapper/-/web-component-wrapper-1.3.0.tgz#b6b40a7625429d2bd7c2281ddba601ed05dc7f1a"
-  integrity sha512-Iu8Tbg3f+emIIMmI2ycSI8QcEuAUgPTgHwesDU1eKMLE4YC/c/sFbGc70QgMq31ijRftV0R7vCm9co6rldCeOA==
-
-baas-base-vue@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.npmjs.org/baas-base-vue/-/baas-base-vue-1.0.1.tgz#d4a31191dfa69c3b5d9d2ae33038d918b6b162bf"
-  integrity sha512-ibX5ijOwduTg4ljeHA7aMw0xSXKhN7uJ/31Mqu5pumLkpxbG7+K2kH/PQPOpJ/UOADdjhexbsIF4oApHBOz0PA==
+baas-base-vue@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.npmjs.org/baas-base-vue/-/baas-base-vue-1.0.3.tgz#7b6049d7bfc12949835b696b0a7cbb64eefaf807"
+  integrity sha512-ArJnUNX3leW392IbPRXoJzixwcpBGGJPfFcF65RpMUM8iYtQQeSN9mKN/6tWS8pX2uiZWxShRz8wDO/J+lhm+w==
   dependencies:
-    "@vue/web-component-wrapper" "^1.3.0"
     baas-vue-runtime "^1.0.0"
 
 baas-vue-runtime@^1.0.0:
