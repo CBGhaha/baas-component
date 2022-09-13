@@ -1,31 +1,31 @@
 <template>
   <div class="demo">
-   <div class="name">
-     <label>姓名：</label>
-     <input v-model="nameVal" type="text"/>
-   </div>
-   <div class="mobile">
+    <div class="name">
+      <label>姓名：</label>
+      <input v-model="nameVal" type="text"/>
+    </div>
+    <div class="mobile">
      <label>电话:</label>
-     <input  v-model="mobileVal" type="number"/>
-   </div>
-   <button @click="submit">提交</button>
-   <slot name="sss"></slot>
+     <input v-model="mobileVal" type="number"/>
+    </div>
+    <button @click="submit">
+      提交
+    </button>
+    <slot name="sss"></slot>
   </div>
 </template>
 <script>
 export default {
   name: "vue-component",
-  props:['names', 'mobile'],
+  props:['name', 'mobile'],
   data(){
     return {
-      nameVal: this.names,
+      nameVal: this.name,
       mobileVal: this.mobile,
     }
   },
-  computed: {
-  },
   watch:{
-    names(val){
+    name(val){
       this.nameVal = val;
     },
     mobile(val){
@@ -34,13 +34,16 @@ export default {
   },
   methods:{
     submit(){
-      this.$emit('handleSubmit', {nameVal: this.nameVal, mobileVal: this.mobileVal})
+      this.$emit('handleSubmit', {
+        name: this.nameVal, 
+        mobile: this.mobileVal
+      })
     }
   }
 };
 </script>
 
-<style rel="stylesheet/scss" lang="less" scoped>
+<style lang="less" scoped>
 .demo{
   width: 300px;
   >div{

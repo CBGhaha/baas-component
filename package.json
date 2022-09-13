@@ -1,6 +1,6 @@
 {
   "name": "baas-component-demo",
-  "version": "1.0.0",
+  "version": "0.0.4",
   "description": "demo",
   "main": "./index.js",
   "workspaces": [
@@ -69,6 +69,7 @@
     "rollup-plugin-postcss-modules": "^2.0.2",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.30.0",
+    "rollup-plugin-vue": "^6.0.0",
     "rollup-plugin-vue2": "^0.8.1",
     "transform-runtime": "0.0.0",
     "typescript": "^4.3.4"

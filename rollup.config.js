@@ -51,7 +51,6 @@ formats = formats.filter((i)=>{
 
 let extensions = ['react', 'react-dom'];
 
-let vueVersion = '';
 [devDependencies, dependencies].forEach(dependent=>{
   try {
     if (dependent) {
@@ -80,9 +79,10 @@ function createConfig(format, output) {
       }),
       jsonPlugin(),
       image(),
-      vueVersion && vue({
+      vue({
         css: true,
-        compileTemplate: true
+        compileTemplate: true,
+        isWebComponent: true
       }),
       postcss({
         plugins: [

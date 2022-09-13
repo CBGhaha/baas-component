@@ -1,5 +1,5 @@
 {
-    "name": "@baas-component-demo/vue-demo",
+    "name": "@baas-component-demo/react-warpper",
     "version": "1.0.0",
     "main": "dist/index.cjs.js",
     "module": "dist/index.esm.js",
@@ -8,10 +8,10 @@
     "description": "",
     "dependencies": {},
     "devDependencies": {
-        "vue": "^2.6.7"
+        "baas-vue-runtime": "^1.0.0"
     },
     "buildOptions": {
-        "name": "youkeDemo",
+        "name": "ReactWarpper",
         "formats": [
             "esm-bundler"
         ]

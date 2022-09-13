@@ -37,9 +37,13 @@ export default function wrap (Vue, Component) {
 
     // proxy $emit to native DOM events
     injectHook(options, 'beforeCreate', function () {
+      console.log('beforeCreate2');
       const emit = this.$emit;
       this.$emit = (name, ...args) => {
-        this.$root.$options.customElement.dispatchEvent(createCustomEvent(name, args));
+        if (this.$root.$options.customElement) {
+          this.$root.$options.customElement.dispatchEvent(createCustomEvent(name, args));
+        }
+
         return emit.call(this, name, ...args);
       };
     });

@@ -2,6 +2,7 @@
 const chalk = require('chalk');
 const  { selectPackage } = require('./utils');
 const execa  = require('execa');// 开启多个子进程打包
+const fs = require('fs');
 
 async function build(package){
   await execa('rollup', ['-c', '--environment',`TARGET:${package}`],
